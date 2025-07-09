@@ -4,8 +4,8 @@
         "path": "/" 
     },
     {
-        "name": "About",
-        "path": "/about" 
+        "name": "Resume",
+        "path": "/resume" 
     },
     {
         "name": "Projects",

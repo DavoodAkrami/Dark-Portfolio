@@ -5,6 +5,7 @@
   --foreground: #171717;
   --primary: #1f2023;  
   --header: #18181b; 
+  --button: #0e0e16; 
   --accent: #6366f1;    
   --text: #e5e7eb;  
   --subtext: #a1a1aa;     
@@ -22,6 +23,7 @@
   --text-color: var(--text);
   --subtext-color: var(--subtext);
   --highlight-color: var(--highlight);
+  --button-color: var(--button);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,3 +60,31 @@ body {
 .ContactIcons {
   @apply text-[2.2rem] cursor-pointer hover:text-[var(--accent-color)] max-md:text-[1.6rem]
 }
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 25s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 25s linear infinite;
+}
+
+
