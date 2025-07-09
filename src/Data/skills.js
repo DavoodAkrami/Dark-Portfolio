@@ -6,41 +6,65 @@ import { SiMui } from "react-icons/si";
 import { FaGitSquare } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { RiNextjsFill } from "react-icons/ri";
+import { SiAdobepremierepro } from "react-icons/si";
+
 
 
 const Skills = [
     {
         name: "HTML",
-        icon: <FaHtml5 />
+        icon: <FaHtml5 />,
+        level: 100,
+        color: "#E34F26",
     },
     {
         name: "CSS",
-        icon: <FaCss3Alt />
+        icon: <FaCss3Alt />,
+        level: 75,
+        color: "#1572B6",
     },
     {
         name: "JavaScript",
-        icon: <IoLogoJavascript />
+        icon: <IoLogoJavascript />,
+        level: 75,
+        color: "#F7DF1E",
     },
     {
         name: "React.js",
-        icon: <RiReactjsFill />
+        icon: <RiReactjsFill />,
+        level: 65,
+        color: "#61DAFB",
     },
     {
         name: "MUI",
-        icon: <SiMui />
+        icon: <SiMui />,
+        level: 60,
+        color: "#007FFF",
     },
     {
         name: "Git",
-        icon: <FaGitSquare />
+        icon: <FaGitSquare />,
+        level: 50,
+        color: "#F05032",
     },
     {
         name: "Tailwind CSS",
-        icon: <RiTailwindCssFill />
+        icon: <RiTailwindCssFill />,
+        level: 40,
+        color: "#38B2AC",
     },
     {
         name: "Next.js",
-        icon: <RiNextjsFill />
-    }
+        icon: <RiNextjsFill />,
+        level: 40,
+        color: "#000",
+    },
+    {
+        name: "Adobe Premiere",
+        icon: <SiAdobepremierepro />,
+        level: 30,
+        color: "#9999FF",
+    },
 ]
 
 export default Skills;

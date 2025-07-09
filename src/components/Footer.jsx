@@ -19,11 +19,11 @@ const Footer = () => {
             <div className="flex items-center justify-between px-[5%] py-[3rem] text-[var(--text-color)]"> 
                 <h3 className="text-[1.2rem] max-md:text-[1rem]">Developed By Davood Akrami</h3>
                 <div className="flex gap-[1.8rem] max-md:gap-[1rem]">
-                    <FaGithub onClick={() => window.open(contact.github)} className="ContactIcons" />
-                    <FaLinkedinIn onClick={() => window.open(contact.linkedin)} className="ContactIcons" />
-                    <FaTelegram onClick={() => window.open(contact.telegram)} className="ContactIcons" />
-                    <IoLogoInstagram onClick={() => window.open(contact.instagram)} className="ContactIcons" /> 
-                    <MdEmail onClick={() => window.open(`mailto:${contact.email}`)} className="ContactIcons" /> 
+                    <FaGithub onClick={() => window.open(contact.github)} className="ContactIcons soft" />
+                    <FaLinkedinIn onClick={() => window.open(contact.linkedin)} className="ContactIcons soft" />
+                    <FaTelegram onClick={() => window.open(contact.telegram)} className="ContactIcons soft" />
+                    <IoLogoInstagram onClick={() => window.open(contact.instagram)} className="ContactIcons soft" /> 
+                    <MdEmail onClick={() => window.open(`mailto:${contact.email}`)} className="ContactIcons soft" /> 
                 </div>
             </div>
         </div>

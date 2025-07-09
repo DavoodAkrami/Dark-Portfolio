@@ -4,12 +4,14 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary: #1f2023;  
-  --header: #18181b; 
+  --header: #0d1117; 
   --button: #0e0e16; 
   --accent: #6366f1;    
   --text: #e5e7eb;  
   --subtext: #a1a1aa;     
-  --highlight: #fbbf24;   
+  --highlight: #fbbf24;
+  --secondary: #1f2937;
+   
 }
 
 @theme inline {
@@ -24,6 +26,7 @@
   --subtext-color: var(--subtext);
   --highlight-color: var(--highlight);
   --button-color: var(--button);
+  --secondary-color: var(--secondary);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +40,14 @@ body {
   font-family: var(--font-sans);
 }
 
+button:hover,
+.hoverLight:hover {
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
+.soft {
+  @apply transition-colors duration-170
+}
 
 .header-hamburger-menu-transition {
   transition:
@@ -58,7 +69,7 @@ body {
 }
 
 .ContactIcons {
-  @apply text-[2.2rem] cursor-pointer hover:text-[var(--accent-color)] max-md:text-[1.6rem]
+  @apply text-[2.2rem] cursor-pointer hover:text-[var(--accent-color)] max-md:text-[1.6rem] 
 }
 
 @keyframes marquee-left {
