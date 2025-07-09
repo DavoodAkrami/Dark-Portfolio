@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #1f2023;  
+  --header: #18181b; 
+  --accent: #6366f1;    
+  --text: #e5e7eb;  
+  --subtext: #a1a1aa;     
+  --highlight: #fbbf24;   
 }
 
 @theme inline {
@@ -10,6 +16,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --primary-color: var(--primary);
+  --header-color: var(--header);
+  --accent-color: var(--accent);
+  --text-color: var(--text);
+  --subtext-color: var(--subtext);
+  --highlight-color: var(--highlight);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +32,29 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+
+.header-hamburger-menu-transition {
+  transition:
+    max-height 0.4s ease,
+    opacity 0.4s ease,
+    padding 0.4s ease;
+}
+
+.header-hamburger-menu-transition-li {
+  transition:
+    transform 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+    filter 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+
+  transform: translateY(30px) scale(0.95);
+  opacity: 0;
+  filter: blur(6px);
+  border-radius: 6px;
+}
+
+.ContactIcons {
+  @apply text-[2.2rem] cursor-pointer hover:text-[var(--accent-color)] max-md:text-[1.6rem]
 }
