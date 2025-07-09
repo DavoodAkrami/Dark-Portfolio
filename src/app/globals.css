@@ -40,6 +40,13 @@ body {
   font-family: var(--font-sans);
 }
 
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+
 button:hover,
 .hoverLight:hover {
   box-shadow: 0 0 8px var(--accent-color);
