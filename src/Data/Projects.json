@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "title": "My Portfolio",
+        "description": "A modern and fully responsive personal portfolio built with Next.js, TailwindCSS, and Framer Motion. Designed to showcase projects, skills, and experience with a clean dark theme and smooth animations.",
+        "url": "https://davood-portfolio.vercel.app/",
+        "technologies": ["Next.js", "React", "JavaScript", "Tailwind CSS", "Motion"],
+        "gitHub": "https://github.com/DavoodAkrami/Dark-Portfolio",
+        "img": "/dark-portfolio.png" 
+    },
+    {
+        "id": 2,
+        "title": "E-commerce",
+        "description": "This project is an e-commerce website built with React. It is designed to serve as a portfolio project",
+        "url": "https://e-commerce-eta-gray-71.vercel.app/",
+        "technologies": [ "React", "CSS modules", "React Router Dom"],
+        "gitHub": "https://github.com/DavoodAkrami/e-commerce",
+        "img": "/E-commerce.png"  
+    },
+    {
+        "id": 3,
+        "title": "Naghz",
+        "description": "Naghz is a smart learning assistant that helps users build essential life and soft skills through real-time, interactive guidance.",
+        "url": "https://naghz.vercel.app/",
+        "technologies": ["vite", "React", "CSS modules", "React Router DOM"],
+        "gitHub": "https://github.com/DavoodAkrami/Naghz",
+        "img": "/Naghz.png" 
+    },
+    {
+        "id": 4,
+        "title": "My last Portfolio",
+        "description": "A modern and fully responsive personal portfolio built with Next.js, TailwindCSS, and Framer Motion. Designed to showcase projects, skills, and experience with a clean dark theme and smooth animations.",
+        "url": "https://portfolio-one-azure-17.vercel.app/",
+        "technologies": ["Vite", "React", "JavaScript", "CSS modules"],
+        "gitHub": "https://github.com/DavoodAkrami/Portfolio?tab=readme-ov-file",
+        "img": "/my-last-portfolio.png" 
+    },
+    {
+        "id": 5,
+        "title": "BookMarks",
+        "description": "A modern, web application for managing your bookmarks with a clean, macOS-inspired design",
+        "url": "https://book-marks-nine.vercel.app/",
+        "technologies": ["Vite", "React", "CSS modules"],
+        "gitHub": "https://github.com/DavoodAkrami/BookMarks",
+        "img": "/bookmarks.png"
+    },
+    {
+        "id": 6,
+        "title": "Bonmano",
+        "description": "An online E-commers coffee store",
+        "url": "https://banmano-4ikg.vercel.app/",
+        "technologies": ["Vite", "React", "MUI", "CSS modules", "React Router DOM"],
+        "gitHub": "https://github.com/DavoodAkrami/Bonmano",
+        "img": "/Bonmano.png"
+    }
+]

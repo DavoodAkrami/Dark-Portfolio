@@ -50,6 +50,7 @@ body {
 button:hover,
 .hoverLight:hover {
   box-shadow: 0 0 8px var(--accent-color);
+  @apply transition-colors duration-170
 }
 
 .soft {

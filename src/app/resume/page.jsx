@@ -11,23 +11,24 @@ import Experience from "@/Data/Experience";
 const About = () => {
     const contact = ContactInfo[0];
 
+
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, threshold: 0.1 });
 
-    const experiencesRef = useRef(null);
-    const isExperiencesInView = useInView(experiencesRef, { once: true, threshold: 0.5 });
+
+    
 
     const containerVariants = {
         hidden: {},
         visible: {
             transition: {
-                staggerChildren: 0.15,
+                staggerChildren: 0.2,
             },
         },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: -50 },
         visible: { opacity: 1, y: 0 },
     };
 
@@ -42,6 +43,8 @@ const About = () => {
             </button>
 
             <SkillsSlider direction="left" />
+
+            
 
             <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]">My Skills</h1>
 
@@ -58,22 +61,23 @@ const About = () => {
                     </motion.div>
                 ))}
             </motion.div>
-            <SkillsSlider direction="right" />
 
+            <SkillsSlider direction="right" />
             <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]">My Experiences</h1>
             <motion.div
-                ref={experiencesRef}
-                variants={containerVariants}
-                initial="hidden"
-                animate={isExperiencesInView ? "visible" : "hidden"}
                 className="flex flex-col gap-[2rem] justify-center items-center"
             >
                 {Experience.map((exp, index) => (
-                    <motion.div key={index} variants={itemVariants}>
-                        <Experiences exp={exp}/>
+                    <motion.div key={index} 
+                    >
+                        <Experiences 
+                            exp={exp}
+                        />
                     </motion.div>
                 ))}
             </motion.div>
+
+
         </div>
     );
 };
