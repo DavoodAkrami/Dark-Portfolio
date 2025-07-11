@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
+import Link from "next/link";
 
 function Home() {
     const containerVariants = {
@@ -65,13 +66,17 @@ function Home() {
                     variants={itemVariants}
                     className="flex flex-wrap gap-4 mb-8"
                 >
-                    <button className="bg-[var(--accent-color)] cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2">
+                    <Link 
+                        href='https://flowcv.com/resume/2bohp73170'
+                        className="hoverLight bg-[var(--accent-color)] cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2">
                         <FaDownload />
                         Download Resume
-                    </button>
-                    <button className="border-2 border-[var(--accent-color)] cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300">
+                    </Link>
+                    <Link 
+                        href='/projects'
+                        className="hoverLight soft border-2 border-[var(--accent-color)] cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300">
                         View My Work
-                    </button>
+                    </Link>
                 </motion.div>
 
                 <motion.div 

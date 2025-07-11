@@ -22,7 +22,7 @@ const Header = () => {
         <>
             <header ref={headerRef} className="flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] relative z-20">
                 <div className="flex items-center gap-[10px] max-md:scale-[0.8]"> 
-                    <img src="/Davood.jpg" alt="" className="rounded-full h-[7vh]" />
+                    <img src="/Davood-noBG.png" alt="" className="rounded-full h-[7vh]" />
                     <span className="text-[1.4rem] font-[600]">Davood Akrami</span>
                 </div>
                 <div 

@@ -46,11 +46,26 @@ body {
   overflow-x: hidden;
 }
 
+input:-webkit-autofill {
+  background-color: var(--primary-color);
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-color) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
 
 button:hover,
 .hoverLight:hover {
   box-shadow: 0 0 8px var(--accent-color);
   @apply transition-colors duration-170
+}
+
+.focusrLight:focus {
+  box-shadow: 0 0 8px var(--accent-color);
+  border: 1px solid var(--accent-color);
+  @apply transition-colors duration-300
 }
 
 .soft {
@@ -106,4 +121,13 @@ button:hover,
   animation: marquee-right 25s linear infinite;
 }
 
+.z-50 { z-index: 50; }
 
+.contactIcons {
+  color: var(--text-color);
+  font-size: 3rem;
+}
+
+.contactIcons:hover {
+  color: var(--accent-color);
+}

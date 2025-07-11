@@ -1,6 +1,5 @@
 "use client"
 import React from "react";
-import Link from "next/link";
 import ContactInfo from "@/Data/ContactInfo"
 import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
