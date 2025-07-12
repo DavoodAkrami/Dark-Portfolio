@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React ,{ useState, useRef, useEffect } from "react";
 import { clsx } from "clsx";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
     const pathName = usePathname();
@@ -49,7 +50,7 @@ const Header = () => {
                     />
                 </div>
                 <nav className="hidden md:flex">
-                    <ul className="flex gap-6">
+                    <ul className="flex gap-6 items-center">
                         {pages.map((page) => {
                             const isActive = pathName === page.path;
                             return (
@@ -75,6 +76,7 @@ const Header = () => {
                                 </li>
                             );
                         })}
+                            <ThemeToggle />
                     </ul>
                 </nav>
             </header>
@@ -105,6 +107,9 @@ const Header = () => {
                             </li>
                         );
                     })}
+                    <li className="flex justify-center p-[1rem]">
+                        <ThemeToggle />
+                    </li>
                 </ul>
             </nav>
         </>

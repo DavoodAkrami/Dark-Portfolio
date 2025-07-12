@@ -47,6 +47,7 @@ const contactme = () => {
                     <div className="flex flex-col justify-center items-center text-[var(--text-color)] mt-[3rem]">
                         <h3 className="text-[1.8rem] text-[var(--text-color)] font-[570] max-md:text-[1.5rem] mb-[3rem] text-center flex justify-center max-[400px]:text-[1.2rem]">Ask question about me from my AI</h3>
                         <motion.button
+                            onClick={() => setIsModalOpen(true)}
                             layoutId="AI-box"
                             className="text-[var(--accent-color)] rounded-lg font-[570] px-[4rem] py-[0.8rem] border-2 border-[var(--accent-color)] cursor-pointer hoverLight hover:text-[var(--text-color)] hover:bg-[var(--accent-color)]"
                         >
@@ -55,6 +56,7 @@ const contactme = () => {
                     </div>
                 </motion.div>
             </div>
+
         </div>
     )
 }

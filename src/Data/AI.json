@@ -1,0 +1,52 @@
+{
+    "personal": [
+        {
+            "id": 1,
+            "title": "name | lastname | Job Title",
+            "text": "I am Davood Akrami, jonior frontend developer and interested in AI, experienced and interested in Entrepreneurship and business development"
+        },
+        {
+            "id": 2,
+            "title": "",
+            "text": ""
+        }
+    ],
+    "my hard skills": [
+        {
+            "name": "HTML",
+            "level": 100
+        },
+        {
+            "name": "CSS",
+            "level": 75
+        },
+        {
+            "name": "JavaScript",
+            "level": 75
+        },
+        {
+            "name": "React.js",
+            "level": 65
+        },
+        {
+            "name": "MUI",
+            "level": 60
+        },
+        {
+            "name": "Git",
+            "level": 50
+        },
+        {
+            "name": "Tailwind CSS",
+            "level": 40
+        },
+        {
+            "name": "Next.js",
+            "level": 40
+        },
+        {
+            "name": "Adobe Premiere",
+            "level": 30
+        }
+    ]
+}
