@@ -5,7 +5,7 @@ import SkillsSlider from "@/components/SkillsSlider";
 import SkillCard from "@/components/SkillCard";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Experiences from "@/components/ExperienceCard";
+import TimelineExperience from "@/components/TimelineExperience";
 import Experience from "@/Data/Experience";
 
 const About = () => {
@@ -63,21 +63,8 @@ const About = () => {
             </motion.div>
 
             <SkillsSlider direction="right" />
-            <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]">My Experiences</h1>
-            <motion.div
-                className="flex flex-col gap-[2rem] justify-center items-center"
-            >
-                {Experience.map((exp, index) => (
-                    <motion.div key={index} 
-                    >
-                        <Experiences 
-                            exp={exp}
-                        />
-                    </motion.div>
-                ))}
-            </motion.div>
-
-
+            <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]">My Experiences</h1>            
+            <TimelineExperience experiences={Experience} />
         </div>
     );
 };

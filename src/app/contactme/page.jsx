@@ -2,17 +2,21 @@
 import  FeedbackForm from "@/components/FeedbackForm";
 import ContactInfo from "@/Data/ContactInfo"
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
-
-
-
+import { useState } from "react";
 
 const contactme = () => {
     const contact = ContactInfo[0];
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const handleClose = () => {
+        setIsModalOpen(false);
+    };
+    
     return (
         <div className="bg-[var(--primary-color)] ">
                 <h1 className="text-[4rem] text-[var(--text-color)] font-[570] max-md:text-[3.4rem] flex justify-center max-sm:text-[3rem] pt-[6vh] text-center">Contact with me</h1>
@@ -56,10 +60,44 @@ const contactme = () => {
                     </div>
                 </motion.div>
             </div>
-
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        className="fixed inset-0 z-50 flex items-center justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                    > 
+                        <motion.div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            onClick={handleClose}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.48 }}
+                        />  
+                        <motion.div 
+                            className="relative z-10 bg-[var(--button-color)] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] max-w-md mx-4"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <motion.div 
+                                layoutId="AI-box"
+                                className="text-center"
+                            >
+                                <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
+                                <p className="text-[var(--text-color)] text-lg mb-6">Coming Soon!</p>
+                                <p className="text-[var(--subtext-color)] text-sm">I'm working on an AI assistant that can answer questions about me, my experience, skills, and projects.</p>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }
-
 
 export default contactme;

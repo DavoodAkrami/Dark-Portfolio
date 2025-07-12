@@ -12,7 +12,6 @@ const Header = () => {
     const headerRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
 
-    
     useEffect(() => {
         if (headerRef.current) {
             setHeaderHeight(headerRef.current.offsetHeight);
@@ -32,20 +31,20 @@ const Header = () => {
                 >
                     <span
                         className={clsx(
-                        "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
-                        isMenuOpen && "translate-y-[9px] rotate-[45deg]"
+                            "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
+                            isMenuOpen && "translate-y-[9px] rotate-[45deg]"
                         )}
                     />
                     <span
                         className={clsx(
-                        "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
-                        isMenuOpen && "opacity-0 scale-0"
+                            "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
+                            isMenuOpen && "opacity-0 scale-0"
                         )}
                     />
                     <span
                         className={clsx(
-                        "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
-                        isMenuOpen && "translate-y-[-9px] rotate-[-45deg]"
+                            "block w-[25px] h-[3px] bg-[var(--text-color)] transition-all duration-300 ease-out origin-center",
+                            isMenuOpen && "translate-y-[-9px] rotate-[-45deg]"
                         )}
                     />
                 </div>
