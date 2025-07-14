@@ -1,12 +1,21 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Projects from "@/Data/Projects.json";
 import { ProjectsGrid, ProjectDetails } from "@/components/ProjectCard";
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+
+
+
 
 const ProjectSection = () => {
     const [selectedId, setSelectedId] = useState(null);
+    const textRef = useRef(null);
+    const isInView = useInView(textRef, { once: true });
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    if (isInView && !hasAnimated) {
+        setHasAnimated(true);
+    }
 
     const handleSelect = (id) => {
         setSelectedId(id);
@@ -48,14 +57,16 @@ const ProjectSection = () => {
             
             <div className="max-w-[70%] mx-auto px-4 max-md:max-w-[90%] mb-16 text-center">
                 <motion.h2 
+                    ref={textRef}
                     initial={{ opacity: 0, y: -50}}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
                     className="text-[3rem] text-[var(--text-color)] font-[570] max-md:text-[2.8rem] mt-[5rem] mb-[1vh]"
                 > What I learned?</motion.h2>
                 <motion.p 
+                    ref={textRef}
                     initial={{ opacity: 0, y: -50}}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
                     className="text-[var(--subtext-color)] text-[1.4rem] leading-relaxed mb-10 max-md:text-[1rem]"
                 >
@@ -63,14 +74,16 @@ const ProjectSection = () => {
                     This journey has been incredibly enriching. I've learned not just technical skills, but also how to approach problems with a builder’s mindset, communicate ideas clearly, and stay curious in the face of new challenges. It helped shape my identity as a developer who continuously learns and improves.
                 </motion.p>
                 <motion.h2
+                    ref={textRef}
                     initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}} 
                     className="text-[3rem] text-[var(--text-color)] font-[570] max-md:text-[2.8rem] mb-[1vh]"
                 >My Journey</motion.h2>
                 <motion.p 
+                    ref={textRef}
                     initial={{ opacity: 0, y: 50}}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
                     className="text-[var(--subtext-color)] text-[1.4rem] leading-relaxed max-md:text-[1rem]"
                 >

@@ -8,6 +8,8 @@ import { useRef } from "react";
 import TimelineExperience from "@/components/TimelineExperience";
 import Experience from "@/Data/Experience";
 
+
+
 const About = () => {
     const contact = ContactInfo[0];
 

@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 import Link from "next/link";
 
-function Home() {
+
+const Home = () => {
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -75,7 +76,7 @@ function Home() {
                     <Link 
                         href='/projects'
                         className="hoverLight soft border-2 border-[var(--accent-color)] cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300">
-                        View My Work
+                        Projects
                     </Link>
                 </motion.div>
 
