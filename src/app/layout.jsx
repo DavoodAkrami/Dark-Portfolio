@@ -52,6 +52,20 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Davood Akrami",
+              "url": "https://www.davoodakrami.ir/",
+              "image": "https://www.davoodakrami.ir/Davood-noBG.png"
+            }
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
