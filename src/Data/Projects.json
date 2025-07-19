@@ -10,6 +10,15 @@
     },
     {
         "id": 2,
+        "title": "Bagro Menu",
+        "description": "A responsive menu for Bagro restaurant in Shiraz with an admin panel to add, edit and delete new items.",
+        "url": "https://bagro-menu.vercel.app/",
+        "technologies": ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Supabase"],
+        "gitHub": "https://github.com/DavoodAkrami/Bagro-Menu",
+        "img": "/Bagro.png"
+    },
+    {
+        "id": 3,
         "title": "E-commerce",
         "description": "This project is an e-commerce website built with React. It is designed to serve as a portfolio project",
         "url": "https://e-commerce-eta-gray-71.vercel.app/",
@@ -18,7 +27,7 @@
         "img": "/E-commerce.png"  
     },
     {
-        "id": 3,
+        "id": 4,
         "title": "Naghz",
         "description": "Naghz is a smart learning assistant that helps users build essential life and soft skills through real-time, interactive guidance.",
         "url": "https://naghz.vercel.app/",
@@ -27,7 +36,7 @@
         "img": "/Naghz.png" 
     },
     {
-        "id": 4,
+        "id": 5,
         "title": "My last Portfolio",
         "description": "A modern and fully responsive personal portfolio built with Next.js, TailwindCSS, and Framer Motion. Designed to showcase projects, skills, and experience with a clean dark theme and smooth animations.",
         "url": "https://portfolio-one-azure-17.vercel.app/",
@@ -36,7 +45,7 @@
         "img": "/my-last-portfolio.png" 
     },
     {
-        "id": 5,
+        "id": 6,
         "title": "BookMarks",
         "description": "A modern, web application for managing your bookmarks with a clean, macOS-inspired design",
         "url": "https://book-marks-nine.vercel.app/",
@@ -45,7 +54,7 @@
         "img": "/bookmarks.png"
     },
     {
-        "id": 6,
+        "id": 7,
         "title": "Bonmano",
         "description": "An online E-commers coffee store",
         "url": "https://banmano-4ikg.vercel.app/",

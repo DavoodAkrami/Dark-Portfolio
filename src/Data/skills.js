@@ -7,6 +7,9 @@ import { FaGitSquare } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiAdobepremierepro } from "react-icons/si";
+import { BiLogoTypescript } from "react-icons/bi";
+import { RiSupabaseFill } from "react-icons/ri";
+
 
 
 
@@ -30,22 +33,22 @@ const Skills = [
         color: "#F7DF1E",
     },
     {
+        name: "TypeScript",
+        icon: <BiLogoTypescript />,
+        level: 75,
+        color: "#007acc",
+    },
+    {
         name: "React.js",
         icon: <RiReactjsFill />,
         level: 65,
         color: "#61DAFB",
     },
     {
-        name: "MUI",
-        icon: <SiMui />,
-        level: 60,
-        color: "#007FFF",
-    },
-    {
-        name: "Git",
-        icon: <FaGitSquare />,
-        level: 50,
-        color: "#F05032",
+        name: "Next.js",
+        icon: <RiNextjsFill />,
+        level: 40,
+        color: "#000",
     },
     {
         name: "Tailwind CSS",
@@ -54,10 +57,22 @@ const Skills = [
         color: "#38B2AC",
     },
     {
-        name: "Next.js",
-        icon: <RiNextjsFill />,
-        level: 40,
-        color: "#000",
+        name: "MUI",
+        icon: <SiMui />,
+        level: 60,
+        color: "#007FFF",
+    },
+    {
+        name: "Supabase",
+        icon: <RiSupabaseFill />,
+        level: 45,
+        color: "#34B27B"
+    },
+    {
+        name: "Git",
+        icon: <FaGitSquare />,
+        level: 50,
+        color: "#F05032",
     },
     {
         name: "Adobe Premiere",

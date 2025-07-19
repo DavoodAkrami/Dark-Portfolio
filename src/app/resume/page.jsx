@@ -65,7 +65,7 @@ const About = () => {
             </motion.div>
 
             <SkillsSlider direction="right" />
-            <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]">My Experiences</h1>            
+            <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center">My Professional Experiences</h1>            
             <TimelineExperience experiences={Experience} />
         </div>
     );
