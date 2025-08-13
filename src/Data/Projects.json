@@ -18,6 +18,15 @@
         "img": "/Bagro.png"
     },
     {
+        "id": 8,
+        "title": "Naghz-mvp",
+        "description": "Naghz is a learning assistant that helps you learn essential life and soft skills through real-time, interactive guidance and this is the MVP version of the project that we are working on it.",
+        "url": "thenaghz.ir",
+        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Redux", "Supabase"],
+        "gitHub": "https://github.com/DavoodAkrami/naghz-mvp-main",
+        "img": "/Naghz-mvp.png"
+    },
+    {
         "id": 3,
         "title": "E-commerce",
         "description": "This project is an e-commerce website built with React. It is designed to serve as a portfolio project",

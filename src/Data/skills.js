@@ -9,6 +9,7 @@ import { RiNextjsFill } from "react-icons/ri";
 import { SiAdobepremierepro } from "react-icons/si";
 import { BiLogoTypescript } from "react-icons/bi";
 import { RiSupabaseFill } from "react-icons/ri";
+import { TbBrandRedux } from "react-icons/tb";
 
 
 
@@ -49,6 +50,12 @@ const Skills = [
         icon: <RiNextjsFill />,
         level: 40,
         color: "#000",
+    },
+    {
+        name: "Redux",
+        icon: <TbBrandRedux />,
+        level: 35,
+        color: "#764ABC",
     },
     {
         name: "Tailwind CSS",

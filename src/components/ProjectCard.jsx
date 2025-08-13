@@ -15,7 +15,7 @@ const ProjectCard = ({ project, onSelect, index }) => {
         offset: ["start end", "center start"]
     });
     const fromX = index % 2 === 0 ? -150 : 150;
-    const x = useTransform(scrollYProgress, [0.03, 0.20, 0.85, 0.97], [fromX, 0, 0, fromX]);
+    const x = useTransform(scrollYProgress, [0.03, 0.10, 0.85, 0.97], [fromX, 0, 0, fromX]);
     const opacity = useTransform(scrollYProgress, [0.03, 0.20, 0.85, 0.97], [0, 1, 1, 0]);
     const MAX_DESC_LENGTH = 90;
     const shortDescription =
