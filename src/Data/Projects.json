@@ -3,7 +3,7 @@
         "id": 1,
         "title": "My Portfolio",
         "description": "A modern and fully responsive personal portfolio built with Next.js, TailwindCSS, and Framer Motion. Designed to showcase projects, skills, and experience with a clean dark theme and smooth animations.",
-        "url": "https://davood-portfolio.vercel.app/",
+        "url": "https://davoodakrami.ir",
         "technologies": ["Next.js", "React", "JavaScript", "Tailwind CSS", "Motion"],
         "gitHub": "https://github.com/DavoodAkrami/Dark-Portfolio",
         "img": "/dark-portfolio.png" 
@@ -21,7 +21,7 @@
         "id": 8,
         "title": "Naghz-mvp",
         "description": "Naghz is a learning assistant that helps you learn essential life and soft skills through real-time, interactive guidance and this is the MVP version of the project that we are working on it.",
-        "url": "thenaghz.ir",
+        "url": "https://thenaghz.ir",
         "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Redux", "Supabase"],
         "gitHub": "https://github.com/DavoodAkrami/naghz-mvp-main",
         "img": "/Naghz-mvp.png"
