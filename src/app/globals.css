@@ -63,6 +63,15 @@ textarea:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
+input::placeholder {
+  color: var(--subtext-color);
+}
+
+input {
+  caret-color: var(--subtext-color); 
+  color: var(--text-color);
+}
+
 button:hover,
 .hoverLight:hover {
   box-shadow: 0 0 8px var(--accent-color);

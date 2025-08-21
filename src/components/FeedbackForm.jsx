@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { VscLoading } from "react-icons/vsc";
 import { MdErrorOutline } from "react-icons/md";
@@ -56,6 +56,18 @@ const FeedbackForm = () => {
     email: "",
     message: "",
   });
+  const successSound = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return new Audio('/applepay.wav');
+    }
+    return null;
+  }, []);
+  const errorSound = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return new Audio('/game-se-2.wav');
+    }
+    return null;
+  }, []);
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = async (e) => {
@@ -90,11 +102,13 @@ const FeedbackForm = () => {
 
       if (res.ok) {
         setStatus("Success");
+        successSound?.play();
         setEmailStatus('');
         setInputError({ name: false, email: false, message: false });
         setForm({ name: "", email: "", message: "" });
       } else {
         setStatus("Failed");
+        errorSound?.play();
       }
     } catch (error) {
       setStatus("Failed");

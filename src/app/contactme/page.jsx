@@ -8,6 +8,9 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
+import clsx from "clsx";
+import Message from "@/components/Message";
 
 
 
@@ -15,11 +18,78 @@ import { useState } from "react";
 const contactme = () => {
     const contact = ContactInfo[0];
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userMessage, setUserMessage] = useState("");
+    const [aiResponse, setAiResponse] = useState("");
+    const [loading, setLoading] = useState(false);
     
     const handleClose = () => {
         setIsModalOpen(false);
     };
+
+    const handleSend = async () => {
+        if (!userMessage.trim()) return;
+        setLoading(true);
+        setAiResponse("");
+        setUserMessage("");
     
+        try {
+            const res = await fetch("/api/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userMessage }),
+            });
+            
+            if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
+            }
+            
+            const data = await res.json();
+
+            if (data.error) {
+            setAiResponse(`Error: ${data.error}`);
+            return;
+            }
+
+            let text = data.reply || "";
+            if (typeof text !== 'string') {
+            setAiResponse("Error: Invalid response format");
+            return;
+            }
+            
+            // Clean the text to remove any undefined values
+            text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+            
+            console.log("Frontend received text:", { 
+            length: text.length, 
+            preview: text.substring(0, 100),
+            lastChars: text.substring(text.length - 10),
+            charCodes: Array.from(text).map(char => char.charCodeAt(0)).slice(-10)
+            });
+            
+            let i = 0;
+            const interval = setInterval(() => {
+            if (i < text.length && text[i] !== undefined && text[i] !== null) {
+                const currentChar = text[i];
+                setAiResponse((prev) => prev + currentChar);
+            } else {
+                console.log(`Skipping character ${i}: ${text[i]}`);
+            }
+            i++;
+            if (i >= text.length) {
+                console.log("Typing animation completed");
+                clearInterval(interval);
+            }
+            }, 30); 
+        } catch (err) {
+            console.error(err);
+            setAiResponse(`Error: ${err.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     return (
         <div className="bg-[var(--primary-color)] ">
                 <h1 className="text-[4rem] text-[var(--text-color)] font-[570] max-md:text-[3.4rem] flex justify-center max-sm:text-[3rem] pt-[6vh] text-center">Contact with me</h1>
@@ -82,6 +152,7 @@ const contactme = () => {
                         />  
                         <motion.div 
                             className="relative z-10 bg-[var(--button-color)] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] max-w-md mx-4"
+                            // className="relative z-10 bg-[var(--button-color)] min-h-[60vh] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] w-[40%] max-[1000px]:w-[60%] max-md:w-[90%] mx-4"
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
@@ -91,6 +162,39 @@ const contactme = () => {
                                 layoutId="AI-box"
                                 className="text-center"
                             >
+                                {/* <div>
+                                    <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
+                                </div>
+                                <div
+                                    className="h-[50vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-[12px] p-[1rem] mb-[2vh] overflow-y-auto overflow-x-auto"
+                                >
+                                    {loading ? (
+                                        <div 
+                                            className="animate-pulse text-[var(--accent-color)]"     
+                                        >Thinking...</div>
+                                    ) : (
+                                        <p className="text-[var(--text-color)] whitespace-pre-wrap">{aiResponse}</p>
+                                    )}
+                                </div>  
+                                <div
+                                    className="flex justify-center items-center gap-[1rem] disabled:opacity-60 w-[98%] mx-auto"
+                                >
+                                    <input 
+                                        type="text"
+                                        placeholder="Ask me anything"
+                                        name="chatbot"
+                                        value={userMessage}
+                                        onChange={(e) => setUserMessage(e.target.value)}
+                                        className="w-[90%] border-transparent mx-auto px-[0.6rem] py-[0.6rem] rounded-[12px] bg-[var(--primary-color)] autofill:bg-[var(--primary-color)] focusrLight border outline-none focus:border-1 focus:border-[var(--accent-color)]" 
+                                    />
+                                    <IoIosArrowForward 
+                                        onClick={handleSend}
+                                        className={clsx(
+                                            "text-[var(--accent-color)] font-extrabold text-[3rem] p-[0.6rem] rounded-full border-2 border-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-[var(--text-color)] button soft cursor-pointer",
+                                            loading && 'opacity-60'
+                                        )}
+                                    />
+                                </div> */}
                                 <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 <p className="text-[var(--text-color)] text-lg mb-6">Coming Soon!</p>
                                 <p className="text-[var(--subtext-color)] text-sm">I'm working on an AI assistant that can answer questions about me, my experience, skills, and projects.</p>
