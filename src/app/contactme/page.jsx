@@ -7,7 +7,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
@@ -19,8 +19,9 @@ const contactme = () => {
     const contact = ContactInfo[0];
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userMessage, setUserMessage] = useState("");
-    const [aiResponse, setAiResponse] = useState("");
+    const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const endOfMessagesRef = useRef(null);
     
     const handleClose = () => {
         setIsModalOpen(false);
@@ -28,66 +29,101 @@ const contactme = () => {
 
     const handleSend = async () => {
         if (!userMessage.trim()) return;
-        setLoading(true);
-        setAiResponse("");
+        const content = userMessage;
         setUserMessage("");
-    
+        const userMsg = {
+            id: `${Date.now()}-user`,
+            role: 'user',
+            text: content,
+            timestamp: Date.now()
+        };
+        setMessages((prev) => [...prev, userMsg]);
+        setLoading(true);
+
         try {
             const res = await fetch("/api/ask", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userMessage }),
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: content })
             });
             
             if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
+                const errorData = await res.json();
+                throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
             }
             
             const data = await res.json();
-
             if (data.error) {
-            setAiResponse(`Error: ${data.error}`);
-            return;
+                const assistantError = {
+                    id: `${Date.now()}-assistant`,
+                    role: 'assistant',
+                    text: `Error: ${data.error}`,
+                    timestamp: Date.now()
+                };
+                setMessages((prev) => [...prev, assistantError]);
+                return;
             }
 
             let text = data.reply || "";
             if (typeof text !== 'string') {
-            setAiResponse("Error: Invalid response format");
-            return;
+                const invalidFormat = {
+                    id: `${Date.now()}-assistant`,
+                    role: 'assistant',
+                    text: "Error: Invalid response format",
+                    timestamp: Date.now()
+                };
+                setMessages((prev) => [...prev, invalidFormat]);
+                return;
             }
-            
-            // Clean the text to remove any undefined values
+
             text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
-            
-            console.log("Frontend received text:", { 
-            length: text.length, 
-            preview: text.substring(0, 100),
-            lastChars: text.substring(text.length - 10),
-            charCodes: Array.from(text).map(char => char.charCodeAt(0)).slice(-10)
-            });
-            
-            let i = 0;
-            const interval = setInterval(() => {
-            if (i < text.length && text[i] !== undefined && text[i] !== null) {
-                const currentChar = text[i];
-                setAiResponse((prev) => prev + currentChar);
-            } else {
-                console.log(`Skipping character ${i}: ${text[i]}`);
-            }
-            i++;
-            if (i >= text.length) {
-                console.log("Typing animation completed");
-                clearInterval(interval);
-            }
-            }, 30); 
+
+            const assistantMsg = {
+                id: `${Date.now()}-assistant`,
+                role: 'assistant',
+                text,
+                timestamp: Date.now()
+            };
+            setMessages((prev) => [...prev, assistantMsg]);
         } catch (err) {
             console.error(err);
-            setAiResponse(`Error: ${err.message}`);
+            const assistantErr = {
+                id: `${Date.now()}-assistant`,
+                role: 'assistant',
+                text: `Error: ${err.message}`,
+                timestamp: Date.now()
+            };
+            setMessages((prev) => [...prev, assistantErr]);
         } finally {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem('contact_ai_messages');
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) {
+                    setMessages(parsed);
+                }
+            }
+        } catch (e) {
+            console.warn('Failed to load messages from storage', e);
+        }
+    }, []);
+
+    useEffect(() => {
+        try {
+            localStorage.setItem('contact_ai_messages', JSON.stringify(messages));
+        } catch (e) {
+            console.warn('Failed to save messages to storage', e);
+        }
+    }, [messages]);
+
+    useEffect(() => {
+        endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages, loading]);
 
 
     return (
@@ -151,8 +187,7 @@ const contactme = () => {
                             transition={{ duration: 0.48 }}
                         />  
                         <motion.div 
-                            className="relative z-10 bg-[var(--button-color)] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] max-w-md mx-4"
-                            // className="relative z-10 bg-[var(--button-color)] min-h-[60vh] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] w-[40%] max-[1000px]:w-[60%] max-md:w-[90%] mx-4"
+                            className="relative z-10 bg-[var(--button-color)] min-h-[60vh] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] w-[40%] max-[1000px]:w-[60%] max-md:w-[90%] mx-4"
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
@@ -162,19 +197,30 @@ const contactme = () => {
                                 layoutId="AI-box"
                                 className="text-center"
                             >
-                                {/* <div>
+                                <div>
                                     <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 </div>
                                 <div
                                     className="h-[50vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-[12px] p-[1rem] mb-[2vh] overflow-y-auto overflow-x-auto"
                                 >
-                                    {loading ? (
-                                        <div 
-                                            className="animate-pulse text-[var(--accent-color)]"     
-                                        >Thinking...</div>
-                                    ) : (
-                                        <p className="text-[var(--text-color)] whitespace-pre-wrap">{aiResponse}</p>
-                                    )}
+                                    <div className="flex flex-col gap-3 items-stretch">
+                                        {messages.map((m) => (
+                                            m.role === 'user' ? (
+                                                <div key={m.id} className="flex justify-end">
+                                                    <Message message={m.text} />
+                                                </div>
+                                            ) : (
+                                                <div key={m.id} className="flex justify-start">
+                                                    <p className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] p-6 rounded-lg bg-[var(--button-color)]/50">{m.text}</p>
+                                                </div>
+                                            )
+                                        ))}
+
+                                        {loading && (
+                                            <div className="text-[var(--accent-color)] animate-pulse">Thinking...</div>
+                                        )}
+                                        <div ref={endOfMessagesRef} />
+                                    </div>
                                 </div>  
                                 <div
                                     className="flex justify-center items-center gap-[1rem] disabled:opacity-60 w-[98%] mx-auto"
@@ -194,10 +240,10 @@ const contactme = () => {
                                             loading && 'opacity-60'
                                         )}
                                     />
-                                </div> */}
-                                <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
+                                </div>
+                                {/* <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 <p className="text-[var(--text-color)] text-lg mb-6">Coming Soon!</p>
-                                <p className="text-[var(--subtext-color)] text-sm">I'm working on an AI assistant that can answer questions about me, my experience, skills, and projects.</p>
+                                <p className="text-[var(--subtext-color)] text-sm">I'm working on an AI assistant that can answer questions about me, my experience, skills, and projects.</p> */}
                             </motion.div>
                         </motion.div>
                     </motion.div>
