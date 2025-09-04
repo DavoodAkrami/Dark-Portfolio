@@ -211,13 +211,15 @@ const contactme = () => {
                                                 </div>
                                             ) : (
                                                 <div key={m.id} className="flex justify-start">
-                                                    <p className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] p-6 rounded-lg bg-[var(--button-color)]/50">{m.text}</p>
+                                                    <p className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50">{m.text}</p>
                                                 </div>
                                             )
                                         ))}
 
                                         {loading && (
-                                            <div className="text-[var(--accent-color)] animate-pulse">Thinking...</div>
+                                            <div className="flex justify-start bg-">
+                                                <div className="text-[var(--accent-color)] animate-pulse whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50">Thinking...</div>
+                                            </div>
                                         )}
                                         <div ref={endOfMessagesRef} />
                                     </div>

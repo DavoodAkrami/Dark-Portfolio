@@ -147,3 +147,21 @@ button:hover,
 .contactIcons:hover {
   color: var(--accent-color);
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--button-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.7);
+}

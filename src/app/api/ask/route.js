@@ -5,7 +5,7 @@ import { index } from "@/configs/pinecone";
 
 export const POST = async (request) => {
     try {
-        const { message, topK = 5, model = "gpt-4o-mini" } = await request.json();
+        const { message, topK = 5, model = "gpt-5" } = await request.json();
 
         if (!message || typeof message !== "string") {
             return NextResponse.json({ error: "message is required" }, { status: 400 });
