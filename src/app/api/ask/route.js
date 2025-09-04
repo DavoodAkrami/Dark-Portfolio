@@ -5,7 +5,7 @@ import { index } from "@/configs/pinecone";
 
 export const POST = async (request) => {
     try {
-        const { message, topK = 5, model = "gpt-5" } = await request.json();
+        const { message, topK = 5, model = "gpt-5-nano" } = await request.json();
 
         if (!message || typeof message !== "string") {
             return NextResponse.json({ error: "message is required" }, { status: 400 });
@@ -30,7 +30,6 @@ export const POST = async (request) => {
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: message }
             ],
-            temperature: 0.3
         });
 
         const reply = completion.choices?.[0]?.message?.content || '';
