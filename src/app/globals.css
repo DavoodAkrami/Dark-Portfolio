@@ -53,6 +53,11 @@ body {
   overflow-x: hidden;
 }
 
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--button-color);
+}
+
 input:-webkit-autofill {
   background-color: var(--primary-color);
 }
@@ -153,15 +158,47 @@ button:hover,
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--primary-color);
+  background: var(--button-color);
+  border-radius: 8px;
 }
 
 
 ::-webkit-scrollbar-thumb {
-  background: var(--button-color);
-  border-radius: 4px;
+  background: var(--accent-color);
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: color-mix(in oklab, var(--accent-color) 85%, black);
+}
+
+
+
+.github-calendar {
+  color: var(--text-color);
+}
+
+
+.github-calendar {
+  scrollbar-width: thin; 
+  scrollbar-color: var(--accent-color) var(--button-color);
+}
+
+.github-calendar::-webkit-scrollbar {
+  height: 8px; 
+  width: 8px;  
+}
+
+.github-calendar::-webkit-scrollbar-track {
+  background: var(--button-color);
+  border-radius: 8px;
+}
+
+.github-calendar::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 8px;
+}
+
+.github-calendar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--accent-color) 85%, black);
 }

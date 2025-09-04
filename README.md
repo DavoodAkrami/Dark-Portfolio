@@ -7,8 +7,9 @@ This site is my personal portfolio, designed to showcase my resume, web developm
 
 ## 🛠️ Tech Stack
 
-- **Next.js** (App Router)
+- **Next.js** 
 - **React**
+- **JavaScript**
 - **Tailwind CSS**
 - **Framer Motion** (for UI animations)
 
@@ -20,11 +21,10 @@ This site is my personal portfolio, designed to showcase my resume, web developm
 - **Resume Page:** Overview of my skills and professional experience.
 - **Projects Page:** Gallery of demo projects built for learning and practice.
 - **Contact Me:** Contact form that sends messages directly to my email.
+- **AI:** An AI created to answer any question about me.
 - **Animated UI:** Smooth transitions and animated mobile navigation.
 - **Responsive Design:** Works seamlessly on all devices.
 - **Dark/Light Theme Toggle:** User-selectable color themes.
-
-> **Note:** More features, including an AI assistant, are planned for future updates.
 
 ---
 

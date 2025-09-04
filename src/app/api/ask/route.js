@@ -5,7 +5,7 @@ import { index } from "@/configs/pinecone";
 
 export const POST = async (request) => {
     try {
-        const { message, topK = 5, model = "gpt-5-nano" } = await request.json();
+        const { message, topK = 5, model = "gpt-4o-mini" } = await request.json();
 
         if (!message || typeof message !== "string") {
             return NextResponse.json({ error: "message is required" }, { status: 400 });
@@ -23,7 +23,7 @@ export const POST = async (request) => {
             .map((m, i) => `#${i + 1} [${m.score?.toFixed(3)}] ${m.metadata?.title || m.id}\n${m.metadata?.text || ''}`)
             .join('\n\n');
 
-        const systemPrompt = `You are an assistant in Davood's portfolio. Use the following context related to Davood to answer the user's question. Only use the context if it is relevant.\n\nContext:\n${context}`;
+        const systemPrompt = `You are an assistant in Davood's portfolio. Use the following context related to Davood to answer the user's question and do not give any suggestions. Only use the context if it is relevant if not say I don't have that information.\n\nContext:\n${context}`;
         const completion = await openai.chat.completions.create({
             model,
             messages: [

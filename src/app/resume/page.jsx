@@ -7,6 +7,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import TimelineExperience from "@/components/TimelineExperience";
 import Experience from "@/Data/Experience";
+import GitHubCalendar from "react-github-calendar";
+
 
 
 
@@ -32,6 +34,11 @@ const About = () => {
     const itemVariants = {
         hidden: { opacity: 0, y: -50 },
         visible: { opacity: 1, y: 0 },
+    };
+
+    const customTheme = {
+        light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+        dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
     };
 
     return (
@@ -65,6 +72,32 @@ const About = () => {
             </motion.div>
 
             <SkillsSlider direction="right" />
+
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full flex flex-col items-center"
+            >
+                <motion.h1
+                    variants={itemVariants}
+                    className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem]"
+                >
+                    My GitHub Activity
+                </motion.h1>
+                <motion.div
+                    variants={itemVariants}
+                    transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                    className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border border-transparent hover:border-[var(--accent-color)]"
+                >
+                    <GitHubCalendar username="DavoodAkrami" theme={customTheme} />
+                </motion.div>
+            </motion.div>
+
+            <SkillsSlider direction="left" />
+
+
             <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center">My Professional Experiences</h1>            
             <TimelineExperience experiences={Experience} />
         </div>

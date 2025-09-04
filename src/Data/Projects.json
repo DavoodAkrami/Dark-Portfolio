@@ -61,14 +61,5 @@
         "technologies": ["Vite", "React", "CSS modules"],
         "gitHub": "https://github.com/DavoodAkrami/BookMarks",
         "img": "/bookmarks.png"
-    },
-    {
-        "id": 7,
-        "title": "Bonmano",
-        "description": "An online E-commers coffee store",
-        "url": "https://banmano-4ikg.vercel.app/",
-        "technologies": ["Vite", "React", "MUI", "CSS modules", "React Router DOM"],
-        "gitHub": "https://github.com/DavoodAkrami/Bonmano",
-        "img": "/Bonmano.png"
     }
 ]
