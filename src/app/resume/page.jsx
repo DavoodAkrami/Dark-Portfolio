@@ -8,19 +8,17 @@ import { useRef } from "react";
 import TimelineExperience from "@/components/TimelineExperience";
 import Experience from "@/Data/Experience";
 import GitHubCalendar from "react-github-calendar";
+import { useTheme } from "@/components/ThemeProvider";
 
 
 
 
 const About = () => {
     const contact = ContactInfo[0];
-
+    const { isLightMode } = useTheme();
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, threshold: 0.1 });
-
-
-    
 
     const containerVariants = {
         hidden: {},
@@ -36,9 +34,16 @@ const About = () => {
         visible: { opacity: 1, y: 0 },
     };
 
-    const customTheme = {
-        light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-        dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+    const getCurrentTheme = () => {
+        return isLightMode 
+            ? {
+                light: ["#f0f9ff", "#7dd3fc", "#0ea5e9", "#0284c7", "#0369a1"],
+                dark: ["#a9c6f1", "#9be9a8", "#40c463", "#30a14e", "#216e39"]
+              }
+            : {
+                light: ["#f0f9ff", "#7dd3fc", "#0ea5e9", "#0284c7", "#0369a1"],
+                dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+              };
     };
 
     return (
@@ -91,7 +96,11 @@ const About = () => {
                     transition={{ type: "spring", stiffness: 220, damping: 20 }}
                     className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border border-transparent hover:border-[var(--accent-color)]"
                 >
-                    <GitHubCalendar username="DavoodAkrami" theme={customTheme} />
+                    <GitHubCalendar 
+                        key={isLightMode ? 'light' : 'dark'}
+                        username="DavoodAkrami" 
+                        theme={getCurrentTheme()} 
+                    />
                 </motion.div>
             </motion.div>
 
