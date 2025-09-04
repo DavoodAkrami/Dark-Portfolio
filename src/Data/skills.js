@@ -24,7 +24,7 @@ const Skills = [
     {
         name: "CSS",
         icon: <FaCss3Alt />,
-        level: 75,
+        level: 85,
         color: "#1572B6",
     },
     {
@@ -36,37 +36,37 @@ const Skills = [
     {
         name: "TypeScript",
         icon: <BiLogoTypescript />,
-        level: 75,
+        level: 70,
         color: "#007acc",
     },
     {
         name: "React.js",
         icon: <RiReactjsFill />,
-        level: 65,
+        level: 70,
         color: "#61DAFB",
     },
     {
         name: "Next.js",
         icon: <RiNextjsFill />,
-        level: 40,
+        level: 75,
         color: "#000",
     },
     {
         name: "Redux",
         icon: <TbBrandRedux />,
-        level: 35,
+        level: 60,
         color: "#764ABC",
     },
     {
         name: "Tailwind CSS",
         icon: <RiTailwindCssFill />,
-        level: 40,
+        level: 85,
         color: "#38B2AC",
     },
     {
         name: "MUI",
         icon: <SiMui />,
-        level: 60,
+        level: 30,
         color: "#007FFF",
     },
     {
@@ -78,7 +78,7 @@ const Skills = [
     {
         name: "Git",
         icon: <FaGitSquare />,
-        level: 50,
+        level: 70,
         color: "#F05032",
     },
     {

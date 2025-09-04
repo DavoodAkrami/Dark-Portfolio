@@ -29,6 +29,7 @@ const aidata = () => {
     const [isModalopen, setIsModalOpen] = useState(false);
     const [metadata, setMetadata] = useState({
         title: "",
+        text: "",
         cat: "",
         createdAt: new Date().toISOString(),
         tags: [],
@@ -70,6 +71,7 @@ const aidata = () => {
                     text: upsertForm.text,
                     metadata: {
                         ...metadata,
+                        text: upsertForm.text,
                         tags: selectedTags,
                         source: 'admin-panel',
                         timestamp: new Date().toISOString()

@@ -18,8 +18,11 @@ export async function POST(request) {
     await index.upsert([
       {
         id,
-        values: vector, 
-        metadata: metadata || {}, 
+        values: vector,
+        metadata: {
+          ...(metadata || {}),
+          text
+        }
       },
     ]);
 
