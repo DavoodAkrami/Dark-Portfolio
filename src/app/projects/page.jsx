@@ -58,16 +58,18 @@ const ProjectSection = () => {
             <div className="max-w-[70%] mx-auto px-4 max-md:max-w-[90%] mb-16 text-center">
                 <motion.h2 
                     ref={textRef}
-                    initial={{ opacity: 0, y: -50}}
+                    initial={{ opacity: 0, y: 50}}
                     animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
+                    viewport={{ once: true }}
                     className="text-[3rem] text-[var(--text-color)] font-[570] max-md:text-[2.8rem] mt-[5rem] mb-[1vh]"
                 > What I learned?</motion.h2>
                 <motion.p 
                     ref={textRef}
-                    initial={{ opacity: 0, y: -50}}
+                    initial={{ opacity: 0, y: 50}}
                     animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
+                    viewport={{ once: true }}
                     className="text-[var(--subtext-color)] text-[1.4rem] leading-relaxed mb-10 max-md:text-[1rem]"
                 >
                     Throughout these projects, I faced real-world challenges such as responsive design complexities, state management, performance optimization, and balancing UI/UX considerations. These experiences taught me how to think critically, adapt quickly, and collaborate effectively. They also deepened my knowledge of tools like React, Next.js, and Tailwind CSS. Each project was more than just code—it was an opportunity to grow and explore the mindset of product-focused development.
@@ -75,9 +77,10 @@ const ProjectSection = () => {
                 </motion.p>
                 <motion.h2
                     ref={textRef}
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 50}}
                     animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 1}} 
+                    transition={{ duration: 1}}
+                    viewport={{ once: true }}
                     className="text-[3rem] text-[var(--text-color)] font-[570] max-md:text-[2.8rem] mb-[1vh]"
                 >My Journey</motion.h2>
                 <motion.p 
@@ -85,6 +88,7 @@ const ProjectSection = () => {
                     initial={{ opacity: 0, y: 50}}
                     animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1}}
+                    viewport={{ once: true }}
                     className="text-[var(--subtext-color)] text-[1.4rem] leading-relaxed max-md:text-[1rem]"
                 >
                     I began my programming journey at Rubikamp, where I was first introduced to Python. After learning the basics, I chose to specialize in web development and started exploring HTML and CSS. Soon after, I dove into JavaScript and React, gradually shifting from static pages to building dynamic, interactive applications.

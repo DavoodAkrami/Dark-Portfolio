@@ -137,6 +137,7 @@ const FeedbackForm = () => {
       initial={{ opacity: 0, x: -80 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
+      viewport={{ once: true }}
     >
       <form
         onSubmit={handleSubmit}
