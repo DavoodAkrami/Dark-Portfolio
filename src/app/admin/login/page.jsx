@@ -27,7 +27,7 @@ const Login = () => {
 
     return (
         <div
-            className="flex justify-center items-center bg-[var(--primary-color)] h-[90vh]"
+            className="flex justify-center items-center bg-[var(--primary-color)] h-[90vh] rounded-ap [--ap-radius:3rem]"
         >
             <form
                 onSubmit={handleSubmit}

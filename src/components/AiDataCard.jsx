@@ -6,7 +6,7 @@ const AiDataCard = ({ title, cat, onDelete, onEdit }) => {
 
     return (
         <div
-            className="bg-[var(--button-color)] rounded-lg p-6 flex flex-col items-center gap-4 w-full shadow-lg soft border border-transparent"
+            className="bg-[var(--button-color)] rounded-lg p-6 flex flex-col items-center gap-4 w-full shadow-lg soft border border-transparent rounded-ap [--ap-radius:3rem]"
         >
             <h2
                 className="text-[1.8rem] text-[var(--accent-color)] font-[550] max-md:text-[1.4rem] mb-6 text-center"

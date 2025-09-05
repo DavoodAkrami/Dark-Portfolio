@@ -140,7 +140,7 @@ const FeedbackForm = () => {
     >
       <form
         onSubmit={handleSubmit}
-        className="p-[1.6rem] bg-[var(--button-color)] rounded-[12px] text-[var(--text-color)] mx-auto flex flex-col gap-[2rem]"
+        className="p-[1.6rem] bg-[var(--button-color)] rounded-ap [--ap-radius:3rem] text-[var(--text-color)] mx-auto flex flex-col gap-[2rem]"
       >
         <h2 className="text-[2.8rem] text-[var(--text-color)] font-[570] max-md:text-[2.4rem] flex justify-center max-[400px]:text-[1.5rem]">
           Contact Me

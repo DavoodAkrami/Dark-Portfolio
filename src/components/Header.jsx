@@ -6,6 +6,7 @@ import React ,{ useState, useRef, useEffect } from "react";
 import { clsx } from "clsx";
 import ThemeToggle from "./ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
+import routes from "@/routes/routes";
 
 const Header = () => {
     const pathName = usePathname();
@@ -13,11 +14,17 @@ const Header = () => {
     const headerRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
 
+    const NoHeaderPages = routes.filter(page => page.hasHeader === false);
+    const NoHeaderPage = NoHeaderPages.find(page => pathName.includes(page.path))
+
     useEffect(() => {
         if (headerRef.current) {
             setHeaderHeight(headerRef.current.offsetHeight);
         }
     }, []);
+
+
+    if (NoHeaderPage) return null
 
     return (
         <>

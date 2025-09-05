@@ -213,14 +213,8 @@ const aidata = () => {
             className="min-h-screen bg-[var(--primary-color)] text-[var(--text-color)]"
         >
             <div
-                className="flex justify-between items-center p-12"
+                className="flex justify-end items-center p-12"
             >
-                <button
-                    className="text-[var(--accent-color)] rounded-md font-[570] px-[1.7rem] py-[0.7rem] border-2 border-[var(--accent-color)] cursor-pointer hoverLight hover:text-[var(--text-color)] hover:bg-[var(--accent-color)]"
-                    onClick={() => (window.location.href = "/")}
-                >
-                    Back
-                </button>
                 <button
                     className="px-4 py-2 hover:cursor-pointer bg-[var(--accent-color)] text-[var(--text-color)] rounded-md hover:opacity-80 transition-opacity"
                     onClick={() => {

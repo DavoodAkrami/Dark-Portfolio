@@ -74,7 +74,7 @@ const TimelineItem = ({ experience, index, total }) => {
             <motion.div
             transition={{ duration: 0.2 }}
             >
-            <div className="bg-[var(--button-color)] p-8 rounded-2xl shadow-xl border-l-6 border-[var(--accent-color)] hover:shadow-2xl transition-all duration-300 backdrop-blur-sm">
+            <div className="bg-[var(--button-color)] p-8 rounded-ap [--ap-radius:3rem] shadow-xl border-l-6 border-[var(--accent-color)] hover:shadow-2xl transition-all duration-300 backdrop-blur-sm">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                 <h3 className="text-2xl font-bold text-[var(--accent-color)] leading-tight">{experience.title}</h3>
                 <div className="flex-shrink-0">

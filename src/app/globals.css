@@ -203,3 +203,26 @@ button:hover,
 .github-calendar::-webkit-scrollbar-thumb:hover {
   background: color-mix(in oklab, var(--accent-color) 85%, black);
 }
+
+.rounded-ap {
+  border-radius: var(--ap-radius, 20px);
+}
+
+@supports (corner-shape: squircle) {
+  .rounded-ap {
+    corner-shape: squircle;
+  }
+  button, a, input {
+    corner-shape: squircle;
+  }
+}
+
+button, input {
+  border-radius: 20px;
+}
+
+a {
+  border-radius: 15px;
+}
+
+

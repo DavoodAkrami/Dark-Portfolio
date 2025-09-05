@@ -137,7 +137,7 @@ const contactme = () => {
                     initial={{ opacity: 0, x: 80 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1 }}
-                    className="col-start-4 col-end-5 bg-[var(--button-color)] rounded-[12px] mx-[12%] my-[10%] p-[1.6rem] max-[1400px]:col-start-2 max-[1400px]:col-end-3 max-[700px]:mx-[3%]">
+                    className="col-start-4 col-end-5 bg-[var(--button-color)] rounded-[12px] mx-[12%] my-[10%] p-[1.6rem] max-[1400px]:col-start-2 max-[1400px]:col-end-3 max-[700px]:mx-[3%] rounded-ap [--ap-radius:3rem]">
                     <h2 className="text-[2.5rem] text-[var(--text-color)] font-[570] max-md:text-[2.4rem] flex justify-center max-[600px]:text-[1.5rem] text-center">Contact Information</h2>
                     <div className="flex gap-[2rem] justify-center items-center mt-[3.4rem]"> 
                         <Link href={contact.github}>
@@ -187,7 +187,7 @@ const contactme = () => {
                             transition={{ duration: 0.48 }}
                         />  
                         <motion.div 
-                            className="relative z-10 bg-[var(--button-color)] min-h-[60vh] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] w-[40%] max-[1000px]:w-[60%] max-md:w-[90%] mx-4"
+                            className="relative z-10 bg-[var(--button-color)] min-h-[60vh] p-8 rounded-2xl shadow-2xl border border-[var(--accent-color)] w-[40%] max-[1000px]:w-[60%] max-md:w-[90%] mx-4 rounded-ap [--ap-radius:3rem]"
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
@@ -201,7 +201,7 @@ const contactme = () => {
                                     <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 </div>
                                 <div
-                                    className="h-[50vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-[12px] p-[1rem] mb-[2vh] overflow-y-auto overflow-x-auto"
+                                    className="h-[50vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] p-[1rem] mb-[2vh] overflow-y-auto overflow-x-auto"
                                 >
                                     <div className="flex flex-col gap-3 items-stretch">
                                         {messages.map((m) => (
@@ -211,7 +211,7 @@ const contactme = () => {
                                                 </div>
                                             ) : (
                                                 <div key={m.id} className="flex justify-start">
-                                                    <p className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50">{m.text}</p>
+                                                    <p className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50 rounded-ap [--ap-radius:1.6rem]">{m.text}</p>
                                                 </div>
                                             )
                                         ))}
@@ -243,9 +243,6 @@ const contactme = () => {
                                         )}
                                     />
                                 </div>
-                                {/* <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
-                                <p className="text-[var(--text-color)] text-lg mb-6">Coming Soon!</p>
-                                <p className="text-[var(--subtext-color)] text-sm">I'm working on an AI assistant that can answer questions about me, my experience, skills, and projects.</p> */}
                             </motion.div>
                         </motion.div>
                     </motion.div>

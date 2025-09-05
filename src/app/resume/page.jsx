@@ -94,13 +94,31 @@ const About = () => {
                 <motion.div
                     variants={itemVariants}
                     transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                    className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border border-transparent hover:border-[var(--accent-color)]"
+                    className="w-full flex flex-col items-center"
                 >
-                    <GitHubCalendar 
-                        key={isLightMode ? 'light' : 'dark'}
-                        username="DavoodAkrami" 
-                        theme={getCurrentTheme()} 
-                    />
+                    <div className="mb-6 text-center">
+                        <p className="text-[var(--text-color)] text-lg mb-2 opacity-80">
+                            This table shows only public repository commits
+                        </p>
+                        <p className="text-[var(--text-color)] text-sm opacity-70">
+                            For better understanding check{" "}
+                            <a 
+                                href="https://github.com/DavoodAkrami" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-[var(--accent-color)] hover:text-[var(--highlight-color)] transition-colors duration-300 underline decoration-2 underline-offset-2 hover:decoration-[var(--highlight-color)] font-medium"
+                            >
+                                My GitHub Profile
+                            </a>
+                        </p>
+                    </div>
+                    <div className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border border-transparent hover:border-[var(--accent-color)] rounded-ap [--ap-radius:3rem]">
+                        <GitHubCalendar 
+                            key={isLightMode ? 'light' : 'dark'}
+                            username="DavoodAkrami" 
+                            theme={getCurrentTheme()} 
+                        />
+                    </div>
                 </motion.div>
             </motion.div>
 

@@ -28,7 +28,7 @@ const Modal = ({ children, onClose, isModalOpen, className }) => {
                         >
                             <div
                                 className={clsx(
-                                    "bg-[var(--button-color)] text-[var(--text-color)] p-4 rounded-lg w-[40vw] max-lg:w-[60vw] max-md:w-[90vw]",
+                                    "bg-[var(--button-color)] text-[var(--text-color)] p-4 rounded-lg w-[40vw] max-lg:w-[60vw] max-md:w-[90vw] rounded-ap [--ap-radius:3rem]",
                                     className
                                 )}
                                 onClick={(e) => e.stopPropagation()} 
