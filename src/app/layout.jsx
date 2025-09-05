@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import storeProvider from "@/providers/storeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,13 +71,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          <Header />
-            {children}
-          <Footer />
-        </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
+        <storeProvider>
+          <ThemeProvider>
+            <Header />
+              {children}
+            <Footer />
+          </ThemeProvider>
+          <Analytics />
+          <SpeedInsights />
+        </storeProvider>
       </body>
     </html>
   );
