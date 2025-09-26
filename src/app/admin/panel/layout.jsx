@@ -1,87 +1,105 @@
 "use client"
 import clsx from "clsx";
 import NavBar from "../../../components/NavBar";
-import { useState } from "react";
-import { IoReorderThreeOutline } from "react-icons/io5";
-import { motion, AnimatePresence } from "framer-motion";
-import { IoIosArrowBack } from "react-icons/io";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { AiFillDatabase } from "react-icons/ai";
-import { FaHome } from "react-icons/fa";
+import { IoArrowBack } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
+import { useRouter } from "next/navigation";
+
 
 
 const adminPanelPages = [
     {
-        name: "Home",
-        route: "/",
-        icon: <FaHome />
+        name: "Dashboard",
+        route: "/admin/panel",
+        icon: <MdDashboard />
     },
     {
         name: "AI data",
         route: "/admin/panel/aidata",
         icon: <AiFillDatabase />,
     },
+    {
+        name: "Back To Home",
+        route: "/",
+        icon: <IoArrowBack />
+    },
 ]
 
 const layout = ({ children }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
 
+    useEffect(() => {
+        const checkAuth = () => {
+            const authStatus = localStorage.getItem(process.env.NEXT_PUBLIC_ADMIN_LOCAL_STORAGE_VALUE) === "true";
+            setIsAuthenticated(authStatus);
+            setIsLoading(false);
+            
+            if (!authStatus) {
+                router.push('/admin/login');
+            }
+        };
+
+        checkAuth();
+    }, [router]);
+
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-[var(--primary-color)]">
+                <div className="text-[var(--accent-color)] text-2xl">Loading...</div>
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return null; 
+    }
 
     return (
         <div className="flex">
-            <AnimatePresence>
-                {isMenuOpen && 
+            <motion.div
+                initial={{ width: '80px' }}
+                animate={{ width: isMenuOpen ? '350px' : '80px' }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="fixed top-0 left-0 max-md:h-[100vh] max-md:z-100"
+            >
+                {isMenuOpen &&
                     <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: 'auto' }}
-                        exit={{ width: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className="max-md:fixed max-md:top-0 max-md:left-0 max-md:h-[100vh] max-md:z-100"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25}}
+                        className={clsx(
+                            "fixed inset-0 z-50",
+                            "bg-[var(--background)]/20 bg-opacity-50 backdrop-blur-sm",
+                            "transition-opacity duration-300 md:hidden"
+                        )}
+                        onClick={() => setIsMenuOpen(false)}
                     >
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.25}}
-                            className={clsx(
-                                "fixed inset-0 z-50",
-                                "bg-[var(--background)]/20 bg-opacity-50 backdrop-blur-sm",
-                                "transition-opacity duration-300 md:hidden"
-                            )}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                        <NavBar
-                            optionsList={adminPanelPages}
-                            isMenuOpen={true}
-                            onClose={() => setIsMenuOpen(false)}
-                            className="md:hidden"
-                        />
-                        </motion.div>
-                        <NavBar
-                            optionsList={adminPanelPages}
-                            isMenuOpen={true}
-                            onClose={() => setIsMenuOpen(false)}
-                            className="max-md:hidden"
-                        />
                     </motion.div>
                 }
-            </AnimatePresence> 
-            <div className="w-full relative">
-                {isMenuOpen ? 
-                    (<IoIosArrowBack
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className={clsx(
-                            "absolute top-[2rem] left-[2rem] rounded-full hover:bg-[var(--subtext-color)] text-[var(--accent-color)] text-[48px] max-md:text-[48px] soft cursor-pointer p-2 max-md:hidden",
-                        )}
-                    /> ): (
-                    <IoReorderThreeOutline 
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className={clsx(
-                            "absolute top-[2rem] left-[2rem] rounded-full hover:bg-[var(--subtext-color)] text-[var(--accent-color)] text-[64px] max-md:text-[48px] soft cursor-pointer p-2",
-                        )}
-                    />)
-                }
+                <NavBar
+                    optionsList={adminPanelPages}
+                    isMenuOpen={isMenuOpen}
+                    onOpen={() => setIsMenuOpen(!isMenuOpen)}
+                    onClose={() => setIsMenuOpen(false)}
+                    className="max-md:hidden"
+                />
+            </motion.div> 
+            <motion.div 
+                className="w-full overflow-y-auto h-screen max-md:pl-0"
+                animate={{ 
+                    paddingLeft: isMenuOpen ? '350px' : '80px' 
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
                 {children}
-            </div>
+            </motion.div>
         </div>
     )
 }

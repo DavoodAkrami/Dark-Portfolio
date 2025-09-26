@@ -27,11 +27,11 @@ const Login = () => {
 
     return (
         <div
-            className="flex justify-center items-center bg-[var(--primary-color)] h-[90vh] rounded-ap [--ap-radius:3rem]"
+            className="flex justify-center items-center bg-[var(--primary-color)] h-screen"
         >
             <form
                 onSubmit={handleSubmit}
-                className="p-12 max-md:p-8 rounded-xl w-[40vw] max-2xl:w-[50vw] max-xl:w-[60vw] max-md:lg-[70vw] max-md:w-[95vw] bg-[var(--button-color)] flex flex-col justify-center gap-[1.4rem]"
+                className="rounded-ap [--ap-radius:3rem] p-12 max-md:p-8 rounded-xl w-[40vw] max-2xl:w-[50vw] max-xl:w-[60vw] max-md:lg-[70vw] max-md:w-[95vw] bg-[var(--button-color)] flex flex-col justify-center gap-[1.4rem]"
             >
                 <h2
                     className="text-[3rem] text-[var(--accent-color)] font-[550] max-md:text-[2rem] mb-6 text-center"

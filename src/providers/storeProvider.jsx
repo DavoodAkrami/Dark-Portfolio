@@ -3,7 +3,7 @@ import { store } from "@/store/store";
 import { Provider } from "react-redux";
 
 
-const storeProvider = (children) => {
+const StoreProvider = ({ children }) => {
     return (
         <Provider
             store={store}
@@ -13,4 +13,4 @@ const storeProvider = (children) => {
     )
 }
 
-export default storeProvider;
+export default StoreProvider;
