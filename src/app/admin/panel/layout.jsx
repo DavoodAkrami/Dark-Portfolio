@@ -55,6 +55,7 @@ const layout = ({ children }) => {
             </div>
         );
     }
+    
 
     if (!isAuthenticated) {
         return null; 
