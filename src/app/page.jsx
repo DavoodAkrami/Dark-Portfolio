@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 import Link from "next/link";
-
+import { useState, useEffect } from "react";
 
 const Home = () => {
     const containerVariants = {
@@ -30,6 +30,33 @@ const Home = () => {
             transition: { duration: 0.8, ease: "easeOut" }
         },
     };
+    
+    const sentences = [
+        " Studying for Konkor...",
+        " Exercising...",
+    ]
+
+    const [currentSentence, setCurrentSentence] = useState(0);
+    const [displayedLetters, setDisplayedLetters] = useState([]);
+
+    useEffect(() => {
+        let i = 0;
+        setDisplayedLetters([]);
+        const letters = sentences[currentSentence].split("");
+
+        const interval = setInterval(() => {
+            setDisplayedLetters((prev) => [...prev, letters[i]]);
+            i++;
+            if (i >= letters.length) {
+              clearInterval(interval);
+              setTimeout(() => {
+                setCurrentSentence((prev) => (prev + 1) % sentences.length);
+              }, 1500);
+            }
+          }, 90);
+      
+          return () => clearInterval(interval);
+    }, [currentSentence])
 
     return (
         <div className="bg-[var(--primary-color)] min-h-screen px-[5vw] py-[15vh] flex items-center justify-around max-lg:flex-col relative overflow-hidden">
@@ -51,10 +78,17 @@ const Home = () => {
                 
                 <motion.h2 
                     variants={itemVariants}
-                    className="text-[1.8rem] text-[var(--accent-color)] font-[550] max-md:text-[1.4rem] mb-6"
+                    className="text-[2rem] text-[var(--accent-color)] font-[550] max-md:text-[1.6rem] mb-2"
                 >
                     Junior Front-End Developer
                 </motion.h2>
+
+                <motion.h3
+                    variants={itemVariants}
+                    className="text-[1.4rem] flex gap-[10px] items-center text-[var(--text-color)] font-[480] max-md:text-[1.2rem] mb-4">
+                    <span className="font-semibold text-[var(--text-color">Current Mode: </span>
+                    <span className="text-[1.4rem] text-[var(--accent-color)] font-[500] max-md:text-[1.4rem]">{displayedLetters.join("")}</span>
+                </motion.h3>
                 
                 <motion.p 
                     variants={itemVariants}
