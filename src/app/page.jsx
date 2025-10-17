@@ -85,9 +85,9 @@ const Home = () => {
 
                 <motion.h3
                     variants={itemVariants}
-                    className="text-[1.4rem] flex gap-[10px] items-center text-[var(--text-color)] font-[480] max-md:text-[1.2rem] mb-4">
+                    className="text-[1.2rem] flex gap-[10px] items-center text-[var(--text-color)] font-[480] max-md:text-[1.2rem] mb-4">
                     <span className="font-semibold text-[var(--text-color">Current Mode: </span>
-                    <span className="text-[1.4rem] text-[var(--accent-color)] font-[500] max-md:text-[1.4rem]">{displayedLetters.join("")}</span>
+                    <span className="text-[var(--accent-color)] font-[500]">{displayedLetters.join("")}</span>
                 </motion.h3>
                 
                 <motion.p 
