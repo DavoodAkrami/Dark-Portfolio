@@ -51,7 +51,7 @@ const layout = ({ children }) => {
     if (isLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-[var(--primary-color)]">
-                <div className="text-[var(--accent-color)] text-2xl">Loading....</div>
+                <div className="text-[var(--accent-color)] text-2xl">Loading...</div>
             </div>
         );
     }
