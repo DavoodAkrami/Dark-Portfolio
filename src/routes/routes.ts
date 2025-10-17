@@ -35,6 +35,12 @@ const routes = [
         hasHeader: false,
         hasFooter: false
     },
+    {
+        name: "Dashboard",
+        path: "/admin/panel",
+        hasHeader: false,
+        hasFooter: false
+    }
 ]
 
 export default routes;

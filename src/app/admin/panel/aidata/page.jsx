@@ -27,7 +27,7 @@ const aidata = () => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isModalopen, setIsModalOpen] = useState(false);
-    const [modalMode, setModalMode] = useState('create'); // 'create' | 'edit' | 'delete'
+    const [modalMode, setModalMode] = useState('create'); 
     const [selectedItem, setSelectedItem] = useState(null);
     const [deleteConfirmText, setDeleteConfirmText] = useState("");
     const [deleteLoading, setDeleteLoading] = useState(false);
