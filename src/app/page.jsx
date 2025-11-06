@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaRobot } from "react-icons/fa";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -104,13 +106,22 @@ const Home = () => {
                     <Link 
                         href='https://flowcv.com/resume/2bohp73170'
                         className="hoverLight bg-[var(--accent-color)] cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2">
-                        <FaDownload />
+                        <FaDownload size={18} className="mb-1.5" />
                         Download Resume
                     </Link>
                     <Link 
                         href='/projects'
-                        className="hoverLight soft border-2 border-[var(--accent-color)] cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300">
-                        Projects
+                        className="hoverLight soft border-2 border-[var(--accent-color)] flex justify-center items-center gap-2 cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300"> 
+                            <AiOutlineFundProjectionScreen size={18} className="mb-1" />
+                           Projects
+                    </Link>
+                    <Link 
+                        href='/contactme?openAI=1'
+                        className="hoverLight soft border-2 border-[var(--accent-color)] cursor-pointer text-[var(--accent-color)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--accent-color)] hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                        title="Talk with my AI about me"
+                    >
+                        <FaRobot size={18} className="mb-1.5" />
+                        Ask my AI
                     </Link>
                 </motion.div>
 

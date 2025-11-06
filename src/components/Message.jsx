@@ -26,7 +26,7 @@ const Message = ({ message, layoutId }) => {
                 stiffness: 100,
                 damping: 15
             }}
-            className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-ap [--ap-radius:1.6rem] bg-[var(--button-color)] shadow-lg"
+            className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-4 rounded-ap [--ap-radius:1.6rem] bg-[var(--button-color)] shadow-lg text-lg max-md:text-md"
         >
             {message}
         </motion.div>

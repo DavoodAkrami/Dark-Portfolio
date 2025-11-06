@@ -204,6 +204,14 @@ button:hover,
   background: color-mix(in oklab, var(--accent-color) 85%, black);
 }
 
+
+.no-scrollbar {
+  scrollbar-width: none; 
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
 .rounded-ap {
   border-radius: var(--ap-radius, 20px);
 }
@@ -212,12 +220,12 @@ button:hover,
   .rounded-ap {
     corner-shape: squircle;
   }
-  button, a, input {
+  button, a, input, textarea {
     corner-shape: squircle;
   }
 }
 
-button, input {
+button, input, textarea {
   border-radius: 20px;
 }
 

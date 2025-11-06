@@ -8,9 +8,11 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
+import SuggestionOption from "@/components/SuggestionOption";
 
 
 
@@ -18,10 +20,25 @@ import Message from "@/components/Message";
 const contactme = () => {
     const contact = ContactInfo[0];
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const searchParams = useSearchParams();
     const [userMessage, setUserMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const endOfMessagesRef = useRef(null);
+    const textareaRef = useRef(null);
+
+    const suggestions = [
+        {
+            id: 1,
+            title: "Send an email",
+            text: "Send an Email to Davood"
+        },
+        {
+            id: 2,
+            title: "Davood's resume",
+            text: "Send me Davood's resume?"
+        },
+    ] 
     
     const handleClose = () => {
         setIsModalOpen(false);
@@ -31,6 +48,9 @@ const contactme = () => {
         if (!userMessage.trim()) return;
         const content = userMessage;
         setUserMessage("");
+        if (textareaRef.current) {
+            textareaRef.current.style.height = '';
+        }
         const userMsg = {
             id: `${Date.now()}-user`,
             role: 'user',
@@ -38,7 +58,7 @@ const contactme = () => {
             timestamp: Date.now()
         };
         setMessages((prev) => [...prev, userMsg]);
-        setLoading(true);
+        let loadingDelayId = setTimeout(() => setLoading(true), 100);
 
         try {
             const res = await fetch("/api/ask", {
@@ -78,13 +98,26 @@ const contactme = () => {
 
             text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
 
+            const assistantId = `${Date.now()}-assistant`;
             const assistantMsg = {
-                id: `${Date.now()}-assistant`,
+                id: assistantId,
                 role: 'assistant',
-                text,
+                text: '',
                 timestamp: Date.now()
             };
             setMessages((prev) => [...prev, assistantMsg]);
+
+            let i = 0;
+            const typingSpeedMs = 18; 
+            const intervalId = setInterval(() => {
+                i++;
+                setMessages((prev) => prev.map((msg) =>
+                    msg.id === assistantId ? { ...msg, text: text.slice(0, i) } : msg
+                ));
+                if (i >= text.length) {
+                    clearInterval(intervalId);
+                }
+            }, typingSpeedMs);
         } catch (err) {
             console.error(err);
             const assistantErr = {
@@ -95,27 +128,45 @@ const contactme = () => {
             };
             setMessages((prev) => [...prev, assistantErr]);
         } finally {
+            if (loadingDelayId) clearTimeout(loadingDelayId);
             setLoading(false);
         }
     };
+
+    const checkIsPersian = (text) => {
+        return /[\u0600-\u06FF]/.test(text);
+    }
 
     useEffect(() => {
         try {
             const raw = localStorage.getItem('contact_ai_messages');
             if (raw) {
                 const parsed = JSON.parse(raw);
-                if (Array.isArray(parsed)) {
-                    setMessages(parsed);
+                const oneDayMs = 24 * 60 * 60 * 1000;
+                const now = Date.now();
+                let storedMessages = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.messages) ? parsed.messages : [];
+                const freshMessages = storedMessages.filter((m) => typeof m?.timestamp === 'number' && (now - m.timestamp) <= oneDayMs);
+                if (freshMessages.length > 0) {
+                    setMessages(freshMessages);
+                } else {
+                    localStorage.removeItem('contact_ai_messages');
                 }
+            }
+            const openAI = searchParams?.get('openAI');
+            if (openAI === '1' || openAI === 'true') {
+                setIsModalOpen(true);
             }
         } catch (e) {
             console.warn('Failed to load messages from storage', e);
         }
-    }, []);
+    }, [searchParams]);
 
     useEffect(() => {
         try {
-            localStorage.setItem('contact_ai_messages', JSON.stringify(messages));
+            const oneDayMs = 24 * 60 * 60 * 1000;
+            const now = Date.now();
+            const freshMessages = (messages || []).filter((m) => typeof m?.timestamp === 'number' && (now - m.timestamp) <= oneDayMs);
+            localStorage.setItem('contact_ai_messages', JSON.stringify({ messages: freshMessages, savedAt: now }));
         } catch (e) {
             console.warn('Failed to save messages to storage', e);
         }
@@ -124,6 +175,15 @@ const contactme = () => {
     useEffect(() => {
         endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, loading]);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            const id = setTimeout(() => {
+                endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' });
+            }, 0);
+            return () => clearTimeout(id);
+        }
+    }, [isModalOpen]);
 
     const linkify = (text) => {
         if (!text) return "";
@@ -136,11 +196,9 @@ const contactme = () => {
       
       
         return text;
-      };
+    };
 
-      
-
-
+    
     return (
         <div className="bg-[var(--primary-color)] ">
                 <h1 className="text-[4rem] text-[var(--text-color)] font-[570] max-md:text-[3.4rem] flex justify-center max-sm:text-[3rem] pt-[6vh] text-center">Contact with me</h1>
@@ -217,51 +275,89 @@ const contactme = () => {
                                     <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 </div>
                                 <div
-                                    className="h-[60vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] p-[0.6rem] mb-[2vh] overflow-y-auto overflow-x-auto"
+                                    className="h-[60vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] px-[0.6rem] pt-[0.6rem] mb-[2vh] overflow-y-auto overflow-x-auto"
                                 >
-                                    <div className="flex flex-col gap-3 items-stretch">
+                                    <div className="flex flex-col gap-3 items-stretch min-h-full justify-end relative">
                                         {messages.map((m) => (
                                             m.role === 'user' ? (
                                                 <div key={m.id} className="flex justify-end">
                                                     <Message message={m.text} />
                                                 </div>
                                             ) : (
-                                                <div key={m.id} className="flex justify-start">
+                                                <div key={m.id} className={clsx("flex", checkIsPersian(m.text) ? "justify-end" : "justify-start") }>
                                                     <p
-                                                        className="text-[var(--text-color)] whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50 rounded-ap [--ap-radius:1.6rem]"
+                                                        className="text-[var(--text-color)] whitespace-pre-wrap max-w-[90%] max-md:max-w-[100%] p-4 rounded-ap [--ap-radius:1.6rem] text-lg max-md:text-md"
                                                         dangerouslySetInnerHTML={{ __html: linkify(m.text) }}
+                                                        style={{ direction: checkIsPersian(m.text) ? 'rtl' : 'ltr', textAlign: checkIsPersian(m.text) ? 'right' : 'left' }}
                                                     />                                                
                                                 </div>
                                             )
                                         ))}
 
                                         {loading && (
-                                            <div className="flex justify-start bg-">
-                                                <div className="text-[var(--accent-color)] animate-pulse whitespace-pre-wrap max-w-[75%] max-md:max-w-[90%] p-6 rounded-lg bg-[var(--button-color)]/50">Thinking...</div>
+                                            <div className="flex justify-start text-[var(--text-color)] m-4 animate-pulse text-xl max-md:text-md italic">
+                                                Thinking...
                                             </div>
                                         )}
-                                        <div ref={endOfMessagesRef} />
+                                    <div className={clsx("flex justify-start gap-2 sticky bottom-0 left-0 right-0 z-10 w-full whitespace-nowrap py-2 px-2 overflow-x-auto overflow-y-visible no-scrollbar")}> 
+                                            {suggestions.map(s => (
+                                                <SuggestionOption 
+                                                className={clsx(userMessage.includes(s.text) && "hidden", "shrink-0")}
+                                                    key={s.id}
+                                                    text={s.title}
+                                                    onClick={() => setUserMessage(s.text)}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div ref={endOfMessagesRef} className="flex items-end" />
                                     </div>
                                 </div>  
-                                <div
+                                <form
+                                    onSubmit={handleSend}
                                     className="flex justify-center items-center gap-[1rem] disabled:opacity-60 w-[98%] mx-auto"
                                 >
-                                    <input 
+                                    <textarea 
+                                        ref={textareaRef}
+                                        rows={1}
+                                        max-rows={4}
                                         type="text"
                                         placeholder="Ask me anything"
-                                        name="chatbot"
                                         value={userMessage}
-                                        onChange={(e) => setUserMessage(e.target.value)}
-                                        className="w-[90%] border-transparent mx-auto px-[0.6rem] py-[0.6rem] rounded-[12px] bg-[var(--primary-color)] autofill:bg-[var(--primary-color)] focusrLight border outline-none focus:border-1 focus:border-[var(--accent-color)]" 
+                                        onChange={(e) => {
+                                            setUserMessage(e.target.value);
+                                            const el = e.target;
+                                            el.style.height = 'auto';
+                                            el.style.height = `${el.scrollHeight}px`;
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleSend(); 
+                                            }
+                                        }}
+                                        style={{ 
+                                            overflowY: 'hidden', 
+                                            direction: checkIsPersian(userMessage) ? 'rtl' : 'ltr',
+                                            textAlign: checkIsPersian(userMessage) ? 'right' : 'left'
+                                        }}
+                                        className="w-[90%] resize-none border border-transparent mx-auto py-[0.6rem] px-[0.6rem] rounded-[12px] bg-[var(--primary-color)] focusrLight outline-none focus:border-1 focus:border-[var(--accent-color)] text-[var(--text-color)] transition-all overflow-hidden leading-[1.6rem] max-h-[8rem]"
                                     />
+                                    <button
+                                        type="submit"
+                                        disabled={loading || !userMessage.trim()}
+                                        className="!shadow-none hover:!shadow-none"
+                                    >
                                     <IoIosArrowForward 
                                         onClick={handleSend}
                                         className={clsx(
-                                            "text-[var(--accent-color)] font-extrabold text-[3rem] p-[0.6rem] rounded-full border-2 border-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-[var(--text-color)] button soft cursor-pointer",
-                                            loading && 'opacity-60'
+                                            "text-[var(--accent-color)] hoverLight rounded-full font-extrabold text-[3rem] p-[0.6rem]  border-2 border-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-[var(--text-color)] button soft cursor-pointer",
+                                            !userMessage.trim() && 'opacity-60',
+                                            
                                         )}
                                     />
-                                </div>
+                                    </button>
+      
+                                </form>
                             </motion.div>
                         </motion.div>
                     </motion.div>
