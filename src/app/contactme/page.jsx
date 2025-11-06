@@ -8,7 +8,6 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
@@ -20,7 +19,6 @@ import SuggestionOption from "@/components/SuggestionOption";
 const contactme = () => {
     const contact = ContactInfo[0];
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const searchParams = useSearchParams();
     const [userMessage, setUserMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -152,14 +150,17 @@ const contactme = () => {
                     localStorage.removeItem('contact_ai_messages');
                 }
             }
-            const openAI = searchParams?.get('openAI');
-            if (openAI === '1' || openAI === 'true') {
-                setIsModalOpen(true);
+            if (typeof window !== 'undefined') {
+                const params = new URLSearchParams(window.location.search);
+                const openAI = params.get('openAI');
+                if (openAI === '1' || openAI === 'true') {
+                    setIsModalOpen(true);
+                }
             }
         } catch (e) {
             console.warn('Failed to load messages from storage', e);
         }
-    }, [searchParams]);
+    }, []);
 
     useEffect(() => {
         try {
