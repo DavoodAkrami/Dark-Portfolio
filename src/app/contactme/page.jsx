@@ -36,6 +36,11 @@ const contactme = () => {
             title: "Davood's resume",
             text: "Send me Davood's resume?"
         },
+        {
+            id: 3,
+            title: "Davood's Skills",
+            text: "What are Davood's soft skills and hard skills?"
+        }
     ] 
     
     const handleClose = () => {
