@@ -213,7 +213,7 @@ const aidata = () => {
             className="min-h-screen bg-[var(--primary-color)] text-[var(--text-color)]"
         >
             <div
-                className="flex justify-end items-center p-12"
+                className="flex justify-end items-center p-8"
             >
                 <button
                     className="px-4 py-2 hover:cursor-pointer bg-[var(--accent-color)] text-[var(--text-color)] rounded-md hover:opacity-80 transition-opacity"
@@ -242,7 +242,7 @@ const aidata = () => {
                     items.length === 0 ? (
                         <div className="px-12 py-6 opacity-70">No items found</div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-12 mx-auto max-w-[80%]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-12 mx-auto max-w-[80%] max-md:max-w-[100%]">
                             {items.map((item) => (
                                 <AiDataCard 
                                     key={item.id}

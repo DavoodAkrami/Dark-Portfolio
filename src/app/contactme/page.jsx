@@ -276,8 +276,16 @@ const contactme = () => {
                                     <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
                                 </div>
                                 <div
-                                    className="h-[60vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] px-[0.6rem] pt-[0.6rem] mb-[2vh] overflow-y-auto overflow-x-auto"
+                                    className="h-[60vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] px-[0.6rem] pt-[0.6rem] mb-[2vh] overflow-y-auto overflow-x-auto relative"
                                 >
+                                    <div className={clsx("absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 transition-opacity ease-in-out duration-300 w-[85%]", messages.length > 0 && "opacity-0 pointer-events-none")}>
+                                        <h2 className="text-[2.4rem] max-md:text-[1.8rem] text-[var(--text-color)] font-bold">
+                                            Hi I'm Davood's assistant
+                                        </h2>
+                                        <p className="text-[1.2rem] text-[var(--text-color)]">
+                                            Ask me anything about Davood
+                                        </p>
+                                    </div>
                                     <div className="flex flex-col gap-3 items-stretch min-h-full justify-end relative">
                                         {messages.map((m) => (
                                             m.role === 'user' ? (

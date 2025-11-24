@@ -6,20 +6,20 @@ const AiDataCard = ({ title, cat, onDelete, onEdit }) => {
 
     return (
         <div
-            className="bg-[var(--button-color)] rounded-lg p-6 flex flex-col items-center gap-4 w-full shadow-lg soft border border-transparent rounded-ap [--ap-radius:3rem]"
+            className="bg-[var(--button-color)] rounded-lg p-6 pb-10 flex flex-col items-center gap-4 w-full shadow-lg soft border border-transparent rounded-ap [--ap-radius:3rem] relative"
         >
             <h2
-                className="text-[1.8rem] text-[var(--accent-color)] font-[550] max-md:text-[1.4rem] mb-6 text-center"
+                className="text-[1.6rem] text-[var(--accent-color)] font-[550] max-md:text-[1.2rem] mb-2 text-center"
             >
                 {title}
             </h2>   
             <p
-                className="text-[1.2rem] text-[var(--text-color)] max-md:text-[1rem]"
+                className="text-[1.2rem] text-[var(--text-color)] max-md:text-[1rem] mb-[2rem] max-md:mb-[6rem]"
             >
                 Category: {cat}
             </p>
             <div
-                className="flex gap-[10px] w-full"
+                className="flex gap-[10px] w-[90%] absolute bottom-4 max-md:flex-col"
             >
                 <button
                     className="text-[var(--accent-color)] w-full rounded-lg font-[570] px-[1.7rem] py-[0.7rem] border-2 border-[var(--accent-color)] cursor-pointer hoverLight hover:text-[var(--text-color)] hover:bg-[var(--accent-color)]"
