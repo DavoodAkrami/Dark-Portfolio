@@ -5,35 +5,55 @@ import { usePathname } from "next/navigation";
 import React ,{ useState, useRef, useEffect } from "react";
 import { clsx } from "clsx";
 import ThemeToggle from "./ThemeToggle";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import routes from "@/routes/routes";
 
 const Header = () => {
-    const pathName = usePathname();
+    const pathName = usePathname(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const headerRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
 
     const NoHeaderPages = routes.filter(page => page.hasHeader === false);
-    const NoHeaderPage = NoHeaderPages.find(page => pathName.includes(page.path))
+    const NoHeaderPage = NoHeaderPages.find(page => pathName.includes(page.path));
 
     useEffect(() => {
-        if (headerRef.current) {
-            setHeaderHeight(headerRef.current.offsetHeight);
-        }
+        const updateHeaderHeight = () => {
+            if (headerRef.current) {
+                setHeaderHeight(headerRef.current.offsetHeight);
+            }
+        };
+
+        updateHeaderHeight();
+        window.addEventListener("resize", updateHeaderHeight);
+
+        return () => window.removeEventListener("resize", updateHeaderHeight);
     }, []);
 
+    const { scrollY } = useScroll();
+
+    const borderRadius = useTransform(scrollY, [0, 70], [0, 60]);
+    const background = useTransform(
+        scrollY,
+        [0, 200],
+        ["var(--header-color)", "var(--header-color-transparent)"]
+    );
+
+    const marginTop = useTransform(scrollY, [0, 200], ["0px", "15px"]);
+    const width = useTransform(scrollY, [0, 200], ["100%", "85%"]);
+    const widthMobile = useTransform(scrollY, [0, 200], ["100%", "100%"]);
+    const mobileNavTop = useMotionTemplate`calc(${headerHeight}px + ${marginTop})`;
 
     if (NoHeaderPage) return null
 
     return (
         <>
-            <header ref={headerRef} className="flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] relative z-20">
+            <motion.header ref={headerRef} style={{ borderRadius, background, marginTop, width: isMenuOpen ? widthMobile : width  }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
                 <Link className="flex items-center gap-[10px] max-md:scale-[0.8]" href="/"> 
                     <img src="/Davood-noBG.png" alt="" className="rounded-full h-[7vh]" />
                     <span className="text-[1.4rem] font-[600]">Davood Akrami</span>
                 </Link>
-                <div 
+                <div
                     className="flex md:hidden flex-col gap-[6px] cursor-pointer p-[5px] transition-transform duration-300 ease-out"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
@@ -83,46 +103,49 @@ const Header = () => {
                                 </li>
                             );
                         })}
-                            <ThemeToggle />
+                        <ThemeToggle />
                     </ul>
                 </nav>
-            </header>
+            </motion.header>
             <AnimatePresence>
-              {isMenuOpen && (
-                <motion.nav
-                  key="mobile-nav"
-                  initial={{ y: -300 }}
-                  animate={{ y: 0 }}
-                  exit={{ y: -300 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}
-                  className={clsx(
-                    "md:hidden w-full left-0 fixed z-10"
-                  )}
-                  style={{ top: headerHeight }}
-                >
-                  <ul className="mobileMenu w-full bg-[var(--header-color)] overflow-hidden p-[1rem] list-none m-0 shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
-                    {pages.map((page) => {
-                      const isActive = pathName === page.path;
-                      return (
-                        <li
-                          key={page.path}
-                          className={clsx(
-                            "text-[var(--text-color)] cursor-pointer rounded-[10px]",
-                            isActive && "bg-[var(--primary-color)]"
-                          )}
-                        >
-                          <Link href={page.path} className="w-full block h-full p-[1rem]" onClick={() => setIsMenuOpen(false)}>
-                            {page.name}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                    <li className="flex justify-center p-[1rem]">
-                      <ThemeToggle />
-                    </li>
-                  </ul>
-                </motion.nav>
-              )}
+                {isMenuOpen && (
+                    <motion.nav
+                        key="mobile-nav"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                        className={clsx(
+                            "md:hidden w-full left-0 right-0 fixed z-10 mx-auto rounded-t-none! backdrop-blur-sm"
+                        )}
+                        style={{ top: mobileNavTop,
+
+                            borderRadius, background, width,
+                         }}
+                    >
+                        <ul style={{ borderRadius, background }} className="w-full overflow-hidden p-[1rem] list-none m-0 rounded-ap">
+                            {pages.map((page) => {
+                                const isActive = pathName === page.path;
+                                return (
+                                    <li
+                                        key={page.path}
+                                        className={clsx(
+                                            "text-[var(--text-color)] cursor-pointer rounded-[10px] rounded-ap",
+                                            isActive && "bg-[var(--primary-color)]"
+                                        )}
+                                    >
+                                        <Link href={page.path} className="w-full block h-full p-[1rem]" onClick={() => setIsMenuOpen(false)}>
+                                            {page.name}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                            <li className="flex justify-center p-[1rem] rounded-2xl">
+                                <ThemeToggle />
+                            </li>
+                        </ul>
+                    </motion.nav>
+                )}
             </AnimatePresence>
         </>
     );

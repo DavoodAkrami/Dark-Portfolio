@@ -11,19 +11,21 @@
   --subtext: #a1a1aa;     
   --highlight: #fbbf24;
   --secondary: #1f2937;
+  --header-color-transparent: rgba(13, 17, 23, 0.8);
 }
 
 .light {
   --background: #ffffff;
   --foreground: #171717;
   --primary: #f8fafc;  
-  --header: #ffffff; 
+  --header: rgba(206, 225, 253, 1); 
   --button: #c6ebff; 
   --accent: #6366f1;    
   --text: #1e293b;  
   --subtext: #64748b;     
   --highlight: #f59e0b;
   --secondary: #e2e8f0;
+  --header-color-transparent: rgba(206, 225, 253, 0.8);
 }
 
 @theme inline {
@@ -39,6 +41,7 @@
   --highlight-color: var(--highlight);
   --button-color: var(--button);
   --secondary-color: var(--secondary);
+  --header-color-transparent: var(--header-color-transparent);
 }
 
 

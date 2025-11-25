@@ -74,7 +74,9 @@ export default function RootLayout({ children }) {
         <StoreProvider>
           <ThemeProvider>
             <Header />
+            <div className="bg-[var(--primary-color)] pt-[10vh]">
               {children}
+            </div>
             <Footer />
           </ThemeProvider>
           <Analytics />
