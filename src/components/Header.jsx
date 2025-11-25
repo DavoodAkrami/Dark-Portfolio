@@ -13,6 +13,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const headerRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
     const NoHeaderPages = routes.filter(page => page.hasHeader === false);
     const NoHeaderPage = NoHeaderPages.find(page => pathName.includes(page.path));
@@ -30,24 +31,39 @@ const Header = () => {
         return () => window.removeEventListener("resize", updateHeaderHeight);
     }, []);
 
+    
+        useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 768px)");
+    
+        setIsMobile(mediaQuery.matches);
+    
+        const handler = (e) => setIsMobile(e.matches);
+        mediaQuery.addEventListener("change", handler);
+    
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
+
+
     const { scrollY } = useScroll();
 
     const borderRadius = useTransform(scrollY, [0, 70], ["0px", "50px"]);
+    const mobileBorderRadus = useTransform(scrollY, [0, 70], ["0px", "25px"]);
     const background = useTransform(
         scrollY,
-        [0, 200],
+        [40, 100],
         ["var(--header-color)", "var(--header-color-transparent)"]
     );
 
-    const marginTop = useTransform(scrollY, [0, 200], ["0px", "15px"]);
-    const width = useTransform(scrollY, [0, 200], ["100%", "85%"]);
+    const marginTop = useTransform(scrollY, [40, 100], ["0px", "15px"]);
+    const mobileWidth = useTransform(scrollY, [40, 100], ["100%", "90%"]);
+    const width = useTransform(scrollY, [40, 100], ["100%", "65%"]);
     const mobileNavTop = useMotionTemplate`calc(${headerHeight}px + ${marginTop})`;
 
     if (NoHeaderPage) return null
 
     return (
         <>
-            <motion.header ref={headerRef} style={{ borderRadius, background, marginTop, width }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
+            <motion.header ref={headerRef} style={{ borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, marginTop, width: isMobile ? mobileWidth : width }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
                 <Link className="flex items-center gap-[10px] max-md:scale-[0.8]" href="/"> 
                     <img src="/Davood-noBG.png" alt="" className="rounded-full h-[7vh]" />
                     <span className="text-[1.4rem] font-[600]">Davood Akrami</span>
@@ -119,7 +135,7 @@ const Header = () => {
                         )}
                         style={{ top: mobileNavTop,
 
-                            borderRadius, background, width,
+                            borderRadius, background, width: isMobile ? mobileWidth : width,
                          }}
                     >
                         <ul style={{ borderRadius, background }} className="w-full overflow-hidden p-[1rem] list-none m-0 rounded-ap">
