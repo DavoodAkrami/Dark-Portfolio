@@ -47,7 +47,7 @@ const Header = () => {
     const { scrollY } = useScroll();
 
     const borderRadius = useTransform(scrollY, [0, 70], ["0px", "50px"]);
-    const mobileBorderRadus = useTransform(scrollY, [0, 70], ["0px", "25px"]);
+    const mobileBorderRadus = useTransform(scrollY, [0, 70], ["0px", "30px"]);
     const background = useTransform(
         scrollY,
         [40, 100],
@@ -135,7 +135,7 @@ const Header = () => {
                         )}
                         style={{ top: mobileNavTop,
 
-                            borderRadius, background, width: isMobile ? mobileWidth : width,
+                            borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, width: isMobile ? mobileWidth : width,
                          }}
                     >
                         <ul style={{ borderRadius, background }} className="w-full overflow-hidden p-[1rem] list-none m-0 rounded-ap">
