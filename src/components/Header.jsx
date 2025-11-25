@@ -32,7 +32,7 @@ const Header = () => {
 
     const { scrollY } = useScroll();
 
-    const borderRadius = useTransform(scrollY, [0, 70], [0, 60]);
+    const borderRadius = useTransform(scrollY, [0, 70], ["0px", "50px"]);
     const background = useTransform(
         scrollY,
         [0, 200],
@@ -41,14 +41,13 @@ const Header = () => {
 
     const marginTop = useTransform(scrollY, [0, 200], ["0px", "15px"]);
     const width = useTransform(scrollY, [0, 200], ["100%", "85%"]);
-    const widthMobile = useTransform(scrollY, [0, 200], ["100%", "100%"]);
     const mobileNavTop = useMotionTemplate`calc(${headerHeight}px + ${marginTop})`;
 
     if (NoHeaderPage) return null
 
     return (
         <>
-            <motion.header ref={headerRef} style={{ borderRadius, background, marginTop, width: isMenuOpen ? widthMobile : width  }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
+            <motion.header ref={headerRef} style={{ borderRadius, background, marginTop, width }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
                 <Link className="flex items-center gap-[10px] max-md:scale-[0.8]" href="/"> 
                     <img src="/Davood-noBG.png" alt="" className="rounded-full h-[7vh]" />
                     <span className="text-[1.4rem] font-[600]">Davood Akrami</span>
