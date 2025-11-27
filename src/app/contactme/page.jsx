@@ -8,6 +8,7 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
@@ -18,6 +19,8 @@ import SuggestionOption from "@/components/SuggestionOption";
 
 const contactme = () => {
     const contact = ContactInfo[0];
+    const router = useRouter();
+    const searchParams = useSearchParams();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userMessage, setUserMessage] = useState("");
     const [messages, setMessages] = useState([]);
@@ -45,6 +48,18 @@ const contactme = () => {
     
     const handleClose = () => {
         setIsModalOpen(false);
+        const params = new URLSearchParams(window.location.search);
+        params.delete('openAI');
+        const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+        router.replace(newUrl);
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+        const params = new URLSearchParams(window.location.search);
+        params.set('openAI', '1');
+        const newUrl = window.location.pathname + '?' + params.toString();
+        router.replace(newUrl);
     };
 
     const handleSend = async () => {
@@ -167,6 +182,106 @@ const contactme = () => {
         }
     }, []);
 
+
+    useEffect(() => {
+        if (isModalOpen && typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const prompt = params.get('prompt');
+            if (prompt && prompt.trim()) {
+                const decodedPrompt = decodeURIComponent(prompt);
+                const timer = setTimeout(async () => {
+                    const content = decodedPrompt;
+                    const userMsg = {
+                        id: `${Date.now()}-user`,
+                        role: 'user',
+                        text: content,
+                        timestamp: Date.now()
+                    };
+                    setMessages((prev) => [...prev, userMsg]);
+                    let loadingDelayId = setTimeout(() => setLoading(true), 100);
+
+                    try {
+                        const res = await fetch("/api/ask", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ message: content })
+                        });
+                        
+                        if (!res.ok) {
+                            const errorData = await res.json();
+                            throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
+                        }
+                        
+                        const data = await res.json();
+                        if (data.error) {
+                            const assistantError = {
+                                id: `${Date.now()}-assistant`,
+                                role: 'assistant',
+                                text: `Error: ${data.error}`,
+                                timestamp: Date.now()
+                            };
+                            setMessages((prev) => [...prev, assistantError]);
+                            return;
+                        }
+
+                        let text = data.reply || "";
+                        if (typeof text !== 'string') {
+                            const invalidFormat = {
+                                id: `${Date.now()}-assistant`,
+                                role: 'assistant',
+                                text: "Error: Invalid response format",
+                                timestamp: Date.now()
+                            };
+                            setMessages((prev) => [...prev, invalidFormat]);
+                            return;
+                        }
+
+                        text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+
+                        const assistantId = `${Date.now()}-assistant`;
+                        const assistantMsg = {
+                            id: assistantId,
+                            role: 'assistant',
+                            text: '',
+                            timestamp: Date.now()
+                        };
+                        setMessages((prev) => [...prev, assistantMsg]);
+
+                        let i = 0;
+                        const typingSpeedMs = 18; 
+                        const intervalId = setInterval(() => {
+                            i++;
+                            setMessages((prev) => prev.map((msg) =>
+                                msg.id === assistantId ? { ...msg, text: text.slice(0, i) } : msg
+                            ));
+                            if (i >= text.length) {
+                                clearInterval(intervalId);
+                            }
+                        }, typingSpeedMs);
+                    } catch (err) {
+                        console.error(err);
+                        const assistantErr = {
+                            id: `${Date.now()}-assistant`,
+                            role: 'assistant',
+                            text: `Error: ${err.message}`,
+                            timestamp: Date.now()
+                        };
+                        setMessages((prev) => [...prev, assistantErr]);
+                    } finally {
+                        if (loadingDelayId) clearTimeout(loadingDelayId);
+                        setLoading(false);
+                    }
+                    
+                    const newParams = new URLSearchParams(window.location.search);
+                    newParams.delete('prompt');
+                    const newUrl = window.location.pathname + (newParams.toString() ? '?' + newParams.toString() : '');
+                    window.history.replaceState({}, '', newUrl);
+                }, 300);
+                return () => clearTimeout(timer);
+            }
+        }
+    }, [isModalOpen]);
+
     useEffect(() => {
         try {
             const oneDayMs = 24 * 60 * 60 * 1000;
@@ -240,7 +355,7 @@ const contactme = () => {
                     <div className="flex flex-col justify-center items-center text-[var(--text-color)] mt-[3rem]">
                         <h3 className="text-[1.8rem] text-[var(--text-color)] font-[570] max-md:text-[1.5rem] mb-[3rem] text-center flex justify-center max-[400px]:text-[1.2rem]">Ask question about me from my AI</h3>
                         <motion.button
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={handleOpenModal}
                             layoutId="AI-box"
                             className="text-[var(--accent-color)] rounded-lg font-[570] px-[4rem] py-[0.8rem] border-2 border-[var(--accent-color)] cursor-pointer hoverLight hover:text-[var(--text-color)] hover:bg-[var(--accent-color)]"
                         >

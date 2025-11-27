@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import StoreProvider from "@/providers/storeProvider";
+import AiGlobalInput from "@/components/AiGlobalInput";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +77,7 @@ export default function RootLayout({ children }) {
             <Header />
             <div className="bg-[var(--primary-color)] pt-[10vh]">
               {children}
+              <AiGlobalInput className="max-md:hidden" />
             </div>
             <Footer />
           </ThemeProvider>
