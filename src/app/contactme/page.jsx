@@ -125,7 +125,7 @@ const contactme = () => {
             setMessages((prev) => [...prev, assistantMsg]);
 
             let i = 0;
-            const typingSpeedMs = 18; 
+            const typingSpeedMs = 10; 
             const intervalId = setInterval(() => {
                 i++;
                 setMessages((prev) => prev.map((msg) =>
