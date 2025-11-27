@@ -8,7 +8,7 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
@@ -20,7 +20,6 @@ import SuggestionOption from "@/components/SuggestionOption";
 const contactme = () => {
     const contact = ContactInfo[0];
     const router = useRouter();
-    const searchParams = useSearchParams();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userMessage, setUserMessage] = useState("");
     const [messages, setMessages] = useState([]);
