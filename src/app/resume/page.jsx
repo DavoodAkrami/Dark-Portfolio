@@ -10,6 +10,8 @@ import Experience from "@/Data/Experience";
 import GitHubCalendar from "react-github-calendar";
 import { useTheme } from "@/components/ThemeProvider";
 
+import ExperiencesSection from "@/components/Experiences";
+
 
 
 
@@ -126,7 +128,8 @@ const About = () => {
 
 
             <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center">My Professional Experiences</h1>            
-            <TimelineExperience experiences={Experience} />
+            <ExperiencesSection experiences={Experience} className={"max-md:hidden"} />
+            <TimelineExperience experiences={Experience} className={"md:hidden"} />
         </div>
     );
 };

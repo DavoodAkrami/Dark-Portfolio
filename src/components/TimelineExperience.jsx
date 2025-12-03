@@ -1,9 +1,9 @@
 "use client";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import ExperienceCard from "./ExperienceCard";
+import clsx from "clsx";
 
-const TimelineExperience = ({ experiences }) => {
+const TimelineExperience = ({ experiences, className }) => {
   const timelineRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: timelineRef,
@@ -13,7 +13,7 @@ const TimelineExperience = ({ experiences }) => {
   const lineProgress = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.3, 0.7, 1]);
 
   return (
-    <div ref={timelineRef} className="relative w-full max-w-[1200px] mx-auto px-4">
+    <div ref={timelineRef} className={clsx("relative w-full max-w-[1200px] mx-auto px-4", className)}>
       <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-color)] to-[var(--accent-color)] opacity-30">
         <motion.div
           className="absolute top-0 left-0 w-full bg-[var(--accent-color)] origin-top"

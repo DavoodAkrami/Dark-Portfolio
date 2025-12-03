@@ -2,31 +2,43 @@
   {
     "title": "Student",
     "description": "Studying at Rubikamp Institute for Front End Development and Entrepreneurship",
-    "date": "2024 July- 2025 Jun"
+    "date": "2024 July- 2025 Jun",
+    "id": 1,
+    "icon": "PiStudent"
   },
   {
     "title": "Logistic team member",
     "description": "Working in the logistic team of Rubikamp",
-    "date": "2024 Oct - 2025 May"
+    "date": "2024 Oct - 2025 May",
+    "id": 2,
+    "icon": "VscSettings"
   },
   {
     "title": "Front-End development",
     "description": "Developed multiple front-end projects including admin panel, portfolio and AI-powered tools",
-    "date": "2024 January - Present"
+    "date": "2024 January - Present",
+    "id": 3,
+    "icon": "IoCodeSlash"
   },
   {
     "title": "Entrepreneurship",
     "description": "Collaborated in cross-functional teams through the full startup lifecycle",
-    "date": "2025 March - 2025 May"
+    "date": "2025 March - 2025 May",
+    "id": 4,
+    "icon": "IoBusinessSharp"
   },
   {
     "title": "Marketing Collaboration",
     "description": "Created a meme campaign with 200k views in a week",
-    "date": "2025 May"
+    "date": "2025 May",
+    "id": 5,
+    "icon": "MdOutlineCampaign"
   },
   {
     "title": "Junior Mentor",
     "description": "Mentored teams during 48-hour national hackathon",
-    "date": "2025 May"
+    "date": "2025 May",
+    "id": 6,
+    "icon": "SiCodementor"
   }
 ]
