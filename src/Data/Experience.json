@@ -1,44 +1,50 @@
 [
   {
-    "title": "Student",
-    "description": "Studying at Rubikamp Institute for Front End Development and Entrepreneurship",
+    "title": "Student, Rubikamp 2025 Program",
+    "description": "Learned programming, personal development, web fundamentals, and entrepreneurship through a structured, multi-semester Rubikamp's program",
     "date": "2024 July- 2025 Jun",
     "id": 1,
-    "icon": "PiStudent"
+    "icon": "PiStudent",
+    "full_discription": "I joined Rubikamp 2025 as a student, starting a journey that shaped both my technical foundation and my personal mindset. \n \n In my first semester, I learned the fundamentals of Python and we had personal development classes that helped me build discipline, self-awareness, long-term thinking etc. \n \nIn the second and third semesters, I chose the **Web Development major**, where I learned how to thinnk as a developer and how to learn coding. \n \n During the fourth semester, I learned **entrepreneurship**, completing three startup projects that challenged me to think beyond code and understand value creation, business logic, user needs, critical thinking, etc. \n \n Throughout the program, we regularly met successful professionals from different industries through **Rubigap sessions**, and we also had continuous **professionalism** and **English** classes. This environment shaped my growth: I learned how to learn, how to think critically, and how to approach problems not just as a developer but as someone who wants to create meaningful products."
   },
   {
-    "title": "Logistic team member",
-    "description": "Working in the logistic team of Rubikamp",
+    "title": "Technical & Logistic Support Member",
+    "description": "Provided technical assistance and operational support for students across Rubikamp’s programs",
     "date": "2024 Oct - 2025 May",
     "id": 2,
-    "icon": "VscSettings"
+    "icon": "VscSettings",
+    "full_discription": "As a member of Rubikamp’s **Logistic and Technical Support Team**, I was responsible for assisting students with their technical issues, answering questions, and ensuring their tools and platforms worked smoothly. This role strengthened my communication skills, improved my problem-solving under time pressure, and gave me a deeper understanding of how to support a learning community both technically and operationally."
   },
   {
-    "title": "Front-End development",
-    "description": "Developed multiple front-end projects including admin panel, portfolio and AI-powered tools",
+    "title": "Front-End Developer",
+    "description": "Built multiple front-end projects, including the mvp of an online soft skill learning platform, portfolio, and AI-powered tools using modern web technologies",
     "date": "2024 January - Present",
     "id": 3,
-    "icon": "IoCodeSlash"
+    "icon": "IoCodeSlash",
+    "full_discription": "I have developed several front-end projects, including the mvp of an online soft skill learning platform called **Naghz**, a personal portfolio, and AI-powered tools. \n Each project forced me to face real challenges—responsive design, state management, performance optimization, accessibility, and UI/UX balance. \n\n These experiences taught me more than just coding. They trained me to think like a **product-oriented developer**: someone who understands users, evaluates trade-offs, and builds with clarity and intent. \n\n I deepened my technical skills with **React, Next.js, TypeScript**, etc. But more importantly, I learned how to reason through problems, adapt quickly, and communicate my decisions clearly.\n\n This journey has helped shape my identity as a developer who grows continuously and builds with curiosity, discipline, and purpose."
   },
   {
-    "title": "Entrepreneurship",
-    "description": "Collaborated in cross-functional teams through the full startup lifecycle",
+    "title": "Entrepreneurship Student & Startup Project Collaborator",
+    "description": "Worked on three startup concepts, creating pitch decks and presenting to industry mentors, judges, and investors",
     "date": "2025 March - 2025 May",
     "id": 4,
-    "icon": "IoBusinessSharp"
+    "icon": "IoBusinessSharp",
+    "full_discription": "I was a student in **Rubikamp’s Entrepreneurship Program**, where we learned how startups think, build, and operate. \n The coursework included critical thinking, storytelling, market analysis, and essential business fundamentals. \n\n I collaborated with **three different teams**, working on three unique startup ideas. We created pitch decks, validated our assumptions, and presented our work to panels of judges, mentors, and investors. \n\n One of the projects was run entirely in **English**, from brainstorming to presentation, giving us the experience of operating like an international startup team. \n\n Our final project evolved into **Naghz**, a concept we developed up to its MVP: [TheNaghz.ir](https://thenaghz.ir). The project paused due to two teammates preparing for Konkur, but the journey gave me invaluable experience in **teamwork, problem-solving, communication**, and building under uncertainty."
   },
   {
     "title": "Marketing Collaboration",
-    "description": "Created a meme campaign with 200k views in a week",
+    "description": "Co-created a meme-based Instagram campaign reaching 200k views for Rubikamp's national entrepreneurship hackathon",
     "date": "2025 May",
     "id": 5,
-    "icon": "MdOutlineCampaign"
+    "icon": "MdOutlineCampaign",
+    "full_discription": "I collaborated with my team to run a meme-based digital marketing campaign for Rubikamp’s National Entrepreneurship Hackathon. \n We produced a series of Instagram reels designed around humor, timing, and cultural relevance. Within a single week, the campaign reached over **200,000 views**, significantly increasing awareness and engagement around the event. \n\n Through this experience, I learned how powerful creative content can be when it aligns with audience behavior, and how fast organic reach can grow when the message connects emotionally with a community."
   },
   {
     "title": "Junior Mentor",
-    "description": "Mentored teams during 48-hour national hackathon",
-    "date": "2025 May",
+    "description": "Guided teams during international and local 48-hour entrepreneurship hackathons, supporting ideation, pitch creation, and presentations",
+    "date": "2025 May & September 2026",
     "id": 6,
-    "icon": "SiCodementor"
+    "icon": "SiCodementor",
+    "full_discription": "I served as a mentor for three teams in Rubikamp’s 48-hour **International Entrepreneurship Hackathon**, guiding them through time management, brainstorming, building their pitch decks, and preparing for their final presentations. \n The judging panel included notable industry leaders, such as **Masoud Tabatabaei, CEO of Digikala**, which made the experience even more demanding and meaningful. \n\n I also worked as a Junior Mentor in **Rubikamp’s 2026 Local Entrepreneurship Hackathon**, helping teams with the same process—from ideation to presentation. After the hackathon, I participated in retrospective meetings with the event lead and with my teams to identify gaps and improve the experience for future editions. \n\n This role strengthened my leadership, communication, and mentoring skills, and taught me how to support teams without interrupting their creativity or ownership." 
   }
 ]

@@ -29,7 +29,7 @@ const ProjectCard = ({ project, onSelect, index }) => {
             style={{ x, opacity }}
             layoutId={`card-${project.id}`}
             onClick={() => onSelect(project.id)}
-            className="cursor-pointer bg-[var(--button-color)] hoverLight soft rounded-[12px] border border-transparent hover:border-[var(--accent-color)] p-[1.4rem] flex flex-col gap-6 w-[45rem] mx-auto min-h-[360px] max-[1480px]:w-[37rem] max-[1250px]:w-[30rem] max-[1100px]:w-[80%] max-sm:w-[90%] rounded-ap [--ap-radius:4rem]"
+            className="cursor-pointer bg-[var(--button-color)] hoverLight soft rounded-[12px] border-2 border-transparent hover:border-[var(--accent-color)] p-[1.4rem] flex flex-col gap-6 w-[45rem] mx-auto min-h-[360px] max-[1480px]:w-[37rem] max-[1250px]:w-[30rem] max-[1100px]:w-[80%] max-sm:w-[90%] rounded-ap [--ap-radius:4rem]"
         >
             <img
                 src={project.img}

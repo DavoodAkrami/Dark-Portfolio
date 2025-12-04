@@ -7,7 +7,7 @@ const SkillCard = ({ skill }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="rounded-ap [--ap-radius:3rem] bg-[var(--button-color)] rounded-lg p-6 flex flex-col items-center gap-4 w-full max-w-[300px] shadow-lg soft border border-transparent hover:border-[var(--accent-color)] hoverLight"
+      className="rounded-ap [--ap-radius:3rem] bg-[var(--button-color)] rounded-lg p-6 flex flex-col items-center gap-4 w-full max-w-[300px] shadow-lg soft border-2 border-transparent hover:border-[var(--accent-color)] hoverLight"
     >
       <div className="text-7xl text-[var(--text-color)]">
         {React.isValidElement(skill.icon)

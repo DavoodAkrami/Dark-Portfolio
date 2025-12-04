@@ -72,7 +72,7 @@ const ProjectSection = () => {
                     viewport={{ once: true }}
                     className="text-[var(--subtext-color)] text-[1.4rem] leading-relaxed mb-10 max-md:text-[1rem]"
                 >
-                    Throughout these projects, I faced real-world challenges such as responsive design complexities, state management, performance optimization, and balancing UI/UX considerations. These experiences taught me how to think critically, adapt quickly, and collaborate effectively. They also deepened my knowledge of tools like React, Next.js, and Tailwind CSS. Each project was more than just code—it was an opportunity to grow and explore the mindset of product-focused development.
+                    Through these projects, I faced real-world challenges such as responsive design complexities, state management, performance optimization, and balancing UI/UX considerations. These experiences taught me how to think critically, adapt quickly, and collaborate effectively. They also deepened my knowledge of tools like React, Next.js, and Tailwind CSS. Each project was more than just code—it was an opportunity to grow and explore the mindset of product-focused development.
                     This journey has been incredibly enriching. I've learned not just technical skills, but also how to approach problems with a builder’s mindset, communicate ideas clearly, and stay curious in the face of new challenges. It helped shape my identity as a developer who continuously learns and improves.
                 </motion.p>
                 <motion.h2

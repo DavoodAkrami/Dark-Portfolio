@@ -114,7 +114,7 @@ const About = () => {
                             </a>
                         </p>
                     </div>
-                    <div className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border border-transparent hover:border-[var(--accent-color)] rounded-ap [--ap-radius:3rem]">
+                    <div className="p-10 mb-[5vh] max-md:max-w-[95%] max-md:p-8 flex justify-center items-center bg-[var(--button-color)] rounded-lg github-calendar hoverLight soft border-2 border-transparent hover:border-[var(--accent-color)] rounded-ap [--ap-radius:3rem]">
                         <GitHubCalendar 
                             key={isLightMode ? 'light' : 'dark'}
                             username="DavoodAkrami" 
@@ -128,7 +128,7 @@ const About = () => {
 
 
             <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center">My Professional Experiences</h1>            
-            <ExperiencesSection experiences={Experience} className={"max-md:hidden"} />
+            <ExperiencesSection experiences={Experience} className={"max-md:hidden mb-[15vh]"} />
             <TimelineExperience experiences={Experience} className={"md:hidden"} />
         </div>
     );
