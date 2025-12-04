@@ -45,25 +45,25 @@ const AiGlobalInput = () => {
 
     return (
         <div 
-            className='fixed bottom-5 w-full z-50 max-md:hidden'
+            className='fixed bottom-5 w-full z-50'
         >
             <form
                 onSubmit={handleSubmit}
-                className='flex items-center justify-center w-[17%] max-xl:w-[23%] max-lg:w-[32%] mx-auto'
+                className='relative flex items-center justify-center w-[18%] max-2xl:w-[30%] max-lg:w-[45%] max-md:w-[70%] max-sm:w-[80%] mx-auto transition-all ease-in-out duration-500 hover:scale-[1.1] focus-within:scale-[1.1] focus-within:w-[23%] max-2xl:focus-within:w-[35%] max-lg:focus-within:w-[54%] max-md:focus-within:w-[80%] '
             >
                 <input 
                     type="text" 
                     placeholder="Ask anything about Davood"
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    className='w-full relative px-[0.7rem] py-[0.7rem] !rounded-full soft bg-[var(--button-color)]/75 backdrop-blur-sm autofill:bg-[var(--primary-color)] focusrLight border border-[var(--accent-color)]/80 outline-none focus:border-1 focus:border-[var(--accent-color)]' 
+                    onChange={(e) => setInputValue(e.target.value)} 
+                    className='w-full cursor-pointer relative px-[0.7rem] pr-12 py-[0.7rem] !rounded-full bg-[var(--button-color)]/75 backdrop-blur-sm autofill:bg-[var(--primary-color)] ring-2 ring-[var(--accent-color)] outline-none focus:ring-2! focus:ring-[var(--accent-color)] max-md:h-[2.5rem]' 
                 />
                 <button 
                     type="submit"
-                    className='relative cursor-pointer !rounded-full hover:!shadow-none '
+                    className='absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full !shadow-none hover:!shadow-none cursor-pointer'
                 >
                     <FaCircleArrowUp
-                        className='absolute right-2 top-0 text-center translate-y-[-50%] text-3xl text-[var(--accent-color)] hoverLight rounded-full'
+                        className='text-3xl text-[var(--accent-color)] hoverLight rounded-full'
                     />
                 </button>
             </form>

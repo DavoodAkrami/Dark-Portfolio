@@ -30,7 +30,7 @@ const Footer = () => {
     return (
         <div className="bg-[var(--primary-color)]">
             <hr className="text-[var(--accent-color)] w-[85%] mx-auto my-[0]" />
-            <div className="flex items-center justify-between px-[10%] py-[3rem] text-[var(--text-color)] max-sm:flex-col max-sm:gap-[1.4rem]"> 
+            <div className="flex items-center justify-between px-[10%] py-[3rem] text-[var(--text-color)] max-sm:flex-col max-sm:gap-[1.4rem] max-lg:pb-[10vh]"> 
                 <div className="flex gap-[1.8rem] max-md:gap-[1rem]">
                     <FaGithub onClick={() => window.open(contact.github)} className="ContactIcons soft" />
                     <FaLinkedinIn onClick={() => window.open(contact.linkedin)} className="ContactIcons soft" />

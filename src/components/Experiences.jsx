@@ -102,7 +102,7 @@ const ExperiencesSection = ({experiences, className}) => {
             </AnimatePresence>
             <div
                 ref={listRef}
-                className={clsx("flex flex-col gap-[15rem] w-1/2")}
+                className={clsx("flex flex-col gap-[15rem] max-md:gap-[8rem] w-1/2 max-md:w-[90%] max-md:mx-auto")}
             >
                 {experiences.map((exp, index) => (
                     <div
@@ -122,6 +122,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                 currentCard !== exp.id && "blur-[2px]"
                             )}
                             handleCardInView={() => handleCardInView(exp.id)}
+                            setIsModalOpen={setReadMoreModal}
                         />
                     </div>
                 ))}
@@ -130,44 +131,51 @@ const ExperiencesSection = ({experiences, className}) => {
                 initial={{ opacity: 0, x: 400 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 400 }}
                 transition={{ duration: 0.2 }}
-                className="fixed right-[5%] top-[30%] bottom-[30%] w-1/3 flex gap-3 items-center z-11"
+                className="fixed right-[5%] top-[30%] bottom-[30%] w-1/3 flex gap-3 items-center z-11 max-md:hidden"
             >
                 <motion.div
                     initial={{ opacity: 0, x: -400 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -400 }}
                     transition={{ duration: 0.2 }}
-                    className={clsx("soft bg-[var(--button-color)]/85 text-[var(--text-color)] p-8 rounded-ap [--ap-radius:4rem] border-2 border-[var(--accent-color)] backdrop-blur-[4px] h-full w-9/10 hoverLight")}
+                    className={clsx("soft bg-[var(--button-color)]/85 text-[var(--text-color)] p-10 rounded-ap [--ap-radius:4rem] border-2 border-[var(--accent-color)] backdrop-blur-[4px] h-full w-9/10 hoverLight")}
                 >
                     <AnimatePresence mode="wait">
                         {currentExperience && (
-                            <motion.div
-                                key={currentExperience.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.25 }}
-                                className="reletave"
-                            >
-                                <div className="">
-                                    <h2 className="text-3xl font-bold text-center">
-                                        {currentExperience.title}
-                                    </h2>
-                                    <p className="text-center text-[var(--text-color)]/70 mt-4">
-                                        {currentExperience.date}
-                                    </p>
-                                </div>
-                                <hr className="text-[var(--accent-color)] mt-4" />
-                                <div className="mt-6">
-                                    <motion.p
-                                        layoutId="read-more" 
-                                        className="text-center mt-6 text-lg cursor-pointer select-none"
-                                        onClick={() => handleModalReadMoreOpen(currentExperience.id)}
+                            <>
+                                <motion.div
+                                    key={currentExperience.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="reletave"
+                                >
+                                    <div className="">
+                                        <h2 className="text-3xl font-bold text-center">
+                                            {currentExperience.title}
+                                        </h2>
+                                        <p className="text-center text-[var(--text-color)]/70 mt-4">
+                                            {currentExperience.date}
+                                        </p>
+                                    </div>
+                                    <hr className="text-[var(--accent-color)] mt-4" />
+                                    <div className="mt-6">
+                                        <motion.p
+                                            layoutId="read-more" 
+                                            className="text-center mt-6 text-lg cursor-pointer select-none"
+                                            onClick={() => handleModalReadMoreOpen(currentExperience.id)}
+                                        >
+                                            {summrizedText(currentExperience.full_discription, isCompact ? 100 : 200)}
+                                        </motion.p>
+                                    </div>
+                                    {/* <button
+                                        className="hoverLight bg-[var(--accent-color)] mx-auto cursor-pointer text-white px-5 py-3 mt-5 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2"
                                     >
-                                        {summrizedText(currentExperience.full_discription, isCompact ? 100 : 200)}
-                                    </motion.p>
-                                </div>
-                            </motion.div>
+                                        Ask AI about this experience
+                                    </button> */}
+                                </motion.div>
+                            </>
                         )}
                     </AnimatePresence>
                 </motion.div>
@@ -201,13 +209,17 @@ const ExperiencesSection = ({experiences, className}) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
                             className="fixed inset-0 z-10000000 bg-[var(--background)]/50 backdrop-blur-lg"
                             onClick={handleCloseReadMoreModal}
                         />
                         <motion.div
                             layoutId="read-more"
-                            className={clsx("z-10000000000 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] bg-[var(--button-color)] p-8 text-[var(--text-color)] rounded-ap [--ap-radius:4rem] border-2 border-[var(--accent-color)]")}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className={clsx("z-10000000000 max-md:w-[95%] max-md:overflow-hidden max-md:h-[90vh] max-md:m-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] bg-[var(--button-color)] p-8 text-[var(--text-color)] rounded-ap [--ap-radius:4rem] border-2 border-[var(--accent-color)] flex flex-col")}
                         >
                             <div 
                                 className="absolute top-4 right-4 bg-[var(--accent-color)] p-2 rounded-full cursor-pointer transition-shadow ease-in-out duration-300 hoverLight" 
@@ -215,14 +227,16 @@ const ExperiencesSection = ({experiences, className}) => {
                             >
                                 <RxCross2 className="text-xl font-bold" />
                             </div>
-                            <h2 className="text-3xl font-bold text-center w-[90%] mx-auto">
-                                {currentExperience.title}
-                            </h2>
-                            <p className="text-center text-[var(--text-color)]/70 mt-4">
-                                {currentExperience.date}
-                            </p>
-                            <hr className="mt-6 text-[var(--accent-color)]" />
-                            <div className="text-center mt-6 text-lg w-[90%] mx-auto">
+                            <div className="shrink-0">
+                                <h2 className="text-3xl font-bold text-center w-[90%] mx-auto">
+                                    {currentExperience.title}
+                                </h2>
+                                <p className="text-center text-[var(--text-color)]/70 mt-4">
+                                    {currentExperience.date}
+                                </p>
+                                <hr className="mt-6 text-[var(--accent-color)]" />
+                            </div>
+                            <div className="text-center mt-6 text-lg w-[90%] max-md:w-[97%] mx-auto flex-1 max-md:overflow-y-auto max-md:pb-6 max-md:pr-2">
                                 {parseRichText(currentExperience.full_discription)}
                             </div>
                         </motion.div>
