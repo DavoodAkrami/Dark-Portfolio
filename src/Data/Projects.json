@@ -9,15 +9,6 @@
         "img": "/dark-portfolio.png" 
     },
     {
-        "id": 2,
-        "title": "Bagro Menu",
-        "description": "A responsive menu for Bagro restaurant in Shiraz with an admin panel to add, edit and delete new items.",
-        "url": "https://bagro-menu.vercel.app/",
-        "technologies": ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Supabase"],
-        "gitHub": "https://github.com/DavoodAkrami/Bagro-Menu",
-        "img": "/Bagro.png"
-    },
-    {
         "id": 8,
         "title": "Naghz-mvp",
         "description": "Naghz is a learning assistant that helps you learn essential life and soft skills through real-time, interactive guidance and this is the MVP version of the project that we are working on it.",
@@ -25,6 +16,14 @@
         "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Redux", "Supabase"],
         "gitHub": "https://github.com/DavoodAkrami/naghz-mvp-main",
         "img": "/Naghz-mvp.png"
+    },
+    {
+        "id": 7,
+        "title": "100bestmovies English learning",
+        "description": "A website that helps you learn English by using a book and watching movies.",
+        "url": "https://www.100bestmovies.ir/",
+        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+        "img": "/Bookshop.png"
     },
     {
         "id": 3,
@@ -36,22 +35,13 @@
         "img": "/E-commerce.png"  
     },
     {
-        "id": 4,
-        "title": "Naghz",
-        "description": "Naghz is a smart learning assistant that helps users build essential life and soft skills through real-time, interactive guidance.",
-        "url": "https://naghz.vercel.app/",
-        "technologies": ["vite", "React", "CSS modules", "React Router DOM"],
-        "gitHub": "https://github.com/DavoodAkrami/Naghz",
-        "img": "/Naghz.png" 
-    },
-    {
-        "id": 5,
-        "title": "My last Portfolio",
-        "description": "A modern and fully responsive personal portfolio built with Next.js, TailwindCSS, and Framer Motion. Designed to showcase projects, skills, and experience with a clean dark theme and smooth animations.",
-        "url": "https://portfolio-one-azure-17.vercel.app/",
-        "technologies": ["Vite", "React", "JavaScript", "CSS modules"],
-        "gitHub": "https://github.com/DavoodAkrami/Portfolio?tab=readme-ov-file",
-        "img": "/my-last-portfolio.png" 
+        "id": 2,
+        "title": "Bagro Menu",
+        "description": "A responsive menu for Bagro restaurant in Shiraz with an admin panel to add, edit and delete new items.",
+        "url": "https://bagro-menu.vercel.app/",
+        "technologies": ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Supabase"],
+        "gitHub": "https://github.com/DavoodAkrami/Bagro-Menu",
+        "img": "/Bagro.png"
     },
     {
         "id": 6,

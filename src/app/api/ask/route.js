@@ -25,8 +25,7 @@ export const POST = async (request) => {
         let context = "";
         let systemPrompt = "";
 
-        // If an experience payload is provided, do NOT query Pinecone. The assistant should
-        // only answer based on that one experience.
+
         if (experienceData !== undefined && experienceData !== null && `${experienceData}`.trim() !== "") {
             const experienceText =
                 typeof experienceData === "string" ? experienceData : JSON.stringify(experienceData);

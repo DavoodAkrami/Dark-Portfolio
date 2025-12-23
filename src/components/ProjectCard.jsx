@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import clsx from "clsx";
 
 const Badge = ({ text }) => (
     <span className="rounded-full bg-gray-700 px-2 py-1 text-xs text-[var(--accent-color)] font-semibold select-none">
@@ -93,7 +94,7 @@ const ProjectDetails = ({ project, onClose }) => {
             </button>
             <button 
                 onClick={() => window.open(project.gitHub)}
-                className="px-[1.7rem] py-[0.7rem] rounded-lg border-2 border-[var(--accent-color)] text-[var(--accent-color)] font-[580] cursor-pointer hover:text-[var(--text-color)] hover:bg-[var(--accent-color)] soft transition-all duration-300"
+                className={clsx("px-[1.7rem] py-[0.7rem] rounded-lg border-2 border-[var(--accent-color)] text-[var(--accent-color)] font-[580] cursor-pointer hover:text-[var(--text-color)] hover:bg-[var(--accent-color)] soft transition-all duration-300", !project.gitHub && "hidden")}
             >
                 GitHub
             </button>
