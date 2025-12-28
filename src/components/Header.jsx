@@ -56,14 +56,14 @@ const Header = () => {
 
     const marginTop = useTransform(scrollY, [40, 100], ["0px", "15px"]);
     const mobileWidth = useTransform(scrollY, [40, 100], ["100%", "90%"]);
-    const width = useTransform(scrollY, [40, 100], ["100%", "65%"]);
+    const width = useTransform(scrollY, [40, 100], ["100%", "50%"]);
     const mobileNavTop = useMotionTemplate`calc(${headerHeight}px + ${marginTop})`;
-
+    const padding = useTransform(scrollY, [40, 100], ["20px", "8px"]);
     if (NoHeaderPage) return null
 
     return (
         <>
-            <motion.header ref={headerRef} style={{ borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, marginTop, width: isMobile ? mobileWidth : width }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-ap flex justify-between items-center px-[5%] py-[2vh] bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!")}>
+            <motion.header ref={headerRef} style={{ borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, marginTop, width: isMobile ? mobileWidth : width, padding }} className={clsx("fixed top-0 left-0 right-0  mx-auto rounded-full flex justify-between items-center bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out", isMenuOpen && "rounded-b-none!", )}>
                 <Link className="flex items-center gap-[10px] max-md:scale-[0.8]" href="/"> 
                     <img src="/Davood-noBG.png" alt="" className="rounded-full h-[7vh]" />
                     <span className="text-[1.4rem] font-[600]">Davood Akrami</span>
@@ -155,7 +155,7 @@ const Header = () => {
                                     </li>
                                 );
                             })}
-                            <li className="flex justify-center p-[1rem] rounded-2xl">
+                            <li className="flex justify-center p-[1rem] !rounded-full">
                                 <ThemeToggle />
                             </li>
                         </ul>

@@ -51,7 +51,7 @@ const AiGlobalInput = () => {
                 onSubmit={handleSubmit}
                 className='relative flex items-center justify-center w-full transition-all ease-in-out duration-500 pointer-events-none'
             >
-                <div className='relative w-[18%] max-2xl:w-[30%] max-lg:w-[45%] max-md:w-[70%] max-sm:w-[80%] mx-auto transition-all ease-in-out duration-500 hover:scale-[1.1] focus-within:scale-[1.1] focus-within:w-[23%] max-2xl:focus-within:w-[35%] max-lg:focus-within:w-[54%] max-md:focus-within:w-[80%] pointer-events-auto'>
+                <div className='relative w-[18%] max-2xl:w-[30%] max-lg:w-[45%]  max-md:w-[70%] max-sm:w-[80%] mx-auto transition-all ease-in-out duration-500 hover:scale-[1.1] focus-within:scale-[1.1] focus-within:w-[23%] max-2xl:focus-within:w-[35%] max-lg:focus-within:w-[54%] max-md:focus-within:w-[80%] pointer-events-auto'>
                     <input 
                         type="text" 
                         placeholder="Ask anything about Davood"

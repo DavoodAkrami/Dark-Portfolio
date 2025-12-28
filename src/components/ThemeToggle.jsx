@@ -6,17 +6,17 @@ const ThemeToggle = () => {
   const { isLightMode, toggleTheme } = useTheme();
 
   return (
-    <button
+    <div
       onClick={toggleTheme}
-      className="hoverLight p-2 rounded-lg transition-all duration-300 flex items-center justify-center cursor-pointer bg-[var(--accent-color)]"
+      className="hoverLight p-4 !rounded-full transition-all duration-300 flex items-center justify-center cursor-pointer bg-[var(--accent-color)]"
       aria-label={isLightMode ? 'Switch to dark mode' : 'Switch to light mode'}
     >
       {isLightMode ? (
-        <FaMoon className="text-[var(--text-color)] text-xl " />
+        <FaMoon className="text-[var(--text-color)] text-xl rounded-full" />
       ) : (
-        <FaSun className="text-[var(--text-color)] text-xl" />
+        <FaSun className="text-[var(--text-color)] text-xl rounded-full" />
       )}
-    </button>
+    </div>
   );
 };
 
