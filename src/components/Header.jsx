@@ -80,7 +80,7 @@ const Header = () => {
                 }}
                 className={clsx(
                     "fixed top-0 left-0 right-0  mx-auto rounded-full flex justify-between items-center bg-[var(--header-color)] text-[var(--text-color)] backdrop-blur-sm max-md:bg-transparent z-20 transition-all duration-300 ease-in-out",
-                    isMenuOpen && "rounded-b-none!",
+                    isMenuOpen && "rounded-b-none! !border-b-transparent",
                 )}
             >
                 <Link className="flex items-center gap-[10px] max-md:scale-[0.8]" href="/"> 
@@ -152,11 +152,11 @@ const Header = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className={clsx(
-                            "md:hidden w-full left-0 right-0 fixed z-10 mx-auto rounded-t-none! backdrop-blur-sm"
+                            "md:hidden w-full left-0 right-0 fixed z-10 mx-auto rounded-t-none! backdrop-blur-sm !border-t-0"
                         )}
                         style={{ top: mobileNavTop,
 
-                            borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, width: isMobile ? mobileWidth : width,
+                            borderRadius: isMobile ? mobileBorderRadus : borderRadius, background, width: isMobile ? mobileWidth : width, borderWidth, borderColor
                          }}
                     >
                         <ul style={{ borderRadius, background }} className="w-full overflow-hidden p-[1rem] list-none m-0 rounded-ap">
