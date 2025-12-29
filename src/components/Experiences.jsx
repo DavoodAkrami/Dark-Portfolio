@@ -314,7 +314,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                             {summrizedText(currentExperience.full_discription, isCompact ? 100 : 185)}
                                         </motion.p>
                                     </div>
-                                    {/* <div className=" flex justify-around px-4 max-xl:px-0 gap-6 w-full max-[1200px]:hidden">
+                                    <div className=" flex justify-around px-4 max-xl:px-0 gap-6 w-full max-[1200px]:hidden">
                                         <button
                                             onClick={() => handleModalReadMoreOpen(currentExperience.id)}
                                             className="hoverLight w-1/2 bg-[var(--accent-color)] mx-auto cursor-pointer text-white px-5 py-3 mt-5 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2"
@@ -328,7 +328,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                         >
                                             Ask AI
                                         </motion.button> 
-                                    </div> */}
+                                    </div>
                                 </motion.div>
                             </>
                         )}
