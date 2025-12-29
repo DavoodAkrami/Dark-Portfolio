@@ -297,7 +297,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                     className="relative flex flex-col h-full"
                                 >
                                     <div className="">
-                                        <h2 className="text-3xl font-bold text-center">
+                                        <h2 className="text-2xl font-bold text-center">
                                             {currentExperience.title}
                                         </h2>
                                         <p className="text-center text-[var(--text-color)]/70 mt-4">
