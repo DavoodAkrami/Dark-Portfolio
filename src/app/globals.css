@@ -12,6 +12,7 @@
   --highlight: #fbbf24;
   --secondary: #1f2937;
   --header-color-transparent: rgba(13, 17, 23, 0.8);
+  --accent-color-tr: #ffffff41;
 }
 
 .light {
@@ -26,6 +27,7 @@
   --highlight: #f59e0b;
   --secondary: #e2e8f0;
   --header-color-transparent: rgba(206, 225, 253, 0.8);
+  --accent-color-tr: #ffffff41;
 }
 
 @theme inline {
