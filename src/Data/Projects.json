@@ -18,6 +18,15 @@
         "img": "/Naghz-mvp.png"
     },
     {
+        "id": 10,
+        "title": "Productivity hub",
+        "description": "A modern, feature-rich productivity application built with Next.js that helps you manage bookmarks, tasks, and interact with AI assistance.",
+        "url": "https://productivity-hub-s51l.vercel.app/",
+        "technologies" : ["Next.js", "TypeScript", "Tailwind CSS", "React.js", "Motion"],
+        "gitHub": "https://github.com/DavoodAkrami/productivity-hub",
+        "img": "/Productivity-hub.png"
+    },
+    {
         "id": 7,
         "title": "100bestmovies English learning",
         "description": "A website that helps you learn English by using a book and watching movies.",
@@ -42,14 +51,5 @@
         "technologies": ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Supabase"],
         "gitHub": "https://github.com/DavoodAkrami/Bagro-Menu",
         "img": "/Bagro.png"
-    },
-    {
-        "id": 6,
-        "title": "BookMarks",
-        "description": "A modern, web application for managing your bookmarks with a clean, macOS-inspired design",
-        "url": "https://book-marks-nine.vercel.app/",
-        "technologies": ["Vite", "React", "CSS modules"],
-        "gitHub": "https://github.com/DavoodAkrami/BookMarks",
-        "img": "/bookmarks.png"
     }
 ]
