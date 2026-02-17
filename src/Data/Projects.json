@@ -21,7 +21,7 @@
         "id": 10,
         "title": "Productivity Hub",
         "description": "A full-stack productivity platform built with Next.js, Supabase, and OpenAI that unifies bookmarks, task and note management, AI chat, personalized insights, and role-based admin tools in one polished workspace.",
-        "url": "https://productivity-hub-s51l.vercel.app/",
+        "url": "https://productivityhub.ir",
         "technologies" : ["Next.js", "TypeScript", "Tailwind CSS", "React.js", "Motion", "Redux", "Recharts"],
         "gitHub": "https://github.com/DavoodAkrami/productivity-hub",
         "img": "/Productivity-hub.png"

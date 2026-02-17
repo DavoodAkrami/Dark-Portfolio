@@ -406,11 +406,6 @@ const ExperiencesSection = ({experiences, className}) => {
                         onClose={() => setIsAiModalOpen(false)}
                     >
                         <div className="relative w-9/10 bg-[var(--button-color)]/85 text-[var(--text-color)] p-4 rounded-ap [--ap-radius:4rem] border-2 border-[var(--accent-color)] backdrop-blur-[4px]">
-                            <div className="absolute top-2.5 left-2.5 z-10 select-none">
-                                <span className="inline-flex items-center gap-1 rounded-full border border-[var(--accent-color)]/70 bg-[var(--primary-color)]/70 px-2 py-0.5 text-[0.7rem] font-semibold tracking-wide text-[var(--text-color)] backdrop-blur-[4px]">
-                                    Beta
-                                </span>
-                            </div>
                             <div className="absolute top-2.5 right-2.5 bg-[var(--accent-color)] p-1 rounded-full cursor-pointer transition-shadow ease-in-out duration-300 hoverLight z-10" 
                                 onClick={() => setIsAiModalOpen(false)}
                             >

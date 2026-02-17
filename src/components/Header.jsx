@@ -152,7 +152,7 @@ const Header = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className={clsx(
-                            "md:hidden w-full left-0 right-0 fixed z-10 mx-auto rounded-t-none! backdrop-blur-sm !border-t-0"
+                            "md:hidden w-full left-0 right-0 fixed z-1000000 mx-auto rounded-t-none! backdrop-blur-sm !border-t-0"
                         )}
                         style={{ top: mobileNavTop,
 
