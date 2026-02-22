@@ -27,6 +27,14 @@
         "img": "/Productivity-hub.png"
     },
     {
+        "id": 11,
+        "title": "Tech Pulse",
+        "description": "TechPulse Daily is a multilingual tech-news aggregation app built with Next.js App Router. It crawls major technology publications server-side, cleans noisy website artifacts, and presents readable articles with source metadata, inline media, market widgets, and AI-assisted summaries. I vibe-coded this project with GPT-5.3-Codex.",
+        "url": "https://tech-puls.vercel.app",
+        "technologies": ["GPT-5.3-Codex", "Next.js", "React.js", "TypeScript", "Tailwind CSS", "Motion", "OpenAI"],
+        "img": "/tech-pulse.png"
+    },
+    {
         "id": 7,
         "title": "100bestmovies English learning",
         "description": "A website that helps you learn English by using a book and watching movies.",
