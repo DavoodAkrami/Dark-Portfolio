@@ -9,15 +9,6 @@
         "img": "/dark-portfolio.png" 
     },
     {
-        "id": 8,
-        "title": "Naghz-mvp",
-        "description": "Naghz is a learning assistant that helps you learn essential life and soft skills through real-time, interactive guidance and this is the MVP version of the project that we are working on it.",
-        "url": "https://thenaghz.ir",
-        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Redux", "Supabase"],
-        "gitHub": "https://github.com/DavoodAkrami/naghz-mvp-main",
-        "img": "/Naghz-mvp.png"
-    },
-    {
         "id": 10,
         "title": "Productivity Hub",
         "description": "A full-stack productivity platform built with Next.js, Supabase, and OpenAI that unifies bookmarks, task and note management, AI chat, personalized insights, and role-based admin tools in one polished workspace.",
@@ -33,6 +24,23 @@
         "url": "https://tech-puls.vercel.app",
         "technologies": ["GPT-5.3-Codex", "Next.js", "React.js", "TypeScript", "Tailwind CSS", "Motion", "OpenAI"],
         "img": "/tech-pulse.png"
+    },
+    {
+        "id": "9",
+        "title": "Gym Management System",
+        "description": "A vide coded comprehensive gym management system built for users to find their ideal gym, and for gym owners to manage their gyms. The platform includes features such as membership management, income insights and an admin panel for gym owners to oversee operations.",
+        "url": "https://gym-management-navy-eta.vercel.app", 
+        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Cursor AI", "Open Code AI"],
+        "img": "/gym.png"
+    },
+    {
+        "id": 8,
+        "title": "Naghz-mvp",
+        "description": "Naghz is a learning assistant that helps you learn essential life and soft skills through real-time, interactive guidance and this is the MVP version of the project that we are working on it.",
+        "url": "https://thenaghz.ir",
+        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Redux", "Supabase"],
+        "gitHub": "https://github.com/DavoodAkrami/naghz-mvp-main",
+        "img": "/Naghz-mvp.png"
     },
     {
         "id": 7,

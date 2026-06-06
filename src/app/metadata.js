@@ -9,7 +9,7 @@ export const metadata = {
     canonical: "https://www.davoodakrami.ir/",
     languages: {
       "en": "https://www.davoodakrami.ir/",
-      "fa": "https://www.davoodakrami.ir/",
+  "fa": "https://www.davoodakrami.ir/",
     },
   },
 }; 
