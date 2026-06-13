@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import clsx from "clsx";
 
 const TimelineExperience = ({ experiences, className }) => {
@@ -10,13 +10,20 @@ const TimelineExperience = ({ experiences, className }) => {
     offset: ["start end", "end start"]
   });
 
-  const lineProgress = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.3, 0.7, 1]);
+  // Smooth the raw scroll progress so the line fill eases as the user
+  // scrolls in either direction (down increases, up decreases).
+  const rawLineProgress = useTransform(scrollYProgress, [0, 0.85], [0, 1], { clamp: true });
+  const lineProgress = useSpring(rawLineProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
     <div ref={timelineRef} className={clsx("relative w-full max-w-[1200px] mx-auto px-4", className)}>
-      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-color)] to-[var(--accent-color)] opacity-30">
+      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-[var(--accent-color)] opacity-30">
         <motion.div
-          className="absolute top-0 left-0 w-full bg-[var(--accent-color)] origin-top"
+          className="absolute top-0 left-0 w-full bg-gradient-to-b from-[var(--accent-color)] to-[var(--highlight-color)] origin-top"
           style={{ scaleY: lineProgress }}
         />
       </div>
@@ -34,19 +41,30 @@ const TimelineItem = ({ experience, index, total }) => {
   const itemRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: itemRef,
-    offset: ["start end", "center start"]
+    offset: ["start end", "center center"]
   });
 
   const isEven = index % 2 === 0;
-  const opacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.95], [0, 1, 1, 1]);
-  const scale = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0.8, 1, 1, 1]);
-  const dotScale = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1.2, 1, 1]);
-  const dotOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 1]);
+
+  // Spring config shared by every scroll-driven value so the motion feels
+  // consistent and eases naturally whether scrolling down or back up.
+  const spring = { stiffness: 120, damping: 24, restDelta: 0.001 };
+
+  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.4], [0, 1]), spring);
+  const scale = useSpring(useTransform(scrollYProgress, [0, 0.4], [0.85, 1]), spring);
+  // Slide the card in from its own side of the timeline (left for even,
+  // right for odd). Reverses smoothly when the user scrolls back up.
+  const x = useSpring(
+    useTransform(scrollYProgress, [0, 0.4], [isEven ? -60 : 60, 0]),
+    spring
+  );
+  const dotScale = useSpring(useTransform(scrollYProgress, [0, 0.35, 0.5], [0, 1.2, 1]), spring);
+  const dotOpacity = useSpring(useTransform(scrollYProgress, [0, 0.35], [0, 1]), spring);
 
   return (
     <motion.div
       ref={itemRef}
-      style={{ opacity, scale }}
+      style={{ opacity, scale, x }}
       className={`relative flex items-center mb-12 ${
         isEven ? 'md:flex-row' : 'md:flex-row-reverse'
       }`}

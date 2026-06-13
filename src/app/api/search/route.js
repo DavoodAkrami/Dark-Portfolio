@@ -5,7 +5,7 @@ import openai from "../../../configs/openAIConfig";
 
 export async function POST(request) {
   try {
-    const { query, topK = 5, model = "gpt-4o-mini" } = await request.json();
+    const { query, topK = 5, model = "gpt-4o-mini", conversation = [] } = await request.json();
 
     if (!query || typeof query !== 'string') {
       return NextResponse.json({ error: 'query is required' }, { status: 400 });
@@ -23,15 +23,17 @@ export async function POST(request) {
       .map((m, i) => `#${i + 1} [${m.score?.toFixed(3)}] ${m.metadata?.title || m.id}\n${m.metadata?.text || ''}`)
       .join('\n\n');
 
-    const systemPrompt = `You are a helpful assistant. Use the following context to answer the user's question. Only use the context if it is relevant.\n\nContext:\n${context}`;
+    const systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context to answer the user's question. Only use the context if it is relevant.\n\nContext:\n${context}`;
 
+    const recentConversation = (conversation || []).slice(-4);
     const completion = await openai.chat.completions.create({
       model,
       messages: [
         { role: 'system', content: systemPrompt },
+        ...recentConversation,
         { role: 'user', content: query }
       ],
-      temperature: 0.3
+      temperature: 0.3,
     });
 
     const answer = completion.choices?.[0]?.message?.content || '';

@@ -38,20 +38,19 @@ const ProjectSection = () => {
             <ProjectsGrid projects={Projects} onSelect={handleSelect} />
             <AnimatePresence>
                 {selectedProject && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center">
-
-                        <motion.div
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                            onClick={handleClose}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.4 }}
-                        />
+                    <motion.div
+                        className="fixed inset-0 z-50 flex items-center justify-center"
+                        onClick={handleClose}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div className="absolute inset-0 bg-black/55" />
                         <div className="relative z-10" onClick={e => e.stopPropagation()}>
                             <ProjectDetails project={selectedProject} onClose={handleClose} />
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
             

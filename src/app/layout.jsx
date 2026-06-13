@@ -78,9 +78,9 @@ export default function RootLayout({ children }) {
             <Header />
             <div className="bg-[var(--primary-color)] pt-[10vh]">
               {children}
-              <Suspense fallback={null}>
-                <AiGlobalInput className="max-md:hidden" />
-              </Suspense>
+                <Suspense fallback={null}>
+                  <AiGlobalInput />
+                </Suspense>
             </div>
             <Footer />
           </ThemeProvider>
