@@ -127,9 +127,19 @@ const About = () => {
             <SkillsSlider direction="left" />
 
 
-            <h1 className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center">My Professional Experiences</h1>            
-            <ExperiencesSection experiences={Experience} className={"mb-[15vh]"} />
-            <TimelineExperience experiences={Experience} className={"hidden"} />
+            <div className="relative w-full flex flex-col items-center">
+                <motion.h1
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.6 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="text-[4rem] text-[var(--text-color)] font-[570] my-[10vh] max-md:text-[2.8rem] text-center"
+                >
+                    My Professional Experiences
+                </motion.h1>
+                <ExperiencesSection experiences={Experience} className={"mb-[15vh]"} />
+                <TimelineExperience experiences={Experience} className={"hidden"} />
+            </div>
         </div>
     );
 };

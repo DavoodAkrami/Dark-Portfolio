@@ -13,6 +13,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 import Message from "@/components/Message";
 import SuggestionOption from "@/components/SuggestionOption";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { VscPass } from "react-icons/vsc";
 
 
 
@@ -24,8 +26,10 @@ const contactme = () => {
     const [userMessage, setUserMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
     const endOfMessagesRef = useRef(null);
     const textareaRef = useRef(null);
+    const streamAssistantId = useRef(null);
 
     const suggestions = [
         {
@@ -77,73 +81,103 @@ const contactme = () => {
         setMessages((prev) => [...prev, userMsg]);
         let loadingDelayId = setTimeout(() => setLoading(true), 100);
 
+        const assistantId = `${Date.now()}-assistant`;
+        streamAssistantId.current = assistantId;
+
+        const recentConversation = messages.slice(-4).map(m => ({
+            role: m.role,
+            content: m.text,
+        }));
+
         try {
             const res = await fetch("/api/ask", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: content })
+                body: JSON.stringify({ message: content, stream: true, conversation: recentConversation })
             });
-            
+
             if (!res.ok) {
-                const errorData = await res.json();
+                const errorData = await res.json().catch(() => ({}));
                 throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
             }
-            
-            const data = await res.json();
-            if (data.error) {
-                const assistantError = {
-                    id: `${Date.now()}-assistant`,
+
+            const contentType = res.headers.get("content-type") || "";
+            if (contentType.includes("text/event-stream")) {
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = "";
+
+                setMessages((prev) => [...prev, {
+                    id: assistantId,
                     role: 'assistant',
-                    text: `Error: ${data.error}`,
+                    text: '',
                     timestamp: Date.now()
-                };
-                setMessages((prev) => [...prev, assistantError]);
-                return;
-            }
+                }]);
 
-            let text = data.reply || "";
-            if (typeof text !== 'string') {
-                const invalidFormat = {
-                    id: `${Date.now()}-assistant`,
-                    role: 'assistant',
-                    text: "Error: Invalid response format",
-                    timestamp: Date.now()
-                };
-                setMessages((prev) => [...prev, invalidFormat]);
-                return;
-            }
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
 
-            text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split("\n");
+                    buffer = lines.pop() || "";
 
-            const assistantId = `${Date.now()}-assistant`;
-            const assistantMsg = {
-                id: assistantId,
-                role: 'assistant',
-                text: '',
-                timestamp: Date.now()
-            };
-            setMessages((prev) => [...prev, assistantMsg]);
-
-            let i = 0;
-            const typingSpeedMs = 10; 
-            const intervalId = setInterval(() => {
-                i++;
-                setMessages((prev) => prev.map((msg) =>
-                    msg.id === assistantId ? { ...msg, text: text.slice(0, i) } : msg
-                ));
-                if (i >= text.length) {
-                    clearInterval(intervalId);
+                    for (const line of lines) {
+                        if (!line.trim()) continue;
+                        try {
+                            const data = JSON.parse(line);
+                            if (data.type === "chunk") {
+                                setMessages((prev) => prev.map((msg) =>
+                                    msg.id === assistantId ? { ...msg, text: msg.text + data.text } : msg
+                                ));
+                            } else if (data.type === "tool_result" && data.result?.success) {
+                                setEmailSent(true);
+                                setTimeout(() => setEmailSent(false), 5000);
+                            } else if (data.type === "error") {
+                                setMessages((prev) => [...prev.filter(m => m.id !== assistantId), {
+                                    id: `${Date.now()}-assistant`,
+                                    role: 'assistant',
+                                    text: `Error: ${data.text}`,
+                                    timestamp: Date.now()
+                                }]);
+                            }
+                        } catch (e) {
+                            // skip invalid JSON
+                        }
+                    }
                 }
-            }, typingSpeedMs);
+            } else {
+                const data = await res.json();
+                if (data.error) {
+                    setMessages((prev) => [...prev, {
+                        id: assistantId,
+                        role: 'assistant',
+                        text: `Error: ${data.error}`,
+                        timestamp: Date.now()
+                    }]);
+                    return;
+                }
+
+                let text = data.reply || "";
+                text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+                setMessages((prev) => [...prev, {
+                    id: assistantId,
+                    role: 'assistant',
+                    text,
+                    timestamp: Date.now()
+                }]);
+            }
         } catch (err) {
             console.error(err);
-            const assistantErr = {
-                id: `${Date.now()}-assistant`,
-                role: 'assistant',
-                text: `Error: ${err.message}`,
-                timestamp: Date.now()
-            };
-            setMessages((prev) => [...prev, assistantErr]);
+            setMessages((prev) => {
+                const filtered = prev.filter(m => m.id !== assistantId);
+                return [...filtered, {
+                    id: `${Date.now()}-assistant`,
+                    role: 'assistant',
+                    text: `Error: ${err.message}`,
+                    timestamp: Date.now()
+                }];
+            });
         } finally {
             if (loadingDelayId) clearTimeout(loadingDelayId);
             setLoading(false);
@@ -199,73 +233,103 @@ const contactme = () => {
                     setMessages((prev) => [...prev, userMsg]);
                     let loadingDelayId = setTimeout(() => setLoading(true), 100);
 
+                    const assistantId = `${Date.now()}-assistant`;
+                    streamAssistantId.current = assistantId;
+
+                    const recentConversation = messages.slice(-4).map(m => ({
+                        role: m.role,
+                        content: m.text,
+                    }));
+
                     try {
                         const res = await fetch("/api/ask", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ message: content })
+                            body: JSON.stringify({ message: content, stream: true, conversation: recentConversation })
                         });
-                        
+
                         if (!res.ok) {
-                            const errorData = await res.json();
+                            const errorData = await res.json().catch(() => ({}));
                             throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
                         }
-                        
-                        const data = await res.json();
-                        if (data.error) {
-                            const assistantError = {
-                                id: `${Date.now()}-assistant`,
+
+                        const contentType = res.headers.get("content-type") || "";
+                        if (contentType.includes("text/event-stream")) {
+                            const reader = res.body.getReader();
+                            const decoder = new TextDecoder();
+                            let buffer = "";
+
+                            setMessages((prev) => [...prev, {
+                                id: assistantId,
                                 role: 'assistant',
-                                text: `Error: ${data.error}`,
+                                text: '',
                                 timestamp: Date.now()
-                            };
-                            setMessages((prev) => [...prev, assistantError]);
-                            return;
-                        }
+                            }]);
 
-                        let text = data.reply || "";
-                        if (typeof text !== 'string') {
-                            const invalidFormat = {
-                                id: `${Date.now()}-assistant`,
-                                role: 'assistant',
-                                text: "Error: Invalid response format",
-                                timestamp: Date.now()
-                            };
-                            setMessages((prev) => [...prev, invalidFormat]);
-                            return;
-                        }
+                            while (true) {
+                                const { done, value } = await reader.read();
+                                if (done) break;
 
-                        text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+                                buffer += decoder.decode(value, { stream: true });
+                                const lines = buffer.split("\n");
+                                buffer = lines.pop() || "";
 
-                        const assistantId = `${Date.now()}-assistant`;
-                        const assistantMsg = {
-                            id: assistantId,
-                            role: 'assistant',
-                            text: '',
-                            timestamp: Date.now()
-                        };
-                        setMessages((prev) => [...prev, assistantMsg]);
-
-                        let i = 0;
-                        const typingSpeedMs = 18; 
-                        const intervalId = setInterval(() => {
-                            i++;
-                            setMessages((prev) => prev.map((msg) =>
-                                msg.id === assistantId ? { ...msg, text: text.slice(0, i) } : msg
-                            ));
-                            if (i >= text.length) {
-                                clearInterval(intervalId);
+                                for (const line of lines) {
+                                    if (!line.trim()) continue;
+                                    try {
+                                        const data = JSON.parse(line);
+                                        if (data.type === "chunk") {
+                                            setMessages((prev) => prev.map((msg) =>
+                                                msg.id === assistantId ? { ...msg, text: msg.text + data.text } : msg
+                                            ));
+                                        } else if (data.type === "tool_result" && data.result?.success) {
+                                            setEmailSent(true);
+                                            setTimeout(() => setEmailSent(false), 5000);
+                                        } else if (data.type === "error") {
+                                            setMessages((prev) => [...prev.filter(m => m.id !== assistantId), {
+                                                id: `${Date.now()}-assistant`,
+                                                role: 'assistant',
+                                                text: `Error: ${data.text}`,
+                                                timestamp: Date.now()
+                                            }]);
+                                        }
+                                    } catch (e) {
+                                        // skip
+                                    }
+                                }
                             }
-                        }, typingSpeedMs);
+                        } else {
+                            const data = await res.json();
+                            if (data.error) {
+                                setMessages((prev) => [...prev, {
+                                    id: assistantId,
+                                    role: 'assistant',
+                                    text: `Error: ${data.error}`,
+                                    timestamp: Date.now()
+                                }]);
+                                return;
+                            }
+
+                            let text = data.reply || "";
+                            text = text.replace(/undefined/g, '').replace(/null/g, '').trim();
+                            setMessages((prev) => [...prev, {
+                                id: assistantId,
+                                role: 'assistant',
+                                text,
+                                timestamp: Date.now()
+                            }]);
+                        }
                     } catch (err) {
                         console.error(err);
-                        const assistantErr = {
-                            id: `${Date.now()}-assistant`,
-                            role: 'assistant',
-                            text: `Error: ${err.message}`,
-                            timestamp: Date.now()
-                        };
-                        setMessages((prev) => [...prev, assistantErr]);
+                        setMessages((prev) => {
+                            const filtered = prev.filter(m => m.id !== assistantId);
+                            return [...filtered, {
+                                id: `${Date.now()}-assistant`,
+                                role: 'assistant',
+                                text: `Error: ${err.message}`,
+                                timestamp: Date.now()
+                            }];
+                        });
                     } finally {
                         if (loadingDelayId) clearTimeout(loadingDelayId);
                         setLoading(false);
@@ -391,8 +455,21 @@ const contactme = () => {
                                 layoutId="AI-box"
                                 className="text-center"
                             >
-                                <div>
+                                <div className="relative">
                                     <h3 className="text-2xl font-bold text-[var(--accent-color)] mb-4">AI Assistant</h3>
+                                    <AnimatePresence>
+                                        {emailSent && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: -20, scale: 0.8 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: -20, scale: 0.8 }}
+                                                className="absolute -top-1 right-0 flex items-center gap-2 bg-green-500/15 text-green-400 border border-green-500/30 px-3 py-1.5 rounded-full text-sm"
+                                            >
+                                                <VscPass className="text-lg" />
+                                                Email sent!
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                                 <div
                                     className="h-[60vh] w-[98%] mx-auto bg-[var(--primary-color)] rounded-ap [--ap-radius:2rem] px-[0.6rem] pt-[0.6rem] mb-[2vh] overflow-y-auto overflow-x-auto relative"
@@ -413,18 +490,33 @@ const contactme = () => {
                                                 </div>
                                             ) : (
                                                 <div key={m.id} className={clsx("flex", checkIsPersian(m.text) ? "justify-end" : "justify-start") }>
-                                                    <p
+                                                    <div
                                                         className="text-[var(--text-color)] whitespace-pre-wrap max-w-[90%] max-md:max-w-[100%] p-4 rounded-ap [--ap-radius:1.6rem] text-lg max-md:text-md"
-                                                        dangerouslySetInnerHTML={{ __html: linkify(m.text) }}
                                                         style={{ direction: checkIsPersian(m.text) ? 'rtl' : 'ltr', textAlign: checkIsPersian(m.text) ? 'right' : 'left' }}
-                                                    />                                                
+                                                    >
+                                                        <MarkdownRenderer content={m.text} />
+                                                    </div>
                                                 </div>
                                             )
                                         ))}
 
                                         {loading && (
-                                            <div className="flex justify-start text-[var(--text-color)] m-4 animate-pulse text-xl max-md:text-md italic">
-                                                Thinking...
+                                            <div className="flex justify-start m-4">
+                                                <div className="flex items-center gap-[6px] px-4 py-3 rounded-ap [--ap-radius:1.6rem] bg-[var(--button-color)]">
+                                                    {[0, 1, 2].map((i) => (
+                                                        <motion.span
+                                                            key={i}
+                                                            className="block w-[8px] h-[8px] rounded-full bg-[var(--accent-color)]"
+                                                            animate={{ y: [0, -6, 0] }}
+                                                            transition={{
+                                                                duration: 0.7,
+                                                                repeat: Infinity,
+                                                                ease: "easeInOut",
+                                                                delay: i * 0.15,
+                                                            }}
+                                                        />
+                                                    ))}
+                                                </div>
                                             </div>
                                         )}
                                     <div className={clsx("flex justify-start gap-2 sticky bottom-0 left-0 right-0 z-10 w-full whitespace-nowrap py-2 px-2 overflow-x-auto overflow-y-visible no-scrollbar")}> 
