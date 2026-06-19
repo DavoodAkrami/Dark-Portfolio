@@ -1,18 +1,23 @@
 import React from "react";
 
 
-const AiDataCard = ({ title, cat, onDelete, onEdit }) => {
+const AiDataCard = ({ title, cat, isAutoSynced, onDelete, onEdit }) => {
 
 
     return (
         <div
             className="bg-[var(--button-color)] rounded-lg p-6 pb-10 flex flex-col items-center gap-4 w-full shadow-lg soft border border-transparent rounded-ap [--ap-radius:3rem] relative"
         >
+            {isAutoSynced && (
+                <span className="absolute top-4 right-4 text-[0.65rem] uppercase tracking-wide font-semibold text-[var(--subtext-color)] bg-[var(--primary-color)] px-2 py-1 rounded-full">
+                    Auto-synced
+                </span>
+            )}
             <h2
                 className="text-[1.6rem] text-[var(--accent-color)] font-[550] max-md:text-[1.2rem] mb-2 text-center"
             >
                 {title}
-            </h2>   
+            </h2>
             <p
                 className="text-[1.2rem] text-[var(--text-color)] max-md:text-[1rem] mb-[2rem] max-md:mb-[6rem]"
             >

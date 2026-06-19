@@ -6,7 +6,7 @@ import { SiMui } from "react-icons/si";
 import { FaGitSquare } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { RiNextjsFill } from "react-icons/ri";
-import { SiAdobepremierepro } from "react-icons/si";
+import { RiClaudeLine } from "react-icons/ri";
 import { BiLogoTypescript } from "react-icons/bi";
 import { RiSupabaseFill } from "react-icons/ri";
 import { TbBrandRedux } from "react-icons/tb";
@@ -52,6 +52,18 @@ const Skills = [
         color: "#000",
     },
     {
+        name: "Claude Code",
+        icon: <RiClaudeLine />,
+        level: 60,
+        color: "#D97757",
+    },
+    {
+        name: "Git",
+        icon: <FaGitSquare />,
+        level: 70,
+        color: "#F05032",
+    },
+    {
         name: "Redux",
         icon: <TbBrandRedux />,
         level: 60,
@@ -72,20 +84,8 @@ const Skills = [
     {
         name: "Supabase",
         icon: <RiSupabaseFill />,
-        level: 45,
+        level: 80,
         color: "#34B27B"
-    },
-    {
-        name: "Git",
-        icon: <FaGitSquare />,
-        level: 70,
-        color: "#F05032",
-    },
-    {
-        name: "Adobe Premiere",
-        icon: <SiAdobepremierepro />,
-        level: 30,
-        color: "#9999FF",
     },
 ]
 

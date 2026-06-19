@@ -19,7 +19,7 @@ const Login = () => {
         e.preventDefault();
         if (adminEmail === loginForm.email && adminPassword === loginForm.password) {
             localStorage.setItem(localStorageValue, "true");
-            router.push('panel/aidata');
+            router.push('/admin/panel/aidata');
         } else {
             setError("Wrong email or password");
         }

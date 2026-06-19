@@ -39,7 +39,7 @@ const ProjectSection = () => {
             <AnimatePresence>
                 {selectedProject && (
                     <motion.div
-                        className="fixed inset-0 z-50 flex items-center justify-center"
+                        className="fixed inset-0 z-[60] flex items-center justify-center"
                         onClick={handleClose}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -47,7 +47,7 @@ const ProjectSection = () => {
                         transition={{ duration: 0.3 }}
                     >
                         <div className="absolute inset-0 bg-black/55" />
-                        <div className="relative z-10" onClick={e => e.stopPropagation()}>
+                        <div className="relative z-10 flex items-center justify-center" onClick={e => e.stopPropagation()}>
                             <ProjectDetails project={selectedProject} onClose={handleClose} />
                         </div>
                     </motion.div>

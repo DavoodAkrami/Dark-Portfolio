@@ -20,9 +20,9 @@
     {
         "id": 11,
         "title": "Tech Pulse",
-        "description": "TechPulse Daily is a multilingual tech-news aggregation app built with Next.js App Router. It crawls major technology publications server-side, cleans noisy website artifacts, and presents readable articles with source metadata, inline media, market widgets, and AI-assisted summaries. I vibe-coded this project with GPT-5.3-Codex.",
+        "description": "TechPulse Daily is a multilingual tech-news aggregation app built with Next.js App Router. It crawls major technology publications server-side, and presents readable articles with source metadata, inline media, market widgets, and AI-assisted summaries. I vibe-coded this project with GPT-5.3-Codex.",
         "url": "https://tech-puls.vercel.app",
-        "technologies": ["GPT-5.3-Codex", "Next.js", "React.js", "TypeScript", "Tailwind CSS", "Motion", "OpenAI"],
+        "technologies": ["GPT-5.3-Codex", "Next.js", "React.js", "TypeScript", "Tailwind CSS", "Motion"],
         "img": "/tech-pulse.png"
     },
     {
@@ -30,7 +30,7 @@
         "title": "Gym Management System",
         "description": "A vide coded comprehensive gym management system built for users to find their ideal gym, and for gym owners to manage their gyms. The platform includes features such as membership management, income insights and an admin panel for gym owners to oversee operations.",
         "url": "https://gym-management-navy-eta.vercel.app", 
-        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Cursor AI", "Open Code AI"],
+        "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "OpenCode"],
         "img": "/gym.png"
     },
     {

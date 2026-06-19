@@ -23,6 +23,14 @@ const MarkdownRenderer = ({ content, className = "", style = {} }) => {
                 <code>{children}</code>
               </pre>
             ),
+          img: ({ src, alt }) => (
+            <img
+              src={src}
+              alt={alt || "Image"}
+              loading="lazy"
+              className="rounded-2xl max-w-full h-auto my-2 border border-white/10 shadow-lg"
+            />
+          ),
           ul: ({ children }) => <ul className="list-disc pl-5 my-1">{children}</ul>,
           ol: ({ children }) => <ol className="list-decimal pl-5 my-1">{children}</ol>,
           li: ({ children }) => <li className="my-0.5">{children}</li>,

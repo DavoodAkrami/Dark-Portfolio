@@ -20,14 +20,16 @@ async function buildContext(message, topK, experienceData) {
       vector: queryVector,
       topK: Number(topK) || 5,
       includeMetadata: true,
+      filter: { kind: { $ne: "sync-marker" } },
     });
-    context = (searchResults?.matches || [])
+    searchResults.matches = (searchResults?.matches || []).filter((m) => m.metadata?.kind !== "sync-marker");
+    context = searchResults.matches
       .map(
         (m, i) =>
           `#${i + 1} [${m.score?.toFixed(3)}] ${m.metadata?.title || m.id}\n${m.metadata?.text || ""}`
       )
       .join("\n\n");
-    systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context related to Davood to answer the user's question and don't give any suggestions. Only use the context if it's relevant otherwise say I don't have that information. If the user asks you to send an email or contact Davood, call the tool "send_email_to_davood" with {name, email, message}.\n\nContext:\n${context}`;
+    systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context related to Davood to answer the user's question and don't give any suggestions. Only use the context if it's relevant otherwise say I don't have that information. If the user asks you to send an email or contact Davood, call the tool "send_email_to_davood" with {name, email, message}. If a context entry for a project includes a line like "Image: <url>", you may show that project's screenshot by including it in your reply as markdown: ![Project Title](url). Only ever use an image URL that appears verbatim in the context above — never invent, guess, or generate one, and never mention an image if no URL is present for that project.\n\nContext:\n${context}`;
   }
 
   return { searchResults, context, systemPrompt };
