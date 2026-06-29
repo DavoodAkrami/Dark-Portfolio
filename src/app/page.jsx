@@ -96,7 +96,7 @@ const Home = () => {
                     variants={itemVariants}
                     className="text-[var(--text-color)] text-[1.2rem] mb-8 w-full font-[520] max-md:text-[1rem] leading-relaxed"
                 >
-                    Junior Front-End Developer familiar with JavaScript, React.js, MUI, and RESTful APIs. Passionate about entrepreneurship, with hands-on involvement in early-stage ideation and pitch deck development. Actively collaborated with teams through multiple non-coding and technical initiatives, with a strong interest in teamwork and creative problem-solving.
+                    Builds software at the intersection of user need and technical possibility — shipping production applications across productivity tooling, AI integration, and platform architecture. Approaches development not as a sequence of features to implement, but as a series of problems to understand deeply before deciding they are worth solving. Navigates the full arc from identifying a meaningful problem to deploying a working system, consistently treating code as the final expression of clear thinking rather than its starting point.
                 </motion.p>
 
                 <motion.div 
