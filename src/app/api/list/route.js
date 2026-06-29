@@ -9,9 +9,11 @@ export async function POST(request) {
     const results = await index.query({
       vector,
       topK: Number(topK) || 100,
-      includeMetadata: true
+      includeMetadata: true,
+      filter: { kind: { $ne: "sync-marker" } }
     });
-    return NextResponse.json({ results: results?.matches || [] });
+    const matches = (results?.matches || []).filter((m) => m.metadata?.kind !== "sync-marker");
+    return NextResponse.json({ results: matches });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

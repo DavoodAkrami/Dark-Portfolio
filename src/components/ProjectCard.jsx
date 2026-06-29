@@ -100,7 +100,7 @@ const ProjectDetails = ({ project, onClose }) => {
             {/* Image header */}
             <motion.div
                 layoutId={`project-image-${project.id}`}
-                className="relative w-full aspect-[16/9] flex-shrink-0 overflow-hidden"
+                className="relative w-full aspect-[16/9] max-h-[32vh] flex-shrink-0 overflow-hidden"
             >
                 <img
                     src={project.img}
@@ -120,13 +120,13 @@ const ProjectDetails = ({ project, onClose }) => {
                 </motion.button>
             </motion.div>
 
-            {/* Content */}
+            {/* Scrollable content */}
             <div className="relative flex-1 min-h-0">
                 <motion.div
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.18, duration: 0.26, ease: 'easeOut' }}
-                    className="overflow-y-auto h-full p-6 flex flex-col gap-4"
+                    className="overflow-y-auto h-full px-6 pt-6 pb-3 flex flex-col gap-4"
                 >
                     <motion.h2
                         layoutId={`project-title-${project.id}`}
@@ -142,31 +142,38 @@ const ProjectDetails = ({ project, onClose }) => {
                             <Badge key={i} text={tech} />
                         ))}
                     </div>
-                    <div className="flex gap-3 pt-1 pb-1">
-                        <button
-                            onClick={() => window.open(project.url)}
-                            className="bg-[var(--accent-color)] cursor-pointer text-white px-6 py-2.5 rounded-xl font-semibold hover:opacity-85 transition-opacity text-sm"
-                        >
-                            Visit Site
-                        </button>
-                        {project.gitHub && (
-                            <button
-                                onClick={() => window.open(project.gitHub)}
-                                className="px-6 py-2.5 rounded-xl border border-[var(--accent-color)]/60 text-[var(--accent-color)] font-semibold cursor-pointer hover:bg-[var(--accent-color)] hover:text-white hover:border-transparent transition-all duration-200 text-sm"
-                            >
-                                GitHub
-                            </button>
-                        )}
-                    </div>
                 </motion.div>
             </div>
+
+            {/* Pinned action buttons — always visible */}
+            <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.22, duration: 0.22, ease: 'easeOut' }}
+                className="flex gap-3 px-6 py-4 flex-shrink-0 border-t border-white/5"
+            >
+                <button
+                    onClick={() => window.open(project.url)}
+                    className="bg-[var(--accent-color)] cursor-pointer text-white px-6 py-2.5 rounded-xl font-semibold hover:opacity-85 transition-opacity text-sm"
+                >
+                    Visit Site
+                </button>
+                {project.gitHub && (
+                    <button
+                        onClick={() => window.open(project.gitHub)}
+                        className="px-6 py-2.5 rounded-xl border border-[var(--accent-color)]/60 text-[var(--accent-color)] font-semibold cursor-pointer hover:bg-[var(--accent-color)] hover:text-white hover:border-transparent transition-all duration-200 text-sm"
+                    >
+                        GitHub
+                    </button>
+                )}
+            </motion.div>
         </motion.div>
     );
 };
 
 const ProjectsGrid = ({ projects, onSelect }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 md:px-10 py-4 w-full max-w-[1300px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-[calc(100%-5rem)] max-w-[1300px] mx-auto">
             {projects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} onSelect={onSelect} index={index} />
             ))}

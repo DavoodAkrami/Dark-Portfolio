@@ -16,14 +16,16 @@ export async function POST(request) {
     const searchResults = await index.query({
       vector: queryVector,
       topK: Number(topK) || 5,
-      includeMetadata: true
+      includeMetadata: true,
+      filter: { kind: { $ne: 'sync-marker' } }
     });
+    searchResults.matches = (searchResults?.matches || []).filter((m) => m.metadata?.kind !== 'sync-marker');
 
-    const context = (searchResults?.matches || [])
+    const context = searchResults.matches
       .map((m, i) => `#${i + 1} [${m.score?.toFixed(3)}] ${m.metadata?.title || m.id}\n${m.metadata?.text || ''}`)
       .join('\n\n');
 
-    const systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context to answer the user's question. Only use the context if it is relevant.\n\nContext:\n${context}`;
+    const systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context to answer the user's question. Only use the context if it is relevant. If a context entry for a project includes a line like "Image: <url>", you may show that project's screenshot by including it in your reply as markdown: ![Project Title](url). Only ever use an image URL that appears verbatim in the context above — never invent, guess, or generate one.\n\nContext:\n${context}`;
 
     const recentConversation = (conversation || []).slice(-4);
     const completion = await openai.chat.completions.create({
