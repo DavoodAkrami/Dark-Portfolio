@@ -9,6 +9,14 @@
         "img": "/dark-portfolio.png" 
     },
     {
+        "id": "20",
+        "title": "GAM",
+        "description": "A bespoke e‑commerce experience for a luxury footwear brand, designed to read more like a dark, cinematic editorial than a traditional storefront. Every detail — from the dual‑theme system and phone‑OTP checkout to the Telegram‑driven order management — was built to feel intentional, not templated. Vibe coded with Claude Code. Freelance project, live and in production.",
+        "url": "https://gamfootwear.com",
+        "technologies": ["Next.js", "JavaScript", "Supabase", "React", "Recharts", "Tailwind CSS", "Claude code"],
+        "img": "/gamfootwear.png"
+    },
+    {
         "id": 10,
         "title": "Productivity Hub",
         "description": "A full-stack productivity platform built with Next.js, Supabase, and OpenAI that unifies bookmarks, task and note management, AI chat, personalized insights, and role-based admin tools in one polished workspace.",
@@ -58,14 +66,5 @@
         "technologies": [ "React", "CSS modules", "React Router Dom"],
         "gitHub": "https://github.com/DavoodAkrami/e-commerce",
         "img": "/E-commerce.png"  
-    },
-    {
-        "id": 2,
-        "title": "Bagro Menu",
-        "description": "A responsive menu for Bagro restaurant in Shiraz with an admin panel to add, edit and delete new items.",
-        "url": "https://bagro-menu.vercel.app/",
-        "technologies": ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Supabase"],
-        "gitHub": "https://github.com/DavoodAkrami/Bagro-Menu",
-        "img": "/Bagro.png"
     }
 ]
