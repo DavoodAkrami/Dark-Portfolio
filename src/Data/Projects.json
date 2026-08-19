@@ -17,6 +17,14 @@
         "img": "/gamfootwear.png"
     },
     {
+        "id": "123",
+        "title": "Pushtiban",
+        "description": "Pushtiban is a vibe coded project that helps small businesses automate their customer support with AI. User can connect their Telegram and instagram and create a bot, add the data of their business like their products and AI will answer customers based on that data.",
+        "img": "/pushtiban.png",
+        "url": "https://pushtiban.vercel.app",
+        "technologies": ["Claude code", "GPT-5-6-sol", "Redux", "Next.js", "Tailwind CSS", "Supabase"] 
+    },
+    {
         "id": 10,
         "title": "Productivity Hub",
         "description": "A full-stack productivity platform built with Next.js, Supabase, and OpenAI that unifies bookmarks, task and note management, AI chat, personalized insights, and role-based admin tools in one polished workspace.",
