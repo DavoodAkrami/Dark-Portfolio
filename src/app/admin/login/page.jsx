@@ -5,23 +5,33 @@ import { useState } from "react";
 const Login = () => {
     const router = useRouter();
 
-    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
-    const localStorageValue = process.env.NEXT_PUBLIC_ADMIN_LOCAL_STORAGE_VALUE;
-
     const [loginForm, setLoginForm] = useState({
         email: "",
         password: ""
     })
     const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (adminEmail === loginForm.email && adminPassword === loginForm.password) {
-            localStorage.setItem(localStorageValue, "true");
-            router.push('/admin/panel/aidata');
-        } else {
-            setError("Wrong email or password");
+        setError(null);
+
+        try {
+            const response = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(loginForm),
+            });
+
+            if (!response.ok) {
+                const body = await response.json().catch(() => ({}));
+                setError(body.error || "Login failed");
+                return;
+            }
+
+            router.replace('/admin/panel/aidata');
+            router.refresh();
+        } catch {
+            setError("Login failed. Please try again.");
         }
     }
 

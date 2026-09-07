@@ -40,6 +40,10 @@ This site is my personal portfolio, designed to showcase my resume, web developm
    ```
 3. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
+### Environment setup
+
+Copy the variable names from `.env.example` into an ignored local environment file. When working with the linked Vercel project, use `vercel env pull .env.local --yes` so deployments and local development use the same server-only configuration. Never add secrets to a `NEXT_PUBLIC_` variable; those values are included in browser JavaScript.
+
 ---
 
 ## 🌐 Live Version

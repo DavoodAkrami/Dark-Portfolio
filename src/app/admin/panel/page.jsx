@@ -12,7 +12,7 @@ const StatCard = ({ label, value, sub }) => (
     </div>
 );
 
-const dashboard = () => {
+const Dashboard = () => {
     const dispatch = useDispatch();
     const { loading: analyticsLoading, error: analyticsError, data: analyticsData } = useSelector(state => state.vercelSlice);
 
@@ -111,4 +111,4 @@ const dashboard = () => {
     )
 }
 
-export default dashboard;
+export default Dashboard;

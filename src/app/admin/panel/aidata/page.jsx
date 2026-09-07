@@ -4,8 +4,9 @@ import clsx from "clsx";
 import Modal from "../../../../components/Modal";
 import AiDataCard from "../../../../components/AiDataCard";
 
+const generateId = () => crypto.randomUUID();
 
-const aidata = () => {
+const AiData = () => {
     const cats = ["resume", "skill", "project", "experience", "bio", "contact", "technologies"];
     const tags = [
         "technologies", "resume", "personalInfo", "bio", "frontend", "backend", 
@@ -21,12 +22,6 @@ const aidata = () => {
         "problem-solving", "creativity", "innovation", "learning", "growth"
     ]
 
-    function generateId() {
-        return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
-    }
-
-
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isModalopen, setIsModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState('create'); 
     const [selectedItem, setSelectedItem] = useState(null);
@@ -40,7 +35,7 @@ const aidata = () => {
         tags: [],
     })
     const [upsertForm, setUpsertForm] = useState({
-        id: generateId(),
+        id: "",
         text: "",
         metadata: metadata
     })
@@ -240,19 +235,10 @@ const aidata = () => {
     useEffect(() => {
         fetchItems();
         fetchSyncStatus();
-        setIsAuthenticated(localStorage.getItem(process.env.NEXT_PUBLIC_ADMIN_LOCAL_STORAGE_VALUE) === "true");
     }, []);
 
 
    
-
-    if (!isAuthenticated) return (
-        <div
-            className="bg-[var(--primary-color)] h-screen flex items-center justify-center text-[red] text-[3rem] font-extrabold ma-md:trext-[1.6rem]"
-        >
-            Access denied
-        </div>
-    )
 
     const filteredItems = categoryFilter === "all" ? items : items.filter((item) => item.cat === categoryFilter);
 
@@ -613,4 +599,4 @@ const aidata = () => {
 }
 
 
-export default aidata;
+export default AiData;

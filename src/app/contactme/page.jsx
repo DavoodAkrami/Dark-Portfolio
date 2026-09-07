@@ -19,7 +19,7 @@ import { VscPass } from "react-icons/vsc";
 
 
 
-const contactme = () => {
+const ContactMe = () => {
     const contact = ContactInfo[0];
     const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -587,4 +587,4 @@ const contactme = () => {
     )
 }
 
-export default contactme;
+export default ContactMe;

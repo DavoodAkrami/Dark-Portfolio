@@ -33,7 +33,7 @@ const NavBar = ({ optionsList, isMenuOpen, className, onOpen })  => {
                                     "p-4 cursor-pointer soft rounded-ap [--ap-radius:2rem]",
                                     option.route === pathname && "bg-[var(--accent-color)]"
                                 )}
-                                onClick={() => window.location.href = option.route}
+                                onClick={() => option.onClick ? option.onClick() : window.location.href = option.route}
                             >
                                 <div 
                                     className={clsx(

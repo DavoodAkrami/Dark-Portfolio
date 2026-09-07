@@ -11,7 +11,8 @@ const initialState = {
 export const fetchVercelAnalyses = createAsyncThunk(
     'vercel/fetchVercelAnalyses',
     async () => {
-        const res = await fetch('api/analyses')
+        const res = await fetch('/api/analyses')
+        if (!res.ok) throw new Error('Unable to load analytics');
         const data = await res.json();
         return data;
     }
