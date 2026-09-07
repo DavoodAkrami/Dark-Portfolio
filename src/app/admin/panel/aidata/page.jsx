@@ -250,7 +250,7 @@ const AiData = () => {
 
     return (
         <div
-            className="min-h-screen bg-[var(--primary-color)] text-[var(--text-color)] max-md:pt-20"
+            className="min-h-full bg-[var(--primary-color)] text-[var(--text-color)] max-md:pt-20"
         >
             <div className="flex justify-between items-center px-8 pt-8 max-md:px-5 flex-wrap gap-4">
                 <h1 className="text-[2rem] font-[600] text-[var(--accent-color)]">AI Data</h1>
@@ -341,7 +341,7 @@ const AiData = () => {
                     filteredItems.length === 0 ? (
                         <div className="px-12 py-6 opacity-70">No items found</div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-12 mx-auto max-w-[80%] max-md:max-w-[100%]">
+                        <div className="grid w-full grid-cols-1 gap-5 px-8 pb-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 max-md:px-5">
                             {filteredItems.map((item) => (
                                 <AiDataCard
                                     key={item.id}

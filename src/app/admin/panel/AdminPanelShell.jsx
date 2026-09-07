@@ -54,8 +54,25 @@ const AdminPanelShell = ({ children }) => {
         return () => mq.removeEventListener("change", update);
     }, []);
 
+    useEffect(() => {
+        // The shared site layout includes header/footer content around this
+        // route. Keep the document itself stationary so the panel owns the
+        // only vertical scroll region.
+        const { body, documentElement } = document;
+        const previousBodyOverflow = body.style.overflow;
+        const previousDocumentOverflow = documentElement.style.overflow;
+
+        body.style.overflow = "hidden";
+        documentElement.style.overflow = "hidden";
+
+        return () => {
+            body.style.overflow = previousBodyOverflow;
+            documentElement.style.overflow = previousDocumentOverflow;
+        };
+    }, []);
+
     return (
-        <div className="flex">
+        <div className="fixed inset-0 z-40 flex h-dvh min-h-0 overflow-hidden bg-[var(--primary-color)]">
             {!isMenuOpen && (
                 <button
                     onClick={() => setIsMenuOpen(true)}
@@ -87,7 +104,7 @@ const AdminPanelShell = ({ children }) => {
                 initial={{ width: '80px' }}
                 animate={{ width: isMenuOpen ? '350px' : '80px' }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed top-0 left-0 h-screen z-30 max-md:hidden"
+                className="fixed top-0 left-0 h-full z-30 max-md:hidden"
             >
                 <NavBar
                     optionsList={adminPanelPages}
@@ -101,7 +118,7 @@ const AdminPanelShell = ({ children }) => {
                 initial={{ x: '-100%' }}
                 animate={{ x: isMenuOpen ? '0%' : '-100%' }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed top-0 left-0 h-screen w-[280px] z-[115] md:hidden"
+                className="fixed top-0 left-0 h-full w-[280px] z-[115] md:hidden"
             >
                 <div className="relative h-full">
                     <NavBar
@@ -121,7 +138,7 @@ const AdminPanelShell = ({ children }) => {
             </motion.div>
 
             <motion.div
-                className="w-full overflow-y-auto h-screen"
+                className="flex min-w-0 min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto overscroll-contain"
                 animate={{
                     paddingLeft: isMobile ? '0px' : (isMenuOpen ? '350px' : '80px')
                 }}

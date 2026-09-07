@@ -5,7 +5,7 @@ import { fetchVercelAnalyses } from "@/store/slices/vercelSlice";
 import { LineChart } from "@mui/x-charts/LineChart";
 
 const StatCard = ({ label, value, sub }) => (
-    <div className="bg-[var(--button-color)] rounded-ap [--ap-radius:2rem] p-6 flex flex-col gap-1 flex-1 min-w-[180px]">
+    <div className="min-w-0 bg-[var(--button-color)] rounded-ap [--ap-radius:2rem] p-6 flex flex-col gap-1">
         <span className="text-[var(--subtext-color)] text-sm">{label}</span>
         <span className="text-[var(--accent-color)] text-3xl font-[650]">{value}</span>
         {sub && <span className="text-[var(--subtext-color)] text-xs">{sub}</span>}
@@ -69,10 +69,10 @@ const Dashboard = () => {
     }, [analyticsData]);
 
     return (
-        <div className="min-h-screen bg-[var(--primary-color)] text-[var(--text-color)] p-8 max-md:p-5 max-md:pt-20">
+        <div className="min-h-full bg-[var(--primary-color)] text-[var(--text-color)] p-8 max-md:p-5 max-md:pt-20">
             <h1 className="text-[2rem] font-[600] text-[var(--accent-color)] mb-6">Dashboard</h1>
 
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <StatCard
                     label="AI Data Entries"
                     value={itemsLoading ? "…" : items.length}
