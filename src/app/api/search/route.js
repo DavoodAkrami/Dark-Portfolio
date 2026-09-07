@@ -44,7 +44,7 @@ export async function POST(request) {
     const systemPrompt = `You are an assistant in Davood's portfolio. Always refer to Davood by name in third person. Never use "you" to refer to Davood. Use the following context to answer the user's question. Only use the context if it is relevant. If a context entry for a project includes a line like "Image: <url>", you may show that project's screenshot by including it in your reply as markdown: ![Project Title](url). Only ever use an image URL that appears verbatim in the context above — never invent, guess, or generate one.\n\nContext:\n${context}`;
 
     const completion = await openai.chat.completions.create({
-      model: process.env.AI_MODEL || "openai/gpt-4o-mini",
+      model: process.env.AI_MODEL || "gpt-4o-mini",
       messages: [
         { role: 'system', content: systemPrompt },
         ...safeConversation,

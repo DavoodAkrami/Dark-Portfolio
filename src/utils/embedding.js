@@ -7,7 +7,7 @@ export const generateEmbedding = async (text) => {
             throw new Error("Embedding input must be between 1 and 20000 characters");
         }
         const response = await getOpenAI().embeddings.create({
-            model: "openai/text-embedding-3-small",
+            model: process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small",
             input: text
         });
 

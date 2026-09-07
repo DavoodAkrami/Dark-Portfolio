@@ -80,7 +80,7 @@ export async function POST(request) {
       ...sanitizeConversation(body?.conversation),
       { role: "user", content: message },
     ];
-    const model = process.env.AI_MODEL || "openai/gpt-4o-mini";
+    const model = process.env.AI_MODEL || "gpt-4o-mini";
 
     if (body?.stream !== true) {
       const completion = await openai.chat.completions.create({
