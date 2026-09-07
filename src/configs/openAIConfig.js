@@ -1,17 +1,19 @@
 import "server-only";
 import OpenAI from "openai";
 
-const gatewayToken = process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN;
+let openai;
 
-if (!gatewayToken) {
-    throw new Error("Missing AI Gateway credentials");
+export function getOpenAI() {
+    if (openai) return openai;
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error("Missing OPENAI_API_KEY");
+
+    openai = new OpenAI({
+        apiKey,
+        maxRetries: 1,
+        timeout: 20000,
+    });
+
+    return openai;
 }
-
-const openai = new OpenAI({
-    apiKey: gatewayToken,
-    baseURL: "https://ai-gateway.vercel.sh/v1",
-    maxRetries: 1,
-    timeout: 20000,
-})
-
-export default openai;

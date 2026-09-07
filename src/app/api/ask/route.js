@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { generateEmbedding } from "@/utils/embedding";
-import openai from "@/configs/openAIConfig";
+import { getOpenAI } from "@/configs/openAIConfig";
 import { index } from "@/configs/pinecone";
 import { isSameOrigin } from "@/lib/adminAuth";
 import { checkRateLimit } from "@/lib/rateLimit";
@@ -65,6 +65,8 @@ export async function POST(request) {
     if (!message || message.length > MAX_MESSAGE_LENGTH) {
       return NextResponse.json({ error: "Message must be between 1 and 2000 characters" }, { status: 400 });
     }
+
+    const openai = getOpenAI();
 
     const experienceData = body?.["experience-data"] ?? body?.experienceData;
     if (experienceData !== undefined && typeof experienceData !== "string") {

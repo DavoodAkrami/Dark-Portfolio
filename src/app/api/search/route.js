@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { index } from "../../../configs/pinecone";
 import { generateEmbedding } from "../../../utils/embedding";
-import openai from "../../../configs/openAIConfig";
+import { getOpenAI } from "../../../configs/openAIConfig";
 import { isAdminRequest } from "@/lib/adminAuth";
 
 export async function POST(request) {
@@ -15,6 +15,8 @@ export async function POST(request) {
     if (typeof query !== "string" || !query.trim() || query.length > 2000) {
       return NextResponse.json({ error: 'query is required' }, { status: 400 });
     }
+
+    const openai = getOpenAI();
 
     const safeTopK = Math.min(10, Math.max(1, Number(topK) || 5));
     const safeConversation = Array.isArray(conversation)
@@ -63,4 +65,3 @@ export async function POST(request) {
     return NextResponse.json({ error: "Search failed" }, { status: 500 });
   }
 }
-
