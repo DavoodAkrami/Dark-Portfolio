@@ -336,7 +336,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.25 }}
-                                    className="relative flex flex-col h-full"
+                                    className="relative flex h-full min-h-0 flex-col"
                                 >
                                     <div className="">
                                         <h2 className="text-2xl font-bold text-center">
@@ -347,7 +347,7 @@ const ExperiencesSection = ({experiences, className}) => {
                                         </p>
                                     </div>
                                     <hr className="text-[var(--accent-color)] mt-4" />
-                                    <div className="mt-6">
+                                    <div className="mt-6 max-h-[10rem] min-h-0 overflow-y-auto">
                                         <motion.p
                                             layoutId="read-more" 
                                             className="text-center mt-6 text-lg cursor-pointer select-none"
@@ -356,17 +356,17 @@ const ExperiencesSection = ({experiences, className}) => {
                                             {summrizedText(currentExperience.full_discription, isCompact ? 100 : 185)}
                                         </motion.p>
                                     </div>
-                                    <div className=" flex justify-around px-4 max-xl:px-0 gap-6 w-full max-[1200px]:hidden">
+                                    <div className="mt-auto flex w-full shrink-0 items-stretch gap-4 pt-6 max-[1200px]:hidden">
                                         <button
                                             onClick={() => handleModalReadMoreOpen(currentExperience.id)}
-                                            className="hoverLight w-1/2 bg-[var(--accent-color)] mx-auto cursor-pointer text-white px-5 py-3 mt-5 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2"
+                                            className="hoverLight min-w-0 flex-1 bg-[var(--accent-color)] cursor-pointer rounded-lg px-4 py-3 font-semibold text-white transition-all duration-300 hover:bg-opacity-90 flex items-center justify-center gap-2"
                                         >
                                             Read more
                                         </button> 
                                         <motion.button
                                             layoutId="AI-box"
                                             onClick={() => setIsAiModalOpen(true)}
-                                            className="hoverLight w-1/2 bg-[var(--accent-color)] mx-auto cursor-pointer text-white px-5 py-3 mt-5 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2"
+                                            className="hoverLight min-w-0 flex-1 bg-[var(--accent-color)] cursor-pointer rounded-lg px-4 py-3 font-semibold text-white transition-all duration-300 hover:bg-opacity-90 flex items-center justify-center gap-2"
                                         >
                                             Ask AI
                                         </motion.button>
