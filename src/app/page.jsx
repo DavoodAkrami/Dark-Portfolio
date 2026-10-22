@@ -6,6 +6,7 @@ import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import sentences from "@/Data/currentModes.json";
 
 const Home = () => {
     const containerVariants = {
@@ -33,11 +34,6 @@ const Home = () => {
         },
     };
     
-    const sentences = [
-        " Studying for Konkor...",
-        " Exercising...",
-    ]
-
     const [currentSentence, setCurrentSentence] = useState(0);
     const [displayedLetters, setDisplayedLetters] = useState([]);
 

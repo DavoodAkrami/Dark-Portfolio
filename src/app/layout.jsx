@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import StoreProvider from "@/providers/storeProvider";
 import { Suspense } from "react";
 import AiGlobalInput from "@/components/AiGlobalInput";
+import { SITE_URL, structuredData } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Davood Akrami | Portfolio",
   description: "Portfolio of Davood Akrami, junior Front-end developer and interested at entreprenuership. Created to show his projects, experiences and his resume. نمونه کارهای داوود اکرمى، توسعه دهنده فرانت اند.",
   keywords: [
@@ -31,7 +33,7 @@ export const metadata = {
     description: "Portfolio of Davood Akrami, junior Front-end developer and interested at entreprenuership. Created to show his projects, experiences and his resume",
     url: "https://www.davoodakrami.ir/",
     siteName: "Davood Akrami Portfolio",
-    Images: [
+    images: [
       {
         url: "/Davood-noBG.png",
         width: 800,
@@ -43,10 +45,6 @@ export const metadata = {
   },
   alternates: {
     canonical: "https://www.davoodakrami.ir/",
-    languages: {
-      "en": "https://www.davoodakrami.ir/",
-      "fa": "https://www.davoodakrami.ir/",
-    },
   },
 };
 
@@ -55,18 +53,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="describedby" href="/llms.txt" type="text/plain" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: `
-            {
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Davood Akrami",
-              "url": "https://www.davoodakrami.ir/",
-              "image": "https://www.davoodakrami.ir/Davood-noBG.png"
-            }
-            `,
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
       </head>

@@ -1,0 +1,23 @@
+# Davood Akrami
+
+> Personal portfolio of Davood Akrami, a Junior Front-End Developer. Current mode: Junior Developer Intern at Adleep. Exploring AI and Entrepreneurship.
+
+The website publishes Davood's projects, skills, professional experiences, and contact details. The text resource below is generated from the same public project and experience data used by the website.
+
+## Portfolio content
+
+- [Portfolio text](https://www.davoodakrami.ir/llms-full.txt): Plain-text Markdown with current mode, project descriptions, technologies, experience summaries, and public contact links. Readable without JavaScript.
+- [Home](https://www.davoodakrami.ir/): Introduction and current mode.
+- [Projects](https://www.davoodakrami.ir/projects): Portfolio projects and their details.
+- [Resume](https://www.davoodakrami.ir/resume): Skills and professional experiences.
+- [Contact](https://www.davoodakrami.ir/contactme): Public contact details.
+
+## Profiles and resume
+
+- [External resume](https://flowcv.com/resume/2bohp73170): The resume linked from the website.
+- [GitHub](https://github.com/DavoodAkrami): Public code profile.
+- [LinkedIn](https://www.linkedin.com/in/davood-akrami-72014a329): Professional profile.
+
+## Optional
+
+- [Sitemap](https://www.davoodakrami.ir/sitemap.xml): Public website page URLs.
